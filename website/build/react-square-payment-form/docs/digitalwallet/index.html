@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Accepting Digital Wallets · React Square Payment Form</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;Add a digital wallet to the Square Payment for to accept payments with Apple Pay for Web, Google Pay, and Masterpass.&lt;/p&gt;
+"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Accepting Digital Wallets · React Square Payment Form"/><meta property="og:type" content="website"/><meta property="og:url" content="https://square.github.io/react-square-payment-form/react-square-payment-form/"/><meta property="og:description" content="&lt;p&gt;Add a digital wallet to the Square Payment for to accept payments with Apple Pay for Web, Google Pay, and Masterpass.&lt;/p&gt;
+"/><meta property="og:image" content="https://square.github.io/react-square-payment-form/react-square-payment-form/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://square.github.io/react-square-payment-form/react-square-payment-form/img/undraw_tweetstorm.svg"/><meta name="robots" content="noindex"/><link rel="shortcut icon" href="/react-square-payment-form/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="/react-square-payment-form/css/main.css"/><script src="/react-square-payment-form/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-square-payment-form/"><h2 class="headerTitle">React Square Payment Form</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/react-square-payment-form/docs/introduction" target="_self">Docs</a></li><li class=""><a href="https://docs.connect.squareup.com/api/connect/v2" target="_self">API</a></li><li class=""><a href="https://github.com/square/react-square-payment-form" target="_self">Github</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/introduction">Introduction</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/paymentform">Build the Payment Form</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/charging">Creating a Charge</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/creditcard">Accepting Credit Cards</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/react-square-payment-form/docs/digitalwallet">Accepting Digital Wallets</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul class=""><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/ApplePayButton">ApplePayButton</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/CreditCardCVVInput">CreditCardCVVInput</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/CreditCardNumberInput">CreditCardNumberInput</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/CreditCardExpirationDateInput">CreditCardExpirationDateInput</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/CreditCardPostalCodeInput">CreditCardPostalCodeInput</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/GooglePayButton">GooglePayButton</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/MasterpassButton">MasterpassButton</a></li><li class="navListItem"><a class="navItem" href="/react-square-payment-form/docs/SquarePaymentForm">SquarePaymentForm</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Accepting Digital Wallets</h1></header><article><div><span><p>Add a digital wallet to the Square Payment for to accept payments with Apple Pay for Web, Google Pay, and Masterpass.</p>
+<p><img src="/react-square-payment-form/docs/assets/digital-wallets-diagram.png" alt="Digital Wallets"></p>
+<h2><a class="anchor" aria-hidden="true" id="prerequisites"></a><a href="#prerequisites" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prerequisites</h2>
+<p>In order to enable digital wallets, the following must be true:</p>
+<ul>
+<li>You have followed the steps of the <a href="/react-square-payment-form/docs/paymentform">Payment Form Setup Guide</a>.</li>
+<li>You are using your <strong>Production Application ID</strong> and <strong>Production Location ID</strong>.</li>
+</ul>
+<p>The setup guide implements the form with credit card inputs because Sandbox is not available for digital wallets. If you want to only support digital wallet payments, you may remove all the components added <a href="http://localhost:3000/react-square-payment-form/docs/paymentform#6-add-the-credit-card-fields">here</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="1-add-the-payment-request-object"></a><a href="#1-add-the-payment-request-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Add the payment request object</h2>
+<p>To process payments, you will need to add the <code>createPaymentRequest</code> callback function. This will create a JSON block that defines the payment request.</p>
+<pre><code class="hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PaymentPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  ...
+  createPaymentRequest() {
+    <span class="hljs-keyword">return</span> {
+      requestShippingAddress: <span class="hljs-literal">false</span>,
+      requestBillingInfo: <span class="hljs-literal">true</span>,
+      currencyCode: <span class="hljs-string">"USD"</span>,
+      countryCode: <span class="hljs-string">"US"</span>,
+      total: {
+        label: <span class="hljs-string">"MERCHANT NAME"</span>,
+        amount: <span class="hljs-string">"1"</span>,
+        pending: <span class="hljs-literal">false</span>
+      },
+      lineItems: [
+        {
+          label: <span class="hljs-string">"Subtotal"</span>,
+          amount: <span class="hljs-string">"1"</span>,
+          pending: <span class="hljs-literal">false</span>
+        }
+      ]
+    }
+  }
+  ...
+  render() {
+    &lt;<span class="hljs-type">SquarePaymentForm</span>
+      {...props}
+      createPaymentRequest={<span class="hljs-keyword">this</span>.createPaymentRequest}
+    /&gt;
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="2-add-the-digital-wallet-component"></a><a href="#2-add-the-digital-wallet-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Add the digital wallet component</h2>
+<p>By default, the digital wallet options will not render anything if they are not ready to take payment. You can pass in views for when the digital wallet is being initialized (<code>loadingView</code>) or when the digital wallet is not available (<code>unavailableView</code>). We've provided some basic implementation below:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> loadingView = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"sq-wallet-loading"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="hljs-keyword">const</span> unavailableView = <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"sq-wallet-unavailable"</span>&gt;</span>Unavailable<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+
+<span class="hljs-comment">// example usage:</span>
+<span class="hljs-comment">// &lt;ApplePayButton loadingView={loadingView} unavailableView={unavailableView} /&gt;</span>
+</code></pre>
+<p><img src="/react-square-payment-form/docs/assets/digital-wallet-views.png" alt="Digital Wallet Display Options"></p>
+<h3><a class="anchor" aria-hidden="true" id="apple-pay"></a><a href="#apple-pay" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apple Pay</h3>
+<p>The payment form adheres to Apple's development requirements for Web Apple Pay. To use Web Apple Pay with the form, the following must be true:</p>
+<ul>
+<li>You are using HTTPS.</li>
+<li>You are using a production Square account.</li>
+<li>The payment form is loaded on a supported client:
+<ul>
+<li>Safari on iOS 10 and later</li>
+<li>Safari on MacOS 10.12 and later</li>
+</ul></li>
+<li>Apple Pay on Web is only available for Square accounts based in the United States.</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="1-register-your-domain-with-apple"></a><a href="#1-register-your-domain-with-apple" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Register your domain with Apple</h4>
+<p>By registering your domain to use Web Apple Pay and the Apple Pay Platform, you agree to the <a href="https://developer.apple.com/terms/apple-pay-web/">Apple Pay Platform Web Merchant Terms and Conditions</a>.</p>
+<p>To register a domain for Web Apple Pay:</p>
+<ol>
+<li>Open the <a href="https://connect.squareup.com/apps">Application Dashboard</a>.</li>
+<li>Select the application associated with your payment form implementation.</li>
+<li>Click on the &quot;Apple Pay&quot; tab for the selected application.</li>
+<li>Click on the &quot;Add a new domain&quot; link and follow the onscreen instructions.
+<ol>
+<li>Add the domain</li>
+<li>Download the verification file</li>
+<li>Host the verification file on your domain at <strong>/.well-known/apple-developer-merchantid-domain-association</strong></li>
+</ol></li>
+</ol>
+<h4><a class="anchor" aria-hidden="true" id="2-add-the-apple-pay-placeholder-to-your-payment-page"></a><a href="#2-add-the-apple-pay-placeholder-to-your-payment-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Add the Apple Pay placeholder to your payment page</h4>
+<p>Add the <code>ApplePayButton</code> component anywhere inside your <code>SquarePaymentForm</code>:</p>
+<pre><code class="hljs"><span class="xml">import </span><span class="hljs-template-variable">{ ApplePayButton }</span><span class="xml"> from 'react-square-payment-form'
+
+<span class="hljs-tag">&lt;<span class="hljs-name">SquarePaymentForm</span> </span></span><span class="hljs-template-variable">{...props}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ApplePayButton</span> <span class="hljs-attr">loadingView</span>=</span></span><span class="hljs-template-variable">{loadingView}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">unavailableView</span>=</span></span><span class="hljs-template-variable">{unavailableView}</span><span class="xml"><span class="hljs-tag"> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">SquarePaymentForm</span>&gt;</span>
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" id="google-pay"></a><a href="#google-pay" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Google Pay</h3>
+<p>To use Google Pay with the form, the following must be true:</p>
+<ul>
+<li>You are using HTTPS.</li>
+<li>You are using a production Square account.</li>
+</ul>
+<p>Add the <code>GooglePayButton</code> component anywhere inside your <code>SquarePaymentForm</code>:</p>
+<pre><code class="hljs"><span class="xml">import </span><span class="hljs-template-variable">{ GooglePayButton }</span><span class="xml"> from 'react-square-payment-form'
+
+<span class="hljs-tag">&lt;<span class="hljs-name">SquarePaymentForm</span> </span></span><span class="hljs-template-variable">{...props}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">GooglePayButton</span> <span class="hljs-attr">loadingView</span>=</span></span><span class="hljs-template-variable">{loadingView}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">unavailableView</span>=</span></span><span class="hljs-template-variable">{unavailableView}</span><span class="xml"><span class="hljs-tag"> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">SquarePaymentForm</span>&gt;</span>
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" id="masterpass"></a><a href="#masterpass" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Masterpass</h3>
+<p>The Masterpass button is available in both Sandbox and Production. There are no additional requirements.</p>
+<p>Add the <code>MasterpassButton</code> component anywhere inside your <code>SquarePaymentForm</code>:</p>
+<pre><code class="hljs"><span class="xml">import </span><span class="hljs-template-variable">{ MasterpassButton }</span><span class="xml"> from 'react-square-payment-form'
+
+<span class="hljs-tag">&lt;<span class="hljs-name">SquarePaymentForm</span> </span></span><span class="hljs-template-variable">{...props}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">MasterpassButton</span> <span class="hljs-attr">loadingView</span>=</span></span><span class="hljs-template-variable">{loadingView}</span><span class="xml"><span class="hljs-tag"> <span class="hljs-attr">unavailableView</span>=</span></span><span class="hljs-template-variable">{unavailableView}</span><span class="xml"><span class="hljs-tag"> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">SquarePaymentForm</span>&gt;</span>
+</span></code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-square-payment-form/docs/creditcard"><span class="arrow-prev">← </span><span>Accepting Credit Cards</span></a><a class="docs-next button" href="/react-square-payment-form/docs/ApplePayButton"><span class="function-name-prevnext">ApplePayButton</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#prerequisites">Prerequisites</a></li><li><a href="#1-add-the-payment-request-object">1. Add the payment request object</a></li><li><a href="#2-add-the-digital-wallet-component">2. Add the digital wallet component</a><ul class="toc-headings"><li><a href="#apple-pay">Apple Pay</a></li><li><a href="#google-pay">Google Pay</a></li><li><a href="#masterpass">Masterpass</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div><h5>Docs</h5><a href="/react-square-payment-form/docs/en/introduction">Getting Started</a><a href="https://docs.connect.squareup.com/api/connect/v2">API Reference</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/square-connect" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://squ.re/2Hks3YE">Slack Channel</a></div><div><h5>More</h5><a href="https://developer.squareup.com/blog/">Blog</a><a href="https://github.com/square/react-square-payment-form">GitHub</a></div></section><section class="copyright">Copyright © 2019 Square Inc.</section></footer></div></body></html>

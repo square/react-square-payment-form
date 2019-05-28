@@ -1,0 +1,21 @@
+{
+  "docs": {
+    "Getting Started": [
+      "introduction",
+      "paymentform",
+      "charging",
+      "creditcard",
+      "digitalwallet"
+    ],
+    "Components": [
+      "ApplePayButton",
+      "CreditCardCVVInput",
+      "CreditCardNumberInput",
+      "CreditCardExpirationDateInput",
+      "CreditCardPostalCodeInput",
+      "GooglePayButton",
+      "MasterpassButton",
+      "SquarePaymentForm"
+    ]
+  }
+}
