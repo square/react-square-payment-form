@@ -1,6 +1,6 @@
 {
   "name": "react-square-payment-form",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Take payments with Square securely and easily in your React app",
   "main": "lib/index.js",
   "scripts": {
