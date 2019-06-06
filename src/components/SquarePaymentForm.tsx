@@ -71,7 +71,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
 
   static defaultProps = {
     formId: `sq-payment-form`,
-    apiWrapper: 'reactjs/0.1.6',
+    apiWrapper: 'reactjs/0.1.7',
     inputStyles: [{
       fontSize: '16px',
       fontFamily: 'Helvetica Neue',
