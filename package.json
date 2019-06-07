@@ -1,12 +1,12 @@
 {
   "name": "react-square-payment-form",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Take payments with Square securely and easily in your React app",
   "main": "lib/index.js",
   "scripts": {
     "build": "rm -rf ./lib && tsc && npm run copyfiles",
     "copyfiles": "cp src/*.css lib/",
-    "prepublish": "npm run build",
+    "prepublish": "npm run lint && npm run test && npm run build",
     "lint": "eslint --fix src/**/*.tsx",
     "test": "jest",
     "tsc": "tsc"
@@ -29,6 +29,9 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.1",
     "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "jest": "^24.7.1",
     "jsdom": "^15.1.0",

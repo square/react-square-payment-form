@@ -15,11 +15,11 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 ## Props
 |Name|Type|Description|
 |---|---|---|
+|apiWrapaper|string|Internal variable: used for logs|
 |applicationId|string|**Required for all features**<br/><br/>sIdentifies the calling form with a verified application ID generated from the Square Application Dashboard|
 |cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData) => void|**Required for all features**<br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|**Required for digital wallets**<br/><br/>Invoked when a digital wallet payment button is clicked.|
-|env|string|Load the staging or production js library. Default is production|
-|formId|string|**Required for all features**<br/><br/>Identifies the DOM form element<br/><br/>**Default Value:**``sq-payment-form-${Math.random()}``|
+|formId|string|**Required for all features**<br/><br/>Identifies the DOM form element<br/><br/>**Default Value:**``sq-payment-form``|
 |inputEventReceived|() => void|Invoked when visitors interact with the iframe elements|
 |inputStyles|{}[]|Define the internal styles applied to the rendered iframes<br/><br/>**Default Value:**`[{  fontSize: '16px',  fontFamily: 'Helvetica Neue',  padding: '16px',  color: '#373F4A',  backgroundColor: 'transparent',  lineHeight: '24px',  placeholderColor: '#CCC',  _webkitFontSmoothing: 'antialiased',  _mozOsxFontSmoothing: 'grayscale'}]`|
 |locationId|string|**Required for all features**<br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.|
