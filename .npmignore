@@ -1,0 +1,11 @@
+demo/
+docs/
+src/
+website/
+
+.gitignore
+.eslintrc.js
+buildDocs.sh
+jest.config.js
+setupTests.ts
+tsconfig.json
