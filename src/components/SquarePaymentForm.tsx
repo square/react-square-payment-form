@@ -171,6 +171,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       autoBuild: false,
       inputClass: 'sq-input',
       inputStyles: props.inputStyles,
+      apiWrapper: props.apiWrapper,
       callbacks: {
         cardNonceResponseReceived: props.cardNonceResponseReceived,
         createPaymentRequest: props.createPaymentRequest,

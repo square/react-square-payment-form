@@ -6,6 +6,7 @@ export interface SqPaymentFormConfiguration {
   inputStyles?: {}[];
   env?: string;
   autoBuild?: boolean;
+  apiWrapper: string;
 
   cardNumber?: SqPaymentFormInputConfiguration;
   cvv?: SqPaymentFormInputConfiguration;
