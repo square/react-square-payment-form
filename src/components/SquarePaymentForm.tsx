@@ -21,7 +21,7 @@ export interface SquarePaymentFormProps {
   /** Define the internal styles applied to the rendered iframes */
   inputStyles?: {}[];
   /** Internal variable: used for logs */
-  apiWrapaper: string;
+  apiWrapper: string;
 
   /** **Required for all features**<br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData) => void;
@@ -121,13 +121,13 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     }
     const script = document.createElement('script')
     script.src = 'https://js.squareup.com/v2/paymentform'
-    document.body.appendChild(script)
     script.onload = function() {
       onSuccess && onSuccess()
     }
     script.onerror = function() {
       onError && onError()
     }
+    document.body.appendChild(script)
   }
 
   renderSqPaymentForm = () => {

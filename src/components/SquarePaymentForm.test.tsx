@@ -6,7 +6,7 @@ import SquarePaymentForm from './SquarePaymentForm'
 
 describe('SquarePaymentForm', () => {
 
-  let wrapper: any
+  let wrapper: any // eslint-disable-line @typescript-eslint/no-explicit-any
 
   beforeEach(() => {
     wrapper = shallow(<SquarePaymentForm applicationId={'test'} locationId={'test'} cardNonceResponseReceived={() => {}} />)
@@ -32,7 +32,7 @@ describe('SquarePaymentForm', () => {
     it('should call renderSqPaymentForm', () => {
       const instance = wrapper.instance()
       jest.spyOn(instance, 'renderSqPaymentForm')
-      instance.componentDidMount()
+      instance.componentDidUpdate()
       expect(instance.renderSqPaymentForm.mock.calls.length).to.eql(1)
     })
   })
@@ -55,13 +55,15 @@ describe('SquarePaymentForm', () => {
   })
 
   describe('loadSqPaymentFormLibrary', () => {
-    it('should load the library successfully', () => {
+    it('should load the library successfully', async () => {
       const instance = wrapper.instance()
       const onSuccess = jest.fn()
       const onError = jest.fn()
       instance.loadSqPaymentFormLibrary(onSuccess, onError)
-      expect(onSuccess.mock.calls.length).to.eql(1)
-      expect(onError.mock.calls.length).to.eql(0)
+      setTimeout(() => {
+        expect(onSuccess.mock.calls.length).to.eql(1)
+        expect(onError.mock.calls.length).to.eql(0)
+      }, 0)
     })
   })
 
@@ -110,12 +112,11 @@ describe('SquarePaymentForm', () => {
   })
 
   describe('buildSqPaymentFormConfiguration', () => {
-    const props: any = {
+    const props: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
       applicationId: 'app-id',
       locationId: 'loc-id',
-      env: 'staging',
     }
-    const callbacks: any = {
+    const callbacks: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
       cardNonceResponseReceived: 'cardNonceResponseReceived',
       createPaymentRequest: 'createPaymentRequest',
       inputEventReceived: 'inputEventReceived',
