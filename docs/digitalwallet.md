@@ -11,6 +11,10 @@ Add a digital wallet to the Square Payment for to accept payments with Apple Pay
 In order to enable digital wallets, the following must be true:
 * You have followed the steps of the [Payment Form Setup Guide](paymentform.md).
 * You are using your **Production Application ID** and **Production Location ID**.
+* You have configured the payment form for production mode.
+
+>Note:
+In the Application Dashboard, your application must be in **Production Settings** mode to access the **Production Application ID** and **Production Location ID**.
 
 The setup guide implements the form with credit card inputs because Sandbox is not available for digital wallets. If you want to only support digital wallet payments, you may remove all the components added [here](http://localhost:3000/react-square-payment-form/docs/paymentform#6-add-the-credit-card-fields).
 

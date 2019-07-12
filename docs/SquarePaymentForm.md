@@ -6,7 +6,7 @@ for the current Square app you're developing
 * **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
 or your [Square Developer Dashboard](https://connect.squareup.com/apps).
 It determines which Square location will receive credit for payments made with this form.
-* **onCardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
+* **onCardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a Payments API "CreatePayment" request to Square.
 
 ...and one additional argument for digital wallets:
 * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.

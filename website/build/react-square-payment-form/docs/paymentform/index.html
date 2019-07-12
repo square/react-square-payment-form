@@ -56,20 +56,21 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Build the Payment Form</h1></header><article><div><span><p>In this guide, we will build a simple payment form in Sandbox mode and generate a nonce that can be used to create a charge.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Build the Payment Form</h1></header><article><div><span><p>In this guide, we will build a simple payment form in Sandbox mode and generate a nonce that can be used to create a payment.</p>
 <h2><a class="anchor" aria-hidden="true" id="1-create-a-square-developer-account"></a><a href="#1-create-a-square-developer-account" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Create a Square developer account</h2>
 <p>To get started with the Square Payment Form, you will need to do the following:</p>
 <ol>
 <li><a href="https://connect.squareup.com/apps">Create a Square Developer account</a>.</li>
-<li><a href="https://connect.squareup.com/apps/new">Create an application</a> and aggree to our <a href="https://squareup.com/us/en/legal/general/developers">developer terms of service</a>.</li>
+<li><a href="https://connect.squareup.com/apps/new">Create an application</a> and agree to our <a href="https://squareup.com/us/en/legal/general/developers">developer terms of service</a>.</li>
 </ol>
 <h2><a class="anchor" aria-hidden="true" id="2-get-your-sandbox-ids"></a><a href="#2-get-your-sandbox-ids" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Get your Sandbox IDs</h2>
 <p>To get your Sandbox IDs:</p>
 <ol>
 <li>Open your <a href="https://connect.squareup.com/apps">Application Dashboard</a>.</li>
 <li>Click on the application you want to use for the payment form.</li>
-<li>On the &quot;Credentials&quot; tab of the application control panel, copy the <strong>Sandbox Application ID</strong>.</li>
-<li>On the &quot;Locations&quot; tab of the application control panel, copy one of the <strong>Sandbox Location ID</strong> values from the list of Sandbox locations.</li>
+<li>Click <strong>Production Settings</strong> to toggle the application to <strong>Test Settings</strong> mode.</li>
+<li>On the <strong>Credentials</strong> tab of the application control panel, copy the <strong>Sandbox Application ID</strong>.</li>
+<li>On the <strong>Locations<strong> tab of the application control panel, copy one of the <strong>Sandbox Location ID</strong> values from the list of Sandbox locations.</li>
 </ol>
 <p>The <strong>application ID</strong> tells us which developer is using the form to take payments. The <strong>location ID</strong> tells us which merchant location should recieve the payments.</p>
 <h2><a class="anchor" aria-hidden="true" id="3-install-the-component"></a><a href="#3-install-the-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Install the component</h2>

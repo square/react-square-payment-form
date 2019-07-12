@@ -3,14 +3,14 @@ id: paymentform
 title: Build the Payment Form
 ---
 
-In this guide, we will build a simple payment form in Sandbox mode and generate a nonce that can be used to create a charge.
+In this guide, we will build a simple payment form in Sandbox mode and generate a nonce that can be used to create a payment.
 
 ## 1. Create a Square developer account
 
 To get started with the Square Payment Form, you will need to do the following:
 
 1. [Create a Square Developer account](https://connect.squareup.com/apps).
-2. [Create an application](https://connect.squareup.com/apps/new) and aggree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
+2. [Create an application](https://connect.squareup.com/apps/new) and agree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
 
 ## 2. Get your Sandbox IDs
 
@@ -18,8 +18,9 @@ To get your Sandbox IDs:
 
 1. Open your [Application Dashboard](https://connect.squareup.com/apps).
 2. Click on the application you want to use for the payment form.
-3. On the "Credentials" tab of the application control panel, copy the **Sandbox Application ID**.
-4. On the "Locations" tab of the application control panel, copy one of the **Sandbox Location ID** values from the list of Sandbox locations.
+3. Click **Production Settings** to toggle the application to **Test Settings** mode. 
+4. On the **Credentials** tab of the application control panel, copy the **Sandbox Application ID**.
+5. On the **Locations** tab of the application control panel, copy one of the **Sandbox Location ID** values from the list of Sandbox locations.
 
 The **application ID** tells us which developer is using the form to take payments. The **location ID** tells us which merchant location should recieve the payments.
 
