@@ -41,8 +41,7 @@ class PaymentPage extends React.Component {
 To get your API access token:
 1. Open your [Application Dashboard](https://connect.squareup.com/apps).
 2. Click on the application you want to use for the payment form.
-3. Click **Production Settings** to toggle the application to **Test Settings** mode. 
-4. Click on the "Show" link on the **Sandbox Personal Access Token** and copy it.
+3. Click on the "Show" link on the **Sandbox Access Token** and copy it.
 
 ## 4. Take a payment
 

@@ -120,7 +120,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       return
     }
     const script = document.createElement('script')
-    script.src = 'https://js.squareupsandbox.com/v2/paymentform'
+    script.src = 'https://js.squareup.com/v2/paymentform'
     script.onload = function() {
       onSuccess && onSuccess()
     }

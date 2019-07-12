@@ -18,9 +18,8 @@ To get your Sandbox IDs:
 
 1. Open your [Application Dashboard](https://connect.squareup.com/apps).
 2. Click on the application you want to use for the payment form.
-3. Click **Production Settings** to toggle the application to **Test Settings** mode. 
-4. On the **Credentials** tab of the application control panel, copy the **Sandbox Application ID**.
-5. On the **Locations** tab of the application control panel, copy one of the **Sandbox Location ID** values from the list of Sandbox locations.
+3. On the **Credentials** tab of the application control panel, copy the **Sandbox Application ID**.
+4. On the **Locations** tab of the application control panel, copy one of the **Sandbox Location ID** values from the list of Sandbox locations.
 
 The **application ID** tells us which developer is using the form to take payments. The **location ID** tells us which merchant location should recieve the payments.
 
