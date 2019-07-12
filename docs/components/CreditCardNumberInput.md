@@ -1,3 +1,7 @@
+---
+id:CreditCardNumberInput
+title:CreditCardNumberInput
+---
 Renders a placeholder element for the card number. The SqPaymentForm JS library will replace this
 element with a secure `<iframe>` tag that will render an `<input>` field for the card number.
 

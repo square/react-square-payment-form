@@ -1,3 +1,7 @@
+---
+id:ApplePayButton
+title:ApplePayButton
+---
 Renders an Apple Pay button to use in the Square Payment Form, pre-styled to meet Apple's Human Interface Guidelines.
 ## Props
 |Name|Type|Description|

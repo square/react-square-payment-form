@@ -8,14 +8,14 @@
       "digitalwallet"
     ],
     "Components": [
-      "ApplePayButton",
-      "CreditCardCVVInput",
-      "CreditCardNumberInput",
-      "CreditCardExpirationDateInput",
-      "CreditCardPostalCodeInput",
-      "GooglePayButton",
-      "MasterpassButton",
-      "SquarePaymentForm"
+      "components/ApplePayButton",
+      "components/CreditCardCVVInput",
+      "components/CreditCardNumberInput",
+      "components/CreditCardExpirationDateInput",
+      "components/CreditCardPostalCodeInput",
+      "components/GooglePayButton",
+      "components/MasterpassButton",
+      "components/SquarePaymentForm"
     ]
   }
 }

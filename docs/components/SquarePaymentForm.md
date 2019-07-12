@@ -1,3 +1,7 @@
+---
+id:SquarePaymentForm
+title:SquarePaymentForm
+---
 Creates a Square Payment Form and renders form inputs to use inside of it.
 
 This component requires 3 arguments for basic use:
@@ -15,7 +19,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 ## Props
 |Name|Type|Description|
 |---|---|---|
-|apiWrapaper|string|Internal variable: used for logs|
+|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:**`'reactjs/0.1.8'`|
 |applicationId|string|**Required for all features**<br/><br/>sIdentifies the calling form with a verified application ID generated from the Square Application Dashboard|
 |cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData) => void|**Required for all features**<br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|**Required for digital wallets**<br/><br/>Invoked when a digital wallet payment button is clicked.|

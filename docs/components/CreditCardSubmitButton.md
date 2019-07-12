@@ -1,3 +1,7 @@
+---
+id:CreditCardSubmitButton
+title:CreditCardSubmitButton
+---
 Renders a button that will create a card nonce using Square's SqPaymentForm JS library and calls
 `onCardNonceResponseReceived` afterwards.
 

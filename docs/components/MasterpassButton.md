@@ -1,3 +1,7 @@
+---
+id:MasterpassButton
+title:MasterpassButton
+---
 Renders a Masterpass button to use in the Square Payment Form, pre-styled to meet Masterpass's branding guidelines.
 ## Props
 |Name|Type|Description|

@@ -5,47 +5,47 @@
     "previous": "Previous",
     "tagline": "Take payments securely and easily in your React App with Square",
     "docs": {
-      "ApplePayButton": {
-        "title": "ApplePayButton"
-      },
       "charging": {
         "title": "Creating a Charge"
+      },
+      "components/ApplePayButton": {
+        "title": "ApplePayButton"
+      },
+      "components/CreditCardCVVInput": {
+        "title": "CreditCardCVVInput"
+      },
+      "components/CreditCardExpirationDateInput": {
+        "title": "CreditCardExpirationDateInput"
+      },
+      "components/CreditCardNumberInput": {
+        "title": "CreditCardNumberInput"
+      },
+      "components/CreditCardPostalCodeInput": {
+        "title": "CreditCardPostalCodeInput"
+      },
+      "components/CreditCardSubmitButton": {
+        "title": "CreditCardSubmitButton"
+      },
+      "components/GooglePayButton": {
+        "title": "GooglePayButton"
+      },
+      "components/MasterpassButton": {
+        "title": "MasterpassButton"
+      },
+      "components/SquarePaymentForm": {
+        "title": "SquarePaymentForm"
       },
       "creditcard": {
         "title": "Accepting Credit Cards"
       },
-      "CreditCardCVVInput": {
-        "title": "CreditCardCVVInput"
-      },
-      "CreditCardExpirationDateInput": {
-        "title": "CreditCardExpirationDateInput"
-      },
-      "CreditCardNumberInput": {
-        "title": "CreditCardNumberInput"
-      },
-      "CreditCardPostalCodeInput": {
-        "title": "CreditCardPostalCodeInput"
-      },
-      "CreditCardSubmitButton": {
-        "title": "CreditCardSubmitButton"
-      },
       "digitalwallet": {
         "title": "Accepting Digital Wallets"
-      },
-      "GooglePayButton": {
-        "title": "GooglePayButton"
       },
       "introduction": {
         "title": "Introduction"
       },
-      "MasterpassButton": {
-        "title": "MasterpassButton"
-      },
       "paymentform": {
         "title": "Build the Payment Form"
-      },
-      "SquarePaymentForm": {
-        "title": "SquarePaymentForm"
       }
     },
     "links": {

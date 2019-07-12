@@ -25,7 +25,7 @@ glob("src/components/**/*.tsx", function (err, files) {
         var typescriptParse = reactDocsTypescript.parse(file)
         var reactParse = reactDocs.parse(data)
         var markdown = generateMarkdown(name, typescriptParse[0], reactParse)
-        var outPath = __dirname + '/docs/' + name + '.md'
+        var outPath = __dirname + '/docs/components/' + name + '.md'
         fs.writeFileSync(outPath, markdown)
     })
   })
@@ -42,6 +42,15 @@ function componentName(filepath) {
 
 function generateDescription(description) {
   return description;
+}
+
+function generatePageMetadata(name) {
+  return [
+    '---',
+    'id:' + name,
+    'title:' + name,
+    '---',
+  ].join('\n')
 }
 
 function generatePropDescription(description, defaultValue) {
@@ -94,6 +103,7 @@ function generateProps(props, reactProps) {
 
 function generateMarkdown(name, typescriptAPI, reactAPI) {
   return [
+    generatePageMetadata(name),
     generateDescription(typescriptAPI.description),
     generateProps(typescriptAPI.props, reactAPI.props)
   ].join('\n')

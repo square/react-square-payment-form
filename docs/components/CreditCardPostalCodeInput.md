@@ -1,3 +1,7 @@
+---
+id:CreditCardPostalCodeInput
+title:CreditCardPostalCodeInput
+---
 Renders a placeholder element for the postal code. The SqPaymentForm JS library will replace this
 element with a secure `<iframe>` tag that will render an `<input>` field for the postal code.
 
