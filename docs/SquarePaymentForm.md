@@ -3,9 +3,9 @@ Creates a Square Payment Form and renders form inputs to use inside of it.
 This component requires 3 arguments for basic use:
 * **applicationId**: This can be found in your [Square Developer Dashboard](https://connect.squareup.com/apps)
 for the current Square app you're developing
-* **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareupstaging.com/api/connect/v2#navsection-locations);
+* **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
 or your [Square Developer Dashboard](https://connect.squareup.com/apps).
-It determines which Square location will receive credit for transactions made with this form.
+It determines which Square location will receive credit for payments made with this form.
 * **onCardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
 
 ...and one additional argument for digital wallets:

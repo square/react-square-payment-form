@@ -45,19 +45,21 @@ To get your API access token:
 
 ## 4. Take a payment
 
-On your backend, take this nonce and create a charge using Square's Transactions API. You can read the [Transactions API Setup Guide](https://docs.connect.squareup.com/payments/transactions/setup) to learn how to create a charge.
+On your backend, take this nonce and create a charge using Square's Payments API. You can read the [Take and Refund Payments](https://developer.squareup.com/docs/payments-api/take-and-refund-payments) guide to learn how to create a payment.
 
 ```
 def create
   payload = {
-    "card_nonce": params[:nonce],
+    "source_id": params[:nonce],
+    "autocomplete": true,
+    "location_id": {SANDBOX_LOCATION_ID},
     "amount_money": { # amount_money = $1.00
       "amount": 100,
       "currency" "USD"
     },
     "idempotency_key": SecureRandom.uuid
   }
-  url = "https://connect.squareup.com/v2/locations/{SANDBOX_LOCATION_ID}/transactions"
+  url = "https://connect.squareup.com/v2/payments"
   res = HTTP.auth("Bearer #{SANDBOX_ACCESS_TOKEN}").post(url, :body => payload.to_json)
   render json: res.body
 end
