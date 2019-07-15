@@ -12,7 +12,7 @@ declare class SqPaymentForm {
 }
 
 export interface SquarePaymentFormProps {
-  /** **Required for all features**<br/><br/>sIdentifies the calling form with a verified application ID generated from the Square Application Dashboard */
+  /** **Required for all features**<br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
   applicationId: string;
   /** **Required for all features**<br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
   locationId: string;

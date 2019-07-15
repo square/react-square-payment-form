@@ -3,7 +3,7 @@ import { ContextConsumer } from './Context'
 
 export interface CreditCardSubmitButtonProps {
   /** Input field label */
-  label?: string;
+  children?: React.ReactNode;
 }
 /**
  * Renders a button that will create a card nonce using Square's SqPaymentForm JS library and calls
@@ -11,13 +11,19 @@ export interface CreditCardSubmitButtonProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-const CreditCardSubmitButton: React.FunctionComponent<CreditCardSubmitButtonProps> = (props) =>
-  <ContextConsumer>
-    {context =>
-      <button className="sq-creditcard" onClick={context.onCreateNonce}>
-        {props.children ? props.children : 'Pay'}
-      </button>
-    }
-  </ContextConsumer>
+class CreditCardSubmitButton extends React.Component<CreditCardSubmitButtonProps> {
+
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <button className="sq-creditcard" onClick={context.onCreateNonce}>
+            {this.props.children ? this.props.children : 'Pay'}
+          </button>
+        }
+      </ContextConsumer>
+    )
+  }
+}
 
 export default CreditCardSubmitButton

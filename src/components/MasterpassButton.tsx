@@ -11,19 +11,25 @@ export interface MasterpassButtonProps {
 /**
 * Renders a Masterpass button to use in the Square Payment Form, pre-styled to meet Masterpass's branding guidelines.
 */
-const MasterpassButton: React.FunctionComponent<MasterpassButtonProps> = (props) =>
-  <ContextConsumer>
-    {context =>
-      <div>
-        <button
-          id={`${context.formId}-sq-masterpass`}
-          className="sq-masterpass"
-          style={{ display: context.masterpassState === 'ready' ? 'block' : 'none' }}
-        />
-        {context.masterpassState === 'loading' && props.loadingView}
-        {context.masterpassState === 'unavailable' && props.unavailableView}
-      </div>
-    }
-  </ContextConsumer>
+class MasterpassButton extends React.Component<MasterpassButtonProps> {
+
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <div>
+            <button
+              id={`${context.formId}-sq-masterpass`}
+              className="sq-masterpass"
+              style={{ display: context.masterpassState === 'ready' ? 'block' : 'none' }}
+            />
+            {context.masterpassState === 'loading' && this.props.loadingView}
+            {context.masterpassState === 'unavailable' && this.props.unavailableView}
+          </div>
+        }
+      </ContextConsumer>
+    )
+  }
+}
 
 export default MasterpassButton
