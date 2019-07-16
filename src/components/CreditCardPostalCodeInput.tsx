@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ContextConsumer } from './Context'
 
-export interface PostalCodeInputProps {
+export interface CreditCardPostalCodeInputProps {
   /** Input field label */
   label?: string;
 }
@@ -11,18 +11,24 @@ export interface PostalCodeInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-const PostalCodeInput: React.FunctionComponent<PostalCodeInputProps> = ({ label }) =>
-  <ContextConsumer>
-    {context =>
-      <div>
-        {label && <span className="sq-label">{label}</span>}
-        <div id={`${context.formId}-sq-postal-code`}></div>
-      </div>
-    }
-  </ContextConsumer>
+class CreditCardPostalCodeInput extends React.Component<CreditCardPostalCodeInputProps> {
 
-PostalCodeInput.defaultProps = {
-  label: 'Postal'
+  static defaultProps = {
+    label: 'Postal'
+  }
+
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <div>
+            {this.props.label && <span className="sq-label">{this.props.label}</span>}
+            <div id={`${context.formId}-sq-postal-code`}></div>
+          </div>
+        }
+      </ContextConsumer>
+    )
+  }
 }
 
-export default PostalCodeInput
+export default CreditCardPostalCodeInput

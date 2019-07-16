@@ -12,7 +12,7 @@ declare class SqPaymentForm {
 }
 
 export interface SquarePaymentFormProps {
-  /** **Required for all features**<br/><br/>sIdentifies the calling form with a verified application ID generated from the Square Application Dashboard */
+  /** **Required for all features**<br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
   applicationId: string;
   /** **Required for all features**<br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
   locationId: string;
@@ -55,7 +55,7 @@ interface State {
  * This component requires 3 arguments for basic use:
  * * **applicationId**: This can be found in your [Square Developer Dashboard](https://connect.squareup.com/apps)
  * for the current Square app you're developing
- * * **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareupstaging.com/api/connect/v2#navsection-locations);
+ * * **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
  * or your [Square Developer Dashboard](https://connect.squareup.com/apps).
  * It determines which Square location will receive credit for transactions made with this form.
  * * **onCardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.

@@ -1,5 +1,14 @@
-# compiled output
+# source code compiled output
 /lib/
+
+# website compiled output
+website/translated_docs
+website/build/
+website/yarn.lock
+website/node_modules
+website/i18n/*
+!website/i18n/en.json
 
 # dependencies
 /node_modules/
+.DS_STORE

@@ -10,19 +10,24 @@ export interface GooglePayButtonProps {
 /**
  * Renders a Google Pay button to use in the Square Payment Form, pre-styled to meet Google's branding guidelines.
  */
-const GooglePayButton: React.FunctionComponent<GooglePayButtonProps> = (props) =>
-  <ContextConsumer>
-    {context =>
-      <div>
-        <button
-          id={`${context.formId}-sq-google-pay`}
-          className="sq-google-pay"
-          style={{ display: context.googlePayState === 'ready' ? 'block' : 'none' }}
-        />
-        {context.googlePayState === 'loading' && props.loadingView}
-        {context.googlePayState === 'unavailable' && props.unavailableView}
-      </div>
-    }
-  </ContextConsumer>
+class GooglePayButton extends React.Component<GooglePayButtonProps> {
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <div>
+            <button
+              id={`${context.formId}-sq-google-pay`}
+              className="sq-google-pay"
+              style={{ display: context.googlePayState === 'ready' ? 'block' : 'none' }}
+            />
+            {context.googlePayState === 'loading' && this.props.loadingView}
+            {context.googlePayState === 'unavailable' && this.props.unavailableView}
+          </div>
+        }
+      </ContextConsumer>
+    )
+  }
+}
 
 export default GooglePayButton

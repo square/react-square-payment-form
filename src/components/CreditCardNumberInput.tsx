@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ContextConsumer } from './Context'
+import { render } from 'enzyme';
 
 export interface CreditCardNumberInputProps {
   /** Input field label */
@@ -11,18 +12,24 @@ export interface CreditCardNumberInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-const CreditCardNumberInput: React.FunctionComponent<CreditCardNumberInputProps> = ({ label }) =>
-  <ContextConsumer>
-    {context =>
-      <div>
-        {label && <span className="sq-label">{label}</span>}
-        <div id={`${context.formId}-sq-card-number`}></div>
-      </div>
-    }
-  </ContextConsumer>
+class CreditCardNumberInput extends React.Component<CreditCardNumberInputProps> {
 
-CreditCardNumberInput.defaultProps = {
-  label: 'Credit Card'
+  static defaultProps = {
+    label: 'Credit Card'
+  }
+
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <div>
+            {this.props.label && <span className="sq-label">{this.props.label}</span>}
+            <div id={`${context.formId}-sq-card-number`}></div>
+          </div>
+        }
+      </ContextConsumer>
+    )
+  }
 }
 
 export default CreditCardNumberInput

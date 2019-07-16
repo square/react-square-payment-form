@@ -14,6 +14,47 @@ React 16.3.0 or above
 
 See the [documentation](https://square.github.io/react-square-payment-form) to get started.
 
+## Demo
+
+1. Run the demo locally
+    ```
+    cd demo
+    npm install
+    npm start
+    ```
+1. Update the `LOCATION_ID` and `APPLICATION_ID` in `PaymentPage.jsx` with your own application credentials
+
+*Note: The demo only supports credit card payments. Digital wallets are not supported locally.*
+
+## Documentation
+
+### Running the doc website locally
+
+```
+cd website
+npm install
+npm start
+```
+
+### Updating the docs
+
+Files under `docs/components` are automatically generated from the component comments. All other documentation files can be modified directly.
+
+To update the component documentation, run `./generateComponentDocs.sh`
+
+### Publishing the website
+
+Once the changes are merged, run the following command to publish the website.
+
+```
+cd website
+GIT_USER=<GIT_USER> CURRENT_BRANCH=master USE_SSH=true npm run publish-gh-pages
+```
+
+## Updating NPM
+
+`npm publish --registry=https://registry.npmjs.org/`
+
 ## License
 
 ```

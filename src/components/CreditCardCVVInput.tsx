@@ -12,18 +12,24 @@ export interface CreditCardCVVInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-const CreditCardCVVInput: React.FunctionComponent<CreditCardCVVInputProps> = ({ label }) =>
-  <ContextConsumer>
-    {context =>
-      <div>
-        {label && <span className="sq-label">{label}</span>}
-        <div id={`${context.formId}-sq-cvv`}></div>
-      </div>
-    }
-  </ContextConsumer>
+class CreditCardCVVInput extends React.Component<CreditCardCVVInputProps> {
 
-CreditCardCVVInput.defaultProps = {
-  label: 'CVV'
+  static defaultProps = {
+    label: 'CVV'
+  }
+
+  render() {
+    return (
+      <ContextConsumer>
+        {context =>
+          <div>
+            {this.props.label && <span className="sq-label">{this.props.label}</span>}
+            <div id={`${context.formId}-sq-cvv`}></div>
+          </div>
+        }
+      </ContextConsumer>
+    )
+  }
 }
 
 export default CreditCardCVVInput
