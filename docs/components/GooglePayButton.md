@@ -6,5 +6,5 @@ Renders a Google Pay button to use in the Square Payment Form, pre-styled to mee
 ## Props
 |Name|Type|Description|
 |---|---|---|
-|loadingView|ReactNode|Placeholder view when the Google Pay is being initialized|
-|unavailableView|ReactNode|Placeholder view when Google Pay is not available|
+|loadingView|React.ReactNode|Placeholder view when the Google Pay is being initialized|
+|unavailableView|React.ReactNode|Placeholder view when Google Pay is not available|
