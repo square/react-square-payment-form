@@ -12,20 +12,20 @@ declare class SqPaymentForm {
 }
 
 export interface SquarePaymentFormProps {
-  /** **Required for all features**<br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
+  /** <b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
   applicationId: string;
-  /** **Required for all features**<br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
+  /** <b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
   locationId: string;
-  /** **Required for all features**<br/><br/>Identifies the DOM form element*/
+  /** <b>Required for all features</b><br/><br/>Identifies the DOM form element*/
   formId: string;
   /** Define the internal styles applied to the rendered iframes */
   inputStyles?: {}[];
   /** Internal variable: used for logs */
   apiWrapper: string;
 
-  /** **Required for all features**<br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
+  /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData) => void;
-  /** **Required for digital wallets**<br/><br/>Invoked when a digital wallet payment button is clicked.*/
+  /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.*/
   createPaymentRequest?: () => SqPaymentRequest;
   /* Triggered when the page renders to decide which, if any, digital wallet button should be rendered in the payment form */
   methodsSupported?: (methods: SqMethods) => void;
@@ -55,10 +55,10 @@ interface State {
  * This component requires 3 arguments for basic use:
  * * **applicationId**: This can be found in your [Square Developer Dashboard](https://connect.squareup.com/apps)
  * for the current Square app you're developing
- * * **locationID**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
+ * * **locationId**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
  * or your [Square Developer Dashboard](https://connect.squareup.com/apps).
  * It determines which Square location will receive credit for transactions made with this form.
- * * **onCardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
+ * * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
  *
  * ...and one additional argument for digital wallets:
  * * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.
@@ -70,7 +70,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
   paymentForm?: SqPaymentForm
 
   static defaultProps = {
-    formId: `sq-payment-form`,
+    formId: 'sq-payment-form',
     apiWrapper: 'reactjs/0.1.8',
     inputStyles: [{
       fontSize: '16px',
