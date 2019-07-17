@@ -71,12 +71,24 @@ export interface SqContact {
   givenName: string;
   email: string;
   country: string;
-  countryName: string;
-  region: string;
+  countryName?: string;
+  region?: string;
   city: string;
-  addressLines: [string];
+  addressLines: string[];
   postalCode: string;
   phone?: string;
+}
+
+export interface SqVerificationDetails {
+  billingContact: SqContact;
+  amount?: string;
+  currencyCode?: string;
+  intent?: string;
+}
+
+export interface SqVerificationResult {
+  token: string;
+  userChallenged: boolean;
 }
 
 interface SqLineItem {
