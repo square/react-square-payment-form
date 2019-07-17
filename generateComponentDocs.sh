@@ -16,7 +16,7 @@ var app = new TypeDoc.Application({
 
 var tempFileName = 'typedocOutput.json'
 
-glob("src/components/**/*.tsx", function (err, files) {
+glob("src/components/**/!(*.test).tsx", function (err, files) {
   if (err) throw err;
 
   files.forEach(function(file, index) {
