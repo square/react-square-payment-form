@@ -55,14 +55,31 @@ class PaymentPage extends React.Component {
     }
   }
 
-  cardNonceResponseReceived = (errors, nonce, cardData) => {
+  cardNonceResponseReceived = (errors, nonce, cardData, token) => {
     if (errors) {
       this.setState({ errorMessages: errors.map(error => error.message) })
       return
     }
 
     this.setState({ errorMessages: [] })
-    alert("nonce created: " + nonce)
+    alert("nonce created: " + nonce + ", token: " + token)
+  }
+
+  createVerificationDetails() {
+    return {
+      amount: '100.00',
+      storeCard: "charge",  //Allowed values: "charge", "create-card", "create-and-charge"
+      billingContact: {
+        familyName: "Smith",
+        givenName: "John",
+        email: "jsmith@example.com",
+        country: "GB",
+        city: "London",
+        addressLines: ["1235 Emperor's Gate"],
+        postalCode: "SW7 4JA",
+        phone: "020 7946 0532"
+      }
+    }
   }
 
   render() {
@@ -74,6 +91,7 @@ class PaymentPage extends React.Component {
           applicationId={SANDBOX_APPLICATION_ID}
           locationId={SANDBOX_LOCATION_ID}
           cardNonceResponseReceived={this.cardNonceResponseReceived}
+          createVerificationDetails={this.createVerificationDetails}
         >
         </SquarePaymentForm>
 
