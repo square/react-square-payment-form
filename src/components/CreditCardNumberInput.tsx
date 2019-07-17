@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { ContextConsumer } from './Context'
-import { render } from 'enzyme';
 
 export interface CreditCardNumberInputProps {
   /** Input field label */
@@ -18,7 +17,7 @@ class CreditCardNumberInput extends React.Component<CreditCardNumberInputProps> 
     label: 'Credit Card'
   }
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

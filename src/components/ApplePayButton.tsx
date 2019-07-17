@@ -12,7 +12,7 @@ export interface ApplePayButtonProps {
  * Renders an Apple Pay button to use in the Square Payment Form, pre-styled to meet Apple's Human Interface Guidelines.
  */
 class ApplePayButton extends React.Component<ApplePayButtonProps> {
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

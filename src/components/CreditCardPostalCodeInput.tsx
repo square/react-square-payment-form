@@ -17,7 +17,7 @@ class CreditCardPostalCodeInput extends React.Component<CreditCardPostalCodeInpu
     label: 'Postal'
   }
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

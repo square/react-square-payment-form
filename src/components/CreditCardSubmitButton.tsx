@@ -13,7 +13,7 @@ export interface CreditCardSubmitButtonProps {
  */
 class CreditCardSubmitButton extends React.Component<CreditCardSubmitButtonProps> {
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>
