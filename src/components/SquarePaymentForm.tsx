@@ -9,6 +9,7 @@ declare class SqPaymentForm {
   destroy: () => void
   recalculateSize: () => void
   requestCardNonce: () => void
+  verifyBuyer: (source: string, verificationDetails: SqVerificationDetails, callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)) => void
 }
 
 export interface SquarePaymentFormProps {
@@ -152,6 +153,10 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     this.paymentForm && this.paymentForm.requestCardNonce()
   }
 
+  verifyBuyer = (source: string, verificationDetails: SqVerificationDetails, callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)) => {
+    this.paymentForm && this.paymentForm.verifyBuyer(source, verificationDetails, callback)
+  }
+
   cardNonceResponseReceived = (errors: [SqError], nonce: string, cardData: SqCardData) => {
     if (errors || !this.props.createVerificationDetails) {
       this.props.cardNonceResponseReceived(errors, nonce, cardData)
@@ -241,7 +246,8 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       googlePayState,
       masterpassState,
       formId: this.props.formId,
-      onCreateNonce: this.createNonce
+      onCreateNonce: this.createNonce,
+      onVerifyBuyer: this.verifyBuyer
     }
 
     return (
