@@ -11,7 +11,8 @@ export interface GooglePayButtonProps {
  * Renders a Google Pay button to use in the Square Payment Form, pre-styled to meet Google's branding guidelines.
  */
 class GooglePayButton extends React.Component<GooglePayButtonProps> {
-  render() {
+
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

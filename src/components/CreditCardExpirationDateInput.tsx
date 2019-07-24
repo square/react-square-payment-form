@@ -18,7 +18,7 @@ class CreditCardExpirationDateInput extends React.Component<CreditCardExpiration
     label: 'Expiration'
   }
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

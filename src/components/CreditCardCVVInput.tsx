@@ -18,7 +18,7 @@ class CreditCardCVVInput extends React.Component<CreditCardCVVInputProps> {
     label: 'CVV'
   }
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

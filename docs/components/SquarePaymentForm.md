@@ -22,8 +22,9 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |---|---|---|
 |apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.1.8"`|
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard|
-|cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
+|cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.|
+|createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>|
 |formId|string|<b>Required for all features</b><br/><br/>Identifies the DOM form element<br/><br/>**Default Value:** `"sq-payment-form"`|
 |inputEventReceived|() => void|Invoked when visitors interact with the iframe elements|
 |inputStyles|array|Define the internal styles applied to the rendered iframes<br/><br/>**Default Value:** ` [{      fontSize: '16px',      fontFamily: 'Helvetica Neue',      padding: '16px',      color: '#373F4A',      backgroundColor: 'transparent',      lineHeight: '24px',      placeholderColor: '#CCC',      _webkitFontSmoothing: 'antialiased',      _mozOsxFontSmoothing: 'grayscale'    }]`|

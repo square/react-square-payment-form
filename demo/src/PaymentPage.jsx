@@ -23,15 +23,16 @@ class PaymentPage extends React.Component {
     }
   }
 
-  cardNonceResponseReceived = (errors, nonce, cardData) => {
+  cardNonceResponseReceived = (errors, nonce, cardData, buyerVerificationToken) => {
     if (errors) {
       this.setState({ errorMessages: errors.map(error => error.message) })
       return
     }
 
     this.setState({ errorMessages: [] })
-    alert("nonce created: " + nonce)
-    // API.post('/payments', data: { nonce: nonce }) // implement this
+
+    alert("nonce created: " + nonce + ", buyerVerificationToken: " + buyerVerificationToken)
+    // API.post('/payments', data: { nonce: nonce, buyerVerificationToken: buyerVerificationToken }) // implement this
   }
 
   createPaymentRequest() {
@@ -55,6 +56,23 @@ class PaymentPage extends React.Component {
     }
   }
 
+  createVerificationDetails() {
+    return {
+      amount: '100.00',
+      storeCard: "charge",  //Allowed values: "charge", "create-card", "create-and-charge"
+      billingContact: {
+        familyName: "Smith",
+        givenName: "John",
+        email: "jsmith@example.com",
+        country: "GB",
+        city: "London",
+        addressLines: ["1235 Emperor's Gate"],
+        postalCode: "SW7 4JA",
+        phone: "020 7946 0532"
+      }
+    }
+  }
+
   render() {
     const loadingView = <div className="sq-wallet-loading"></div>
     const unavailableApple = <div className="sq-wallet-unavailable">Apple pay unavailable. Open safari on desktop or mobile to use.</div>
@@ -67,6 +85,7 @@ class PaymentPage extends React.Component {
         locationId={LOCATION_ID}
         cardNonceResponseReceived={this.cardNonceResponseReceived}
         createPaymentRequest={this.createPaymentRequest}
+        createVerificationDetails={this.createVerificationDetails}
         >
           <ApplePayButton loadingView={loadingView} unavailableView={unavailableApple} />
           <GooglePayButton loadingView={loadingView} unavailableView={unavailableGoogle} />

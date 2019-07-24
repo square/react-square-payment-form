@@ -10,6 +10,8 @@ import ApplePayButton from './components/ApplePayButton';
 import GooglePayButton from './components/GooglePayButton';
 import MasterpassButton from './components/MasterpassButton';
 
+import { ContextConsumer } from './components/Context';
+
 export {
   CreditCardCVVInput,
   CreditCardExpirationDateInput,
@@ -20,6 +22,8 @@ export {
   ApplePayButton,
   GooglePayButton,
   MasterpassButton,
+
+  ContextConsumer,
 }
 
 export default SquarePaymentForm

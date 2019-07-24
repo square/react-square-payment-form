@@ -13,7 +13,7 @@ export interface MasterpassButtonProps {
 */
 class MasterpassButton extends React.Component<MasterpassButtonProps> {
 
-  render() {
+  render(): React.ReactElement {
     return (
       <ContextConsumer>
         {context =>

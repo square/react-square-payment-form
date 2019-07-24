@@ -7,9 +7,10 @@ import SquarePaymentForm from './SquarePaymentForm'
 describe('SquarePaymentForm', () => {
 
   let wrapper: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  var cardNonceResponseReceived = jest.fn()
 
   beforeEach(() => {
-    wrapper = shallow(<SquarePaymentForm applicationId={'test'} locationId={'test'} cardNonceResponseReceived={() => {}} />)
+    wrapper = shallow(<SquarePaymentForm applicationId={'test'} locationId={'test'} cardNonceResponseReceived={cardNonceResponseReceived} />)
     wrapper.instance().renderSqPaymentForm = jest.fn()
     wrapper.instance().forceUpdate()
     wrapper.update()
@@ -111,13 +112,39 @@ describe('SquarePaymentForm', () => {
     })
   })
 
+  describe('cardNonceResponseReceived', () => {
+    it('should call props.cardNonceResponseReceived', () => {
+      const instance = wrapper.instance()
+      instance.cardNonceResponseReceived()
+      expect(cardNonceResponseReceived.mock.calls.length).to.eql(1)
+    })
+
+    it('should call SqPaymentForm.verifyBuyer when createVerificationDetails exists', () => {
+      wrapper.setProps({ createVerificationDetails: jest.fn() })
+      const instance = wrapper.instance()
+      const paymentForm = { verifyBuyer: jest.fn() }
+      instance.paymentForm = paymentForm
+      instance.cardNonceResponseReceived()
+      expect(paymentForm.verifyBuyer.mock.calls.length).to.eql(1)
+    })
+
+    it('should call createVerificationDetails when createVerificationDetails exists', () => {
+      var createVerificationDetails = jest.fn()
+      wrapper.setProps({ createVerificationDetails })
+      const instance = wrapper.instance()
+      const paymentForm = { verifyBuyer: jest.fn() }
+      instance.paymentForm = paymentForm
+      instance.cardNonceResponseReceived()
+      expect(createVerificationDetails.mock.calls.length).to.eql(1)
+    })
+  })
+
   describe('buildSqPaymentFormConfiguration', () => {
     const props: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
       applicationId: 'app-id',
       locationId: 'loc-id',
     }
     const callbacks: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
-      cardNonceResponseReceived: 'cardNonceResponseReceived',
       createPaymentRequest: 'createPaymentRequest',
       inputEventReceived: 'inputEventReceived',
       methodsSupported: 'methodsSupported',
@@ -139,6 +166,17 @@ describe('SquarePaymentForm', () => {
       Object.keys(callbacks).forEach(key => {
         expect(config.callbacks[key]).to.eql(callbacks[key])
       })
+    })
+
+    it('should not set cardNonceResponseReceived if cardNonceResponseReceived prop is missing', () => {
+      const config = wrapper.instance().buildSqPaymentFormConfiguration({ cardNonceResponseReceived: null })
+      expect(config.callbacks['cardNonceResponseReceived']).to.be.null
+    })
+
+
+    it('should set cardNonceResponseReceived if cardNonceResponseReceived prop is passed', () => {
+      const config = wrapper.instance().buildSqPaymentFormConfiguration({ cardNonceResponseReceived: jest.fn() })
+      expect(config.callbacks['cardNonceResponseReceived']).to.eql(wrapper.instance().cardNonceResponseReceived)
     })
   })
 })

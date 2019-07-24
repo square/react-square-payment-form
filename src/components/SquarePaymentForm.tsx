@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { SqError, SqCardData, SqContact, SqMethods, SqPaymentRequest, SqShippingOption, SqPaymentFormConfiguration } from './models'
+import { SqError, SqCardData, SqContact, SqMethods, SqPaymentRequest, SqShippingOption, SqPaymentFormConfiguration, SqVerificationResult, SqVerificationDetails } from './models'
 import { ContextProvider } from './Context'
 
 declare class SqPaymentForm {
@@ -9,6 +9,7 @@ declare class SqPaymentForm {
   destroy: () => void
   recalculateSize: () => void
   requestCardNonce: () => void
+  verifyBuyer: (source: string, verificationDetails: SqVerificationDetails, callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)) => void
 }
 
 export interface SquarePaymentFormProps {
@@ -24,9 +25,11 @@ export interface SquarePaymentFormProps {
   apiWrapper: string;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
-  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData) => void;
+  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken?: string) => void;
   /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.*/
   createPaymentRequest?: () => SqPaymentRequest;
+  /** <b>Required for SCA</b><br/><br/> */
+  createVerificationDetails?: () => SqVerificationDetails;
   /* Triggered when the page renders to decide which, if any, digital wallet button should be rendered in the payment form */
   methodsSupported?: (methods: SqMethods) => void;
   /** Invoked when visitors interact with the iframe elements */
@@ -150,6 +153,25 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     this.paymentForm && this.paymentForm.requestCardNonce()
   }
 
+  verifyBuyer = (source: string, verificationDetails: SqVerificationDetails, callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)) => {
+    this.paymentForm && this.paymentForm.verifyBuyer(source, verificationDetails, callback)
+  }
+
+  cardNonceResponseReceived = (errors: [SqError], nonce: string, cardData: SqCardData) => {
+    if (errors || !this.props.createVerificationDetails) {
+      this.props.cardNonceResponseReceived(errors, nonce, cardData)
+      return
+    }
+
+    this.paymentForm && this.paymentForm.verifyBuyer(
+      nonce,
+      this.props.createVerificationDetails(),
+      (err: [SqError], result: SqVerificationResult) => {
+        this.props.cardNonceResponseReceived(err, nonce, cardData, result.token)
+      }
+    )
+  }
+
   methodsSupported = (methods: SqMethods) => {
     const keys = Object.keys(methods)
 
@@ -173,7 +195,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       inputStyles: props.inputStyles,
       apiWrapper: props.apiWrapper,
       callbacks: {
-        cardNonceResponseReceived: props.cardNonceResponseReceived,
+        cardNonceResponseReceived: props.cardNonceResponseReceived ? this.cardNonceResponseReceived: null, // handles missing callback error
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
         methodsSupported: props.methodsSupported,
@@ -224,7 +246,8 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       googlePayState,
       masterpassState,
       formId: this.props.formId,
-      onCreateNonce: this.createNonce
+      onCreateNonce: this.createNonce,
+      onVerifyBuyer: this.verifyBuyer
     }
 
     return (
