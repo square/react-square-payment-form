@@ -11,7 +11,7 @@ export interface SqPaymentFormConfiguration {
   cardNumber?: SqPaymentFormInputConfiguration;
   cvv?: SqPaymentFormInputConfiguration;
   expirationDate?: SqPaymentFormInputConfiguration;
-  postalCode?: SqPaymentFormInputConfiguration;
+  postalCode?: SqPaymentFormInputConfiguration | boolean;
 
   applePay?: SqPaymentFormInputConfiguration;
   googlePay?: SqPaymentFormInputConfiguration;
