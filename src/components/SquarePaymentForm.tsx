@@ -25,7 +25,7 @@ export interface SquarePaymentFormProps {
   apiWrapper: string;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
-  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, token?: string) => void;
+  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken?: string) => void;
   /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.*/
   createPaymentRequest?: () => SqPaymentRequest;
   /** <b>Required for SCA</b><br/><br/> */

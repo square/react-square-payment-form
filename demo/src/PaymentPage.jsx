@@ -23,7 +23,7 @@ class PaymentPage extends React.Component {
     }
   }
 
-  cardNonceResponseReceived = (errors, nonce, cardData, token) => {
+  cardNonceResponseReceived = (errors, nonce, cardData, buyerVerificationToken) => {
     if (errors) {
       this.setState({ errorMessages: errors.map(error => error.message) })
       return
@@ -31,8 +31,8 @@ class PaymentPage extends React.Component {
 
     this.setState({ errorMessages: [] })
 
-    alert("nonce created: " + nonce + ", token: " + token)
-    // API.post('/payments', data: { nonce: nonce, token: token }) // implement this
+    alert("nonce created: " + nonce + ", buyerVerificationToken: " + buyerVerificationToken)
+    // API.post('/payments', data: { nonce: nonce, buyerVerificationToken: buyerVerificationToken }) // implement this
   }
 
   createPaymentRequest() {
