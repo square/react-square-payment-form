@@ -224,6 +224,8 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     }
     if (document.getElementById(`${props.formId}-sq-postal-code`)) {
       config.postalCode = { elementId: `${props.formId}-sq-postal-code`, placeholder: '12345' }
+    } else {
+      config.postalCode = false
     }
     if (document.getElementById(`${props.formId}-sq-expiration-date`)) {
       config.expirationDate = { elementId: `${props.formId}-sq-expiration-date`, placeholder: 'MM/YY' }
