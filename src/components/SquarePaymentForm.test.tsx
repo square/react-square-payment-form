@@ -8,9 +8,17 @@ describe('SquarePaymentForm', () => {
 
   let wrapper: any // eslint-disable-line @typescript-eslint/no-explicit-any
   var cardNonceResponseReceived = jest.fn()
+  var paymentFormLoaded = jest.fn()
 
   beforeEach(() => {
-    wrapper = shallow(<SquarePaymentForm applicationId={'test'} locationId={'test'} cardNonceResponseReceived={cardNonceResponseReceived} />)
+    wrapper = shallow(
+      <SquarePaymentForm
+        applicationId={'test'}
+        locationId={'test'}
+        cardNonceResponseReceived={cardNonceResponseReceived}
+        paymentFormLoaded={paymentFormLoaded}
+      />
+    )
     wrapper.instance().renderSqPaymentForm = jest.fn()
     wrapper.instance().forceUpdate()
     wrapper.update()
@@ -139,6 +147,22 @@ describe('SquarePaymentForm', () => {
     })
   })
 
+  describe('paymentFormLoaded', () => {
+    it('should call props.paymentFormLoaded', () => {
+      const instance = wrapper.instance()
+      instance.paymentFormLoaded()
+      expect(paymentFormLoaded.mock.calls.length).to.eql(1)
+    })
+
+    it('should call SqPaymentForm.recalculateSize ', () => {
+      const instance = wrapper.instance()
+      const paymentForm = { recalculateSize: jest.fn() }
+      instance.paymentForm = paymentForm
+      instance.paymentFormLoaded()
+      expect(paymentForm.recalculateSize.mock.calls.length).to.eql(1)
+    })
+  })
+
   describe('buildSqPaymentFormConfiguration', () => {
     const props: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
       applicationId: 'app-id',
@@ -148,7 +172,6 @@ describe('SquarePaymentForm', () => {
       createPaymentRequest: 'createPaymentRequest',
       inputEventReceived: 'inputEventReceived',
       methodsSupported: 'methodsSupported',
-      paymentFormLoaded: 'paymentFormLoaded',
       shippingContactChanged: 'shippingContactChanged',
       shippingOptionChanged: 'shippingOptionChanged',
       unsupportedBrowserDetected: 'unsupportedBrowserDetected',
