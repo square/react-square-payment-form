@@ -62,6 +62,7 @@ interface State {
  * or your [Square Developer Dashboard](https://connect.squareup.com/apps).
  * It determines which Square location will receive credit for transactions made with this form.
  * * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
+ * * **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview)
  *
  * ...and one additional argument for digital wallets:
  * * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.
@@ -74,7 +75,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
 
   static defaultProps = {
     formId: 'sq-payment-form',
-    apiWrapper: 'reactjs/0.1.8',
+    apiWrapper: 'reactjs/0.2.0',
     inputStyles: [{
       fontSize: '16px',
       fontFamily: 'Helvetica Neue',

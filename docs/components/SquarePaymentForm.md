@@ -11,6 +11,7 @@ for the current Square app you're developing
 or your [Square Developer Dashboard](https://connect.squareup.com/apps).
 It determines which Square location will receive credit for transactions made with this form.
 * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
+* **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview)
 
 ...and one additional argument for digital wallets:
 * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.
@@ -20,7 +21,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 ## Props
 |Name|Type|Description|
 |---|---|---|
-|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.1.8"`|
+|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.2.0"`|
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard|
 |cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.|
