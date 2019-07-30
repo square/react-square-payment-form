@@ -11,6 +11,7 @@ for the current Square app you're developing
 or your [Square Developer Dashboard](https://connect.squareup.com/apps).
 It determines which Square location will receive credit for transactions made with this form.
 * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
+* **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview)
 
 ...and one additional argument for digital wallets:
 * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.

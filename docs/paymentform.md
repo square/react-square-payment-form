@@ -43,7 +43,7 @@ import 'react-square-payment-form/lib/default.css'
 
 The `SquarePaymentForm` is a wrapper that loads the SqPaymentForm JS library. It does not render anything on its own.
 
-You will need to provide the `applicationId`, `locationId`, and `onCardNonceResponseRecieved`. `onCardNonceResponseRecieved` will return errors for invalid credit cards.
+You will need to provide the `applicationId`, `locationId`, `onCardNonceResponseRecieved`, and `createVerificationDetails`. `onCardNonceResponseRecieved` will return errors for invalid credit cards.
 
 ```
 class PaymentPage extends React.Component {
