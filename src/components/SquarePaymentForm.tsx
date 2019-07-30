@@ -141,7 +141,6 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     try {
       this.paymentForm = new SqPaymentForm(this.buildSqPaymentFormConfiguration({ methodsSupported: this.methodsSupported, ...this.props}))
       this.paymentForm.build()
-      this.paymentForm.recalculateSize()
     } catch (error) {
       let errorMesasge = error.message || 'Unable to build Square payment form'
       this.setState({ errorMessage: errorMesasge })
@@ -186,6 +185,11 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     }
   }
 
+  paymentFormLoaded = () => {
+    this.paymentForm && this.paymentForm.recalculateSize()
+    this.props.paymentFormLoaded && this.props.paymentFormLoaded()
+  }
+
   buildSqPaymentFormConfiguration(props: SquarePaymentFormProps): SqPaymentFormConfiguration {
     const config: SqPaymentFormConfiguration = {
       applicationId: props.applicationId,
@@ -199,7 +203,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
         methodsSupported: props.methodsSupported,
-        paymentFormLoaded: props.paymentFormLoaded,
+        paymentFormLoaded: this.paymentFormLoaded,
         shippingContactChanged: props.shippingContactChanged,
         shippingOptionChanged: props.shippingOptionChanged,
         unsupportedBrowserDetected: props.unsupportedBrowserDetected,
