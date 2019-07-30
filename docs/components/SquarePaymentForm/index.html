@@ -65,6 +65,7 @@ for the current Square app you're developing</li>
 or your <a href="https://connect.squareup.com/apps">Square Developer Dashboard</a>.
 It determines which Square location will receive credit for transactions made with this form.</li>
 <li><strong>cardNonceResponseReceived</strong>: This callback gives you a nonce to pass to your back-end server to make a &quot;charge&quot; request to Square.</li>
+<li><strong>createVerificationDetails</strong>: This callback returns data used for <a href="https://developer.squareup.com/docs/sca-overview">Strong Customer Authentication</a></li>
 </ul>
 <p>...and one additional argument for digital wallets:</p>
 <ul>
@@ -77,10 +78,11 @@ It determines which Square location will receive credit for transactions made wi
 <tr><th>Name</th><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs<br/><br/><strong>Default Value:</strong> <code>&quot;reactjs/0.1.8&quot;</code></td></tr>
+<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs<br/><br/><strong>Default Value:</strong> <code>&quot;reactjs/0.2.0&quot;</code></td></tr>
 <tr><td>applicationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard</td></tr>
-<tr><td>cardNonceResponseReceived</td><td>(errors: [SqError], nonce: string, cardData: SqCardData) =&gt; void</td><td><b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.</td></tr>
+<tr><td>cardNonceResponseReceived</td><td>(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string) =&gt; void</td><td><b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.</td></tr>
 <tr><td>createPaymentRequest</td><td>() =&gt; SqPaymentRequest</td><td><b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.</td></tr>
+<tr><td>createVerificationDetails</td><td>() =&gt; SqVerificationDetails</td><td><b>Required for SCA</b><br/><br/></td></tr>
 <tr><td>formId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the DOM form element<br/><br/><strong>Default Value:</strong> <code>&quot;sq-payment-form&quot;</code></td></tr>
 <tr><td>inputEventReceived</td><td>() =&gt; void</td><td>Invoked when visitors interact with the iframe elements</td></tr>
 <tr><td>inputStyles</td><td>array</td><td>Define the internal styles applied to the rendered iframes<br/><br/><strong>Default Value:</strong> <code>[{ fontSize: '16px', fontFamily: 'Helvetica Neue', padding: '16px', color: '#373F4A', backgroundColor: 'transparent', lineHeight: '24px', placeholderColor: '#CCC', _webkitFontSmoothing: 'antialiased', _mozOsxFontSmoothing: 'grayscale' }]</code></td></tr>

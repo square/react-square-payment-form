@@ -82,7 +82,7 @@
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="5-add-the-squarepaymentform"></a><a href="#5-add-the-squarepaymentform" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Add the SquarePaymentForm</h2>
 <p>The <code>SquarePaymentForm</code> is a wrapper that loads the SqPaymentForm JS library. It does not render anything on its own.</p>
-<p>You will need to provide the <code>applicationId</code>, <code>locationId</code>, and <code>onCardNonceResponseRecieved</code>. <code>onCardNonceResponseRecieved</code> will return errors for invalid credit cards.</p>
+<p>You will need to provide the <code>applicationId</code>, <code>locationId</code>, <code>onCardNonceResponseRecieved</code>, and <code>createVerificationDetails</code>. <code>onCardNonceResponseRecieved</code> will return errors for invalid credit cards.</p>
 <pre><code class="hljs"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PaymentPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
 
   <span class="hljs-keyword">constructor</span>(props) {
@@ -92,14 +92,31 @@
     }
   }
 
-  cardNonceResponseReceived = <span class="hljs-function">(<span class="hljs-params">errors, nonce, cardData</span>) =&gt;</span> {
+  cardNonceResponseReceived = <span class="hljs-function">(<span class="hljs-params">errors, nonce, cardData, buyerVerificationToken</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (errors) {
       <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">errorMessages</span>: errors.map(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> error.message) })
       <span class="hljs-keyword">return</span>
     }
 
     <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">errorMessages</span>: [] })
-    alert(<span class="hljs-string">"nonce created: "</span> + nonce)
+    alert(<span class="hljs-string">"nonce created: "</span> + nonce + <span class="hljs-string">", buyerVerificationToken: "</span> + buyerVerificationToken)
+  }
+
+  createVerificationDetails() {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">amount</span>: <span class="hljs-string">'100.00'</span>,
+      <span class="hljs-attr">storeCard</span>: <span class="hljs-string">"charge"</span>,  <span class="hljs-comment">//Allowed values: "charge", "create-card", "create-and-charge"</span>
+      billingContact: {
+        <span class="hljs-attr">familyName</span>: <span class="hljs-string">"Smith"</span>,
+        <span class="hljs-attr">givenName</span>: <span class="hljs-string">"John"</span>,
+        <span class="hljs-attr">email</span>: <span class="hljs-string">"jsmith@example.com"</span>,
+        <span class="hljs-attr">country</span>: <span class="hljs-string">"GB"</span>,
+        <span class="hljs-attr">city</span>: <span class="hljs-string">"London"</span>,
+        <span class="hljs-attr">addressLines</span>: [<span class="hljs-string">"1235 Emperor's Gate"</span>],
+        <span class="hljs-attr">postalCode</span>: <span class="hljs-string">"SW7 4JA"</span>,
+        <span class="hljs-attr">phone</span>: <span class="hljs-string">"020 7946 0532"</span>
+      }
+    }
   }
 
   render() {
@@ -111,6 +128,7 @@
           <span class="hljs-attr">applicationId</span>=<span class="hljs-string">{SANDBOX_APPLICATION_ID}</span>
           <span class="hljs-attr">locationId</span>=<span class="hljs-string">{SANDBOX_LOCATION_ID}</span>
           <span class="hljs-attr">cardNonceResponseReceived</span>=<span class="hljs-string">{this.cardNonceResponseReceived}</span>
+          <span class="hljs-attr">createVerificationDetails</span>=<span class="hljs-string">{this.createVerificationDetails}</span>
         &gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">SquarePaymentForm</span>&gt;</span>
 
