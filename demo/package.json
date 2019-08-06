@@ -9,7 +9,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
-    "react-square-payment-form": "0.2.0",
+    "react-square-payment-form": "0.2.1",
     "typescript": "^3.4.5"
   },
   "scripts": {
