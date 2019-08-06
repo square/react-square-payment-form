@@ -51,9 +51,11 @@ cd website
 GIT_USER=<GIT_USER> CURRENT_BRANCH=master USE_SSH=true npm run publish-gh-pages
 ```
 
-## Updating NPM
+## Publishing a new version
 
-`npm publish --registry=https://registry.npmjs.org/`
+The following script will update the package version, release the new version, and publish the documentation.
+
+`npm run update [major|minor|patch]`
 
 ## License
 
