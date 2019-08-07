@@ -23,6 +23,8 @@ export interface SquarePaymentFormProps {
   inputStyles?: {}[];
   /** Internal variable: used for logs */
   apiWrapper: string;
+  /** Enables Sandbox mode */
+  sandbox: boolean;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken?: string) => void;
@@ -76,6 +78,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
   static defaultProps = {
     formId: 'sq-payment-form',
     apiWrapper: 'reactjs/0.2.1',
+    sandbox: false,
     inputStyles: [{
       fontSize: '16px',
       fontFamily: 'Helvetica Neue',
@@ -124,7 +127,11 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       return
     }
     const script = document.createElement('script')
-    script.src = 'https://js.squareup.com/v2/paymentform'
+    if (this.props.sandbox) {
+      script.src = 'https://js.squareupsandbox.com/v2/paymentform'
+    } else {
+      script.src = 'https://js.squareup.com/v2/paymentform'
+    }
     script.onload = function() {
       onSuccess && onSuccess()
     }

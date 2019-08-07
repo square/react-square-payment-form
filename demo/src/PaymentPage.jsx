@@ -81,6 +81,7 @@ class PaymentPage extends React.Component {
 
     return (
       <SquarePaymentForm
+        sandbox={true}
         applicationId={APPLICATION_ID}
         locationId={LOCATION_ID}
         cardNonceResponseReceived={this.cardNonceResponseReceived}
