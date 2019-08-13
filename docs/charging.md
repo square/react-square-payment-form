@@ -57,7 +57,7 @@ def create
     },
     "idempotency_key": SecureRandom.uuid
   }
-  url = "https://connect.squareup.com/v2/locations/{SANDBOX_LOCATION_ID}/transactions"
+  url = "https://connect.squareupsandbox.com/v2/locations/{SANDBOX_LOCATION_ID}/transactions"
   res = HTTP.auth("Bearer #{SANDBOX_ACCESS_TOKEN}").post(url, :body => payload.to_json)
   render json: res.body
 end

@@ -43,7 +43,12 @@ import 'react-square-payment-form/lib/default.css'
 
 The `SquarePaymentForm` is a wrapper that loads the SqPaymentForm JS library. It does not render anything on its own.
 
-You will need to provide the `applicationId`, `locationId`, `onCardNonceResponseRecieved`, and `createVerificationDetails`. `onCardNonceResponseRecieved` will return errors for invalid credit cards.
+You will need to provide the the following fields:
+* `applicationId` with your **Sandbox Application ID**
+* `locationId` with your **Sandbox Location ID**
+* `sandbox` with **true**. This is required in addition to using your sandbox IDs.
+* `onCardNonceResponseRecieved`
+* `createVerificationDetails`
 
 ```
 class PaymentPage extends React.Component {
@@ -88,6 +93,7 @@ class PaymentPage extends React.Component {
         <h1>Payment Page</h1>
 
         <SquarePaymentForm
+          sandbox={true}
           applicationId={SANDBOX_APPLICATION_ID}
           locationId={SANDBOX_LOCATION_ID}
           cardNonceResponseReceived={this.cardNonceResponseReceived}
@@ -168,3 +174,10 @@ Fill in the form with the following test credit card information and click the "
 * **CVV**: any three non-consecutive numbers
 * **Expiration Date**: any month and year in the future
 * **Postal Code**: 94103
+
+## 8. Using the form in production
+
+If you are ready to use the payment form in production, you will need to do the following:
+1. Remove the `sandbox` flag from the props
+2. Replace your sandbox application ID with your production application ID
+3. Replace your sandbox location ID with your production location ID
