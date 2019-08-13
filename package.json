@@ -9,7 +9,8 @@
     "prepublish": "npm run lint && npm run test && npm run build",
     "lint": "eslint --fix src/**/*.tsx",
     "test": "jest",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "update": "sh updateVersion.sh"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
