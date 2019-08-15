@@ -21,7 +21,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 ## Props
 |Name|Type|Description|
 |---|---|---|
-|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.2.1"`|
+|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.3.0"`|
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard|
 |cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.|
