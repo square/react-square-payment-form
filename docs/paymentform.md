@@ -10,19 +10,16 @@ In this guide, we will build a simple payment form in Sandbox mode and generate 
 To get started with the Square Payment Form, you will need to do the following:
 
 1. [Create a Square Developer account](https://connect.squareup.com/apps).
-2. [Create an application](https://connect.squareup.com/apps/new) and aggree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
+1. [Create an application](https://developer.squareup.com/apps/new) and aggree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
 
-## 2. Get your Sandbox IDs
+## 2. Get your Sandbox credentials
 
-To get your Sandbox IDs:
+To get your Sandbox credentials:
 
-1. Open your [Application Dashboard](https://connect.squareup.com/apps).
-2. Click on the application you want to use for the payment form.
-3. On the "Credentials" tab of the application control panel, copy the **Sandbox Application ID**.
-4. On the "Locations" tab of the application control panel, copy one of the **Sandbox Location ID** values from the list of Sandbox locations.
-
-The **application ID** tells us which developer is using the form to take payments. The **location ID** tells us which merchant location should recieve the payments.
-
+1. Open your [Application Dashboard](https://developer.squareup.com/apps/new).
+1. Click on the application you want to use for the payment form. You should land on the "Credentials" tab.
+1. On the bottom left corner, toggle "Production Settings" to "Sandbox Settings" .
+1. Copy the **Sandbox Application ID**. This tells Square which developer is using the form to take payments.
 
 ## 3. Install the component
 
@@ -45,8 +42,7 @@ The `SquarePaymentForm` is a wrapper that loads the SqPaymentForm JS library. It
 
 You will need to provide the the following fields:
 * `applicationId` with your **Sandbox Application ID**
-* `locationId` with your **Sandbox Location ID**
-* `sandbox` with **true**. This is required in addition to using your sandbox IDs.
+* `sandbox` with **true**. This is required in addition to using your sandbox ID.
 * [`onCardNonceResponseRecieved`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived). This will be invoked with either a successful nonce or errors.
 * [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
 
@@ -96,7 +92,6 @@ class PaymentPage extends React.Component {
         <SquarePaymentForm
           sandbox={true}
           applicationId={SANDBOX_APPLICATION_ID}
-          locationId={SANDBOX_LOCATION_ID}
           cardNonceResponseReceived={this.cardNonceResponseReceived}
           createVerificationDetails={this.createVerificationDetails}
         >
@@ -175,10 +170,3 @@ Fill in the form with the following test credit card information and click the "
 * **CVV**: any three non-consecutive numbers
 * **Expiration Date**: any month and year in the future
 * **Postal Code**: 94103
-
-## 8. Using the form in production
-
-If you are ready to use the payment form in production, you will need to do the following:
-1. Remove the `sandbox` flag from the props
-2. Replace your sandbox application ID with your production application ID
-3. Replace your sandbox location ID with your production location ID
