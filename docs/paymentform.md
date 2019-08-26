@@ -47,8 +47,8 @@ You will need to provide the the following fields:
 * `applicationId` with your **Sandbox Application ID**
 * `locationId` with your **Sandbox Location ID**
 * `sandbox` with **true**. This is required in addition to using your sandbox IDs.
-* `onCardNonceResponseRecieved`
-* `createVerificationDetails`
+* [`onCardNonceResponseRecieved`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived). This will be invoked with either a successful nonce or errors.
+* [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
 
 ```
 class PaymentPage extends React.Component {
