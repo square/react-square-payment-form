@@ -59,6 +59,7 @@ class PaymentPage extends React.Component {
   createVerificationDetails() {
     return {
       amount: '100.00',
+      currencyCode: "USD",
       storeCard: "charge",  //Allowed values: "charge", "create-card", "create-and-charge"
       billingContact: {
         familyName: "Smith",

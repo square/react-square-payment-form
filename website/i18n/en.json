@@ -6,7 +6,7 @@
     "tagline": "Take payments securely and easily in your React App with Square",
     "docs": {
       "charging": {
-        "title": "Creating a Charge"
+        "title": "Creating a Payment"
       },
       "components/ApplePayButton": {
         "title": "ApplePayButton"
@@ -35,9 +35,6 @@
       "components/SquarePaymentForm": {
         "title": "SquarePaymentForm"
       },
-      "creditcard": {
-        "title": "Accepting Credit Cards"
-      },
       "digitalwallet": {
         "title": "Accepting Digital Wallets"
       },
@@ -46,6 +43,9 @@
       },
       "paymentform": {
         "title": "Build the Payment Form"
+      },
+      "production": {
+        "title": "Taking payments in production"
       }
     },
     "links": {

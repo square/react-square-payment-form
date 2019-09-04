@@ -5,11 +5,11 @@ title:SquarePaymentForm
 Creates a Square Payment Form and renders form inputs to use inside of it.
 
 This component requires 3 arguments for basic use:
-* **applicationId**: This can be found in your [Square Developer Dashboard](https://connect.squareup.com/apps)
+* **applicationId**: This can be found in your [Square Developer Dashboard](https://developer.squareup.com/apps)
 for the current Square app you're developing
 * **locationId**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
-or your [Square Developer Dashboard](https://connect.squareup.com/apps).
-It determines which Square location will receive credit for transactions made with this form.
+or your [Square Developer Dashboard](https://developer.squareup.com/apps).
+It determines which Square location will receive credit for payments made with this form.
 * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
 * **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview)
 
