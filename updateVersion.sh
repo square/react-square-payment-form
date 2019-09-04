@@ -4,7 +4,7 @@ UPDATE_TYPES=("major\tminor\tpatch")
 USAGE="USAGE: sh publishNewVersion.sh [${UPDATE_TYPES}]"
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 UPDATE=$1
-DRYRUN=0
+DRYRUN=false
 
 if [[ $(git diff --stat) != '' ]]; then
   echo 'Git is dirty'
@@ -42,7 +42,7 @@ git commit -m "Update ${NEW_PACKAGE_VERSION}" --no-edit
 git tag -a ${NEW_PACKAGE_VERSION} -m "${NEW_PACKAGE_VERSION}"
 
 echo "Publishing package..."
-if [[ $DRYRUN ]]; then
+if [[ $DRYRUN = true ]]; then
   npm run lint && npm run test && npm run build
 else
   npm publish --registry=https://registry.npmjs.org/
@@ -50,7 +50,7 @@ fi
 
 echo "Publishing website..."
 cd website
-if [[ ! $DRYRUN ]]; then
+if [[ $DRYRUN = false ]]; then
   CURRENT_BRANCH=master USE_SSH=true npm run publish-gh-pages
 fi
 
