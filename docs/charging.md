@@ -50,7 +50,7 @@ To get your Sandbox credentials:
 
 ## 4. Take a payment
 
-On your backend, take this nonce and create a charge using Square's Payments API. You can read the [Take and Refund Payments](https://developer.squareup.com/docs/payments-api/take-and-refund-payments) guide to learn how to create a payment.
+On your backend, take this nonce and create a payment using Square's Payments API. You can read the [Payments and Refunds Overview](https://developer.squareup.com/docs/payments-api/overview) guide to learn how to create a payment.
 
 ```
 def create
