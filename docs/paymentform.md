@@ -20,6 +20,8 @@ To get your Sandbox credentials:
 1. Click on the application you want to use for the payment form. You should land on the "Credentials" tab.
 1. On the bottom left corner, toggle "Production Settings" to "Sandbox Settings" .
 1. Copy the **Sandbox Application ID**. This tells Square which developer is using the form to take payments.
+1. Click on the "Locations" tab on the left navigation bar.
+1. Copy the **Sandbox Location ID**.
 
 ## 3. Install the component
 
@@ -42,6 +44,7 @@ The `SquarePaymentForm` is a wrapper that loads the SqPaymentForm JS library. It
 
 You will need to provide the the following fields:
 * `applicationId` with your **Sandbox Application ID**
+* `locationId` with your **Sandbox Location ID**
 * `sandbox` with **true**. This is required in addition to using your sandbox ID.
 * [`onCardNonceResponseRecieved`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived). This will be invoked with either a successful nonce or errors.
 * [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
@@ -70,7 +73,7 @@ class PaymentPage extends React.Component {
     return {
       amount: '100.00',
       currencyCode: "USD",
-      storeCard: "charge",  //Allowed values: "charge", "create-card", "create-and-charge"
+      intent: "CHARGE",
       billingContact: {
         familyName: "Smith",
         givenName: "John",
@@ -92,6 +95,7 @@ class PaymentPage extends React.Component {
         <SquarePaymentForm
           sandbox={true}
           applicationId={SANDBOX_APPLICATION_ID}
+          locationId={SANDBOX_LOCATION_ID}
           cardNonceResponseReceived={this.cardNonceResponseReceived}
           createVerificationDetails={this.createVerificationDetails}
         >
@@ -166,7 +170,7 @@ We are ready to start creating nonces! Errors should render when you submit with
 
 Fill in the form with the following test credit card information and click the "Pay" button. A nonce should be generated and an alert should appear on your browser.
 
-* **Card Number**: 4532 7597 3454 5858
-* **CVV**: any three non-consecutive numbers
-* **Expiration Date**: any month and year in the future
-* **Postal Code**: 94103
+* **Card Number**: 4111 1111 1111 1111
+* **CVV**: any three non-consecutive numbers (ex. 123)
+* **Expiration Date**: any month and year in the future (ex. 01/25)
+* **Postal Code**: any potal code (ex. 12345)
