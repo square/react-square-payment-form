@@ -170,7 +170,7 @@ We are ready to start creating nonces! Errors should render when you submit with
 
 Fill in the form with the following test credit card information and click the "Pay" button. A nonce should be generated and an alert should appear on your browser.
 
-* **Card Number**: 4532 7597 3454 5858
-* **CVV**: any three non-consecutive numbers
-* **Expiration Date**: any month and year in the future
-* **Postal Code**: 94103
+* **Card Number**: 4111 1111 1111 1111
+* **CVV**: any three non-consecutive numbers (ex. 123)
+* **Expiration Date**: any month and year in the future (ex. 01/25)
+* **Postal Code**: any potal code (ex. 12345)
