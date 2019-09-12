@@ -73,7 +73,7 @@ class PaymentPage extends React.Component {
     return {
       amount: '100.00',
       currencyCode: "USD",
-      storeCard: "charge",  //Allowed values: "charge", "create-card", "create-and-charge"
+      intent: "CHARGE",
       billingContact: {
         familyName: "Smith",
         givenName: "John",
