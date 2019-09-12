@@ -70,6 +70,8 @@
 <li>Click on the application you want to use for the payment form. You should land on the &quot;Credentials&quot; tab.</li>
 <li>On the bottom left corner, toggle &quot;Production Settings&quot; to &quot;Sandbox Settings&quot; .</li>
 <li>Copy the <strong>Sandbox Application ID</strong>. This tells Square which developer is using the form to take payments.</li>
+<li>Click on the &quot;Locations&quot; tab on the left navigation bar.</li>
+<li>Copy the <strong>Sandbox Location ID</strong>.</li>
 </ol>
 <h2><a class="anchor" aria-hidden="true" id="3-install-the-component"></a><a href="#3-install-the-component" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Install the component</h2>
 <pre><code class="hljs">npm install --<span class="hljs-keyword">save</span> react-square-payment-<span class="hljs-keyword">form</span>
@@ -84,6 +86,7 @@
 <p>You will need to provide the the following fields:</p>
 <ul>
 <li><code>applicationId</code> with your <strong>Sandbox Application ID</strong></li>
+<li><code>locationId</code> with your <strong>Sandbox Location ID</strong></li>
 <li><code>sandbox</code> with <strong>true</strong>. This is required in addition to using your sandbox ID.</li>
 <li><a href="https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived"><code>onCardNonceResponseRecieved</code></a>. This will be invoked with either a successful nonce or errors.</li>
 <li><a href="https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails"><code>createVerificationDetails</code></a> This is used to verify the identity of the buyer using <a href="https://developer.squareup.com/docs/sca-overview?q=sca">Strong Customer Authentication</a>.</li>
@@ -111,8 +114,8 @@
     <span class="hljs-keyword">return</span> {
       <span class="hljs-attr">amount</span>: <span class="hljs-string">'100.00'</span>,
       <span class="hljs-attr">currencyCode</span>: <span class="hljs-string">"USD"</span>,
-      <span class="hljs-attr">storeCard</span>: <span class="hljs-string">"charge"</span>,  <span class="hljs-comment">//Allowed values: "charge", "create-card", "create-and-charge"</span>
-      billingContact: {
+      <span class="hljs-attr">intent</span>: <span class="hljs-string">"CHARGE"</span>,
+      <span class="hljs-attr">billingContact</span>: {
         <span class="hljs-attr">familyName</span>: <span class="hljs-string">"Smith"</span>,
         <span class="hljs-attr">givenName</span>: <span class="hljs-string">"John"</span>,
         <span class="hljs-attr">email</span>: <span class="hljs-string">"jsmith@example.com"</span>,
@@ -133,6 +136,7 @@
         <span class="hljs-tag">&lt;<span class="hljs-name">SquarePaymentForm</span>
           <span class="hljs-attr">sandbox</span>=<span class="hljs-string">{true}</span>
           <span class="hljs-attr">applicationId</span>=<span class="hljs-string">{SANDBOX_APPLICATION_ID}</span>
+          <span class="hljs-attr">locationId</span>=<span class="hljs-string">{SANDBOX_LOCATION_ID}</span>
           <span class="hljs-attr">cardNonceResponseReceived</span>=<span class="hljs-string">{this.cardNonceResponseReceived}</span>
           <span class="hljs-attr">createVerificationDetails</span>=<span class="hljs-string">{this.createVerificationDetails}</span>
         &gt;</span>
@@ -198,9 +202,9 @@ We have chosen to render the expiration date, postal code, and cvv on one line.<
 <p>We are ready to start creating nonces! Errors should render when you submit with an invalid credit card.</p>
 <p>Fill in the form with the following test credit card information and click the &quot;Pay&quot; button. A nonce should be generated and an alert should appear on your browser.</p>
 <ul>
-<li><strong>Card Number</strong>: 4532 7597 3454 5858</li>
-<li><strong>CVV</strong>: any three non-consecutive numbers</li>
-<li><strong>Expiration Date</strong>: any month and year in the future</li>
-<li><strong>Postal Code</strong>: 94103</li>
+<li><strong>Card Number</strong>: 4111 1111 1111 1111</li>
+<li><strong>CVV</strong>: any three non-consecutive numbers (ex. 123)</li>
+<li><strong>Expiration Date</strong>: any month and year in the future (ex. 01/25)</li>
+<li><strong>Postal Code</strong>: any potal code (ex. 12345)</li>
 </ul>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-square-payment-form/docs/introduction"><span class="arrow-prev">← </span><span>Introduction</span></a><a class="docs-next button" href="/react-square-payment-form/docs/charging"><span>Creating a Payment</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#1-create-a-square-developer-account">1. Create a Square developer account</a></li><li><a href="#2-get-your-sandbox-credentials">2. Get your Sandbox credentials</a></li><li><a href="#3-install-the-component">3. Install the component</a></li><li><a href="#4-import-the-component-and-styles">4. Import the component and styles</a></li><li><a href="#5-add-the-squarepaymentform">5. Add the SquarePaymentForm</a></li><li><a href="#6-add-the-credit-card-fields">6. Add the credit card fields</a></li><li><a href="#7-generate-a-nonce">7. Generate a nonce</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div><h5>Docs</h5><a href="/react-square-payment-form/docs/en/introduction">Getting Started</a><a href="https://docs.connect.squareup.com/api/connect/v2">API Reference</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/square-connect" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://squ.re/2Hks3YE">Slack Channel</a></div><div><h5>More</h5><a href="https://developer.squareup.com/blog/">Blog</a><a href="https://github.com/square/react-square-payment-form">GitHub</a></div></section><section class="copyright">Copyright © 2019 Square Inc.</section></footer></div></body></html>
