@@ -3,20 +3,19 @@ import { ContextConsumer } from './Context'
 
 export interface MasterpassButtonProps {
   /** Placeholder view when the Masterpass is being initialized */
-  loadingView?: React.ReactNode;
+  loadingView?: React.ReactNode
   /** Placeholder view when Masterpass is not available */
-  unavailableView?: React.ReactNode;
+  unavailableView?: React.ReactNode
 }
 
 /**
-* Renders a Masterpass button to use in the Square Payment Form, pre-styled to meet Masterpass's branding guidelines.
-*/
+ * Renders a Masterpass button to use in the Square Payment Form, pre-styled to meet Masterpass's branding guidelines.
+ */
 class MasterpassButton extends React.Component<MasterpassButtonProps> {
-
   render(): React.ReactElement {
     return (
       <ContextConsumer>
-        {context =>
+        {context => (
           <div>
             <button
               id={`${context.formId}-sq-masterpass`}
@@ -26,7 +25,7 @@ class MasterpassButton extends React.Component<MasterpassButtonProps> {
             {context.masterpassState === 'loading' && this.props.loadingView}
             {context.masterpassState === 'unavailable' && this.props.unavailableView}
           </div>
-        }
+        )}
       </ContextConsumer>
     )
   }

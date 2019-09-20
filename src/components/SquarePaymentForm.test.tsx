@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
@@ -5,8 +6,7 @@ import { expect } from 'chai'
 import SquarePaymentForm from './SquarePaymentForm'
 
 describe('SquarePaymentForm', () => {
-
-  let wrapper: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  let wrapper: any
   var cardNonceResponseReceived = jest.fn()
   var paymentFormLoaded = jest.fn()
 
@@ -88,8 +88,8 @@ describe('SquarePaymentForm', () => {
   })
 
   describe('methodsSupported', () => {
-    ['applePay', 'googlePay', 'masterpass'].forEach(method => {
-      ['ready', 'unavailable'].forEach(state => {
+    ;['applePay', 'googlePay', 'masterpass'].forEach(method => {
+      ;['ready', 'unavailable'].forEach(state => {
         const key = `${method}State`
         it(`should set ${key} = ${state}`, () => {
           const instance = wrapper.instance()
@@ -107,16 +107,16 @@ describe('SquarePaymentForm', () => {
   describe('render', () => {
     it('should render the default form id', () => {
       wrapper.instance().setState({ errorMessage: null })
-      expect(wrapper.find("#sq-payment-form")).to.be.length(1)
+      expect(wrapper.find('#sq-payment-form')).to.be.length(1)
     })
 
     it('should render the class name for styling', () => {
-      expect(wrapper.find(".sq-payment-form")).to.be.length(1)
+      expect(wrapper.find('.sq-payment-form')).to.be.length(1)
     })
 
     it('should render errors from loading the payment form', () => {
       wrapper.instance().setState({ errorMessage: 'Whoops' })
-      expect(wrapper.find(".sq-error-message")).to.be.length(1)
+      expect(wrapper.find('.sq-error-message')).to.be.length(1)
     })
   })
 
@@ -164,11 +164,11 @@ describe('SquarePaymentForm', () => {
   })
 
   describe('buildSqPaymentFormConfiguration', () => {
-    const props: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
+    const props: any = {
       applicationId: 'app-id',
       locationId: 'loc-id',
     }
-    const callbacks: any = { // eslint-disable-line @typescript-eslint/no-explicit-any
+    const callbacks: any = {
       createPaymentRequest: 'createPaymentRequest',
       inputEventReceived: 'inputEventReceived',
       methodsSupported: 'methodsSupported',
@@ -195,7 +195,6 @@ describe('SquarePaymentForm', () => {
       const config = wrapper.instance().buildSqPaymentFormConfiguration({ cardNonceResponseReceived: null })
       expect(config.callbacks['cardNonceResponseReceived']).to.be.null
     })
-
 
     it('should set cardNonceResponseReceived if cardNonceResponseReceived prop is passed', () => {
       const config = wrapper.instance().buildSqPaymentFormConfiguration({ cardNonceResponseReceived: jest.fn() })

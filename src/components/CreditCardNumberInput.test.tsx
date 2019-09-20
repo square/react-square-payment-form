@@ -9,11 +9,10 @@ let mockContext: ContextInterface = {}
 jest.mock('./Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
-  }
+  },
 }))
 
 describe('CreditCardNumberInput', () => {
-
   beforeEach(() => {
     mockContext = {}
   })
@@ -27,25 +26,25 @@ describe('CreditCardNumberInput', () => {
 
     it('should render the class name for styling', () => {
       const wrapper = mount(<CreditCardNumberInput />)
-      expect(wrapper.find(".sq-label")).to.be.length(1)
+      expect(wrapper.find('.sq-label')).to.be.length(1)
     })
   })
 
   describe('label', () => {
     it('should render the default placeholder label', () => {
       const wrapper = mount(<CreditCardNumberInput />)
-      expect(wrapper.find(".sq-label").text()).to.eql('Credit Card')
+      expect(wrapper.find('.sq-label').text()).to.eql('Credit Card')
     })
 
     it('should render a custom placeholder label', () => {
       const label = 'test'
       const wrapper = mount(<CreditCardNumberInput label={label} />)
-      expect(wrapper.find(".sq-label").text()).to.eql(label)
+      expect(wrapper.find('.sq-label').text()).to.eql(label)
     })
 
     it('should not render the placeholder label', () => {
       const wrapper = mount(<CreditCardNumberInput label={''} />)
-      expect(wrapper.find(".sq-label")).to.be.length(0)
+      expect(wrapper.find('.sq-label')).to.be.length(0)
     })
   })
 })

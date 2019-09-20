@@ -3,7 +3,7 @@ import { ContextConsumer } from './Context'
 
 export interface CreditCardPostalCodeInputProps {
   /** Input field label */
-  label?: string;
+  label?: string
 }
 /**
  * Renders a placeholder element for the postal code. The SqPaymentForm JS library will replace this
@@ -12,20 +12,19 @@ export interface CreditCardPostalCodeInputProps {
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
 class CreditCardPostalCodeInput extends React.Component<CreditCardPostalCodeInputProps> {
-
   static defaultProps = {
-    label: 'Postal'
+    label: 'Postal',
   }
 
   render(): React.ReactElement {
     return (
       <ContextConsumer>
-        {context =>
+        {context => (
           <div>
             {this.props.label && <span className="sq-label">{this.props.label}</span>}
             <div id={`${context.formId}-sq-postal-code`}></div>
           </div>
-        }
+        )}
       </ContextConsumer>
     )
   }

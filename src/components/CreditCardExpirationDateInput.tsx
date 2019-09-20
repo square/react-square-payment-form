@@ -3,7 +3,7 @@ import { ContextConsumer } from './Context'
 
 export interface CreditCardExpirationDateInputProps {
   /** Input field label */
-  label?: string;
+  label?: string
 }
 
 /**
@@ -13,20 +13,19 @@ export interface CreditCardExpirationDateInputProps {
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
 class CreditCardExpirationDateInput extends React.Component<CreditCardExpirationDateInputProps> {
-
   static defaultProps = {
-    label: 'Expiration'
+    label: 'Expiration',
   }
 
   render(): React.ReactElement {
     return (
       <ContextConsumer>
-        {context =>
+        {context => (
           <div>
             {this.props.label && <span className="sq-label">{this.props.label}</span>}
             <div id={`${context.formId}-sq-expiration-date`}></div>
           </div>
-        }
+        )}
       </ContextConsumer>
     )
   }

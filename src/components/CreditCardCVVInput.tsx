@@ -3,7 +3,7 @@ import { ContextConsumer } from './Context'
 
 export interface CreditCardCVVInputProps {
   /** Input field label */
-  label?: string;
+  label?: string
 }
 
 /**
@@ -13,20 +13,19 @@ export interface CreditCardCVVInputProps {
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
 class CreditCardCVVInput extends React.Component<CreditCardCVVInputProps> {
-
   static defaultProps = {
-    label: 'CVV'
+    label: 'CVV',
   }
 
   render(): React.ReactElement {
     return (
       <ContextConsumer>
-        {context =>
+        {context => (
           <div>
             {this.props.label && <span className="sq-label">{this.props.label}</span>}
             <div id={`${context.formId}-sq-cvv`}></div>
           </div>
-        }
+        )}
       </ContextConsumer>
     )
   }
