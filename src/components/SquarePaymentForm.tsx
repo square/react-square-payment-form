@@ -46,7 +46,7 @@ export interface SquarePaymentFormProps {
     nonce: string,
     cardData: SqCardData,
     buyerVerificationToken?: string,
-    billingContent?: SqContact,
+    billingContact?: SqContact,
     shippingContact?: SqContact,
     shippingOption?: SqShippingOption
   ) => void
