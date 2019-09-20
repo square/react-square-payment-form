@@ -45,7 +45,7 @@
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.1.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.4.5"
   },
   "directories": {
