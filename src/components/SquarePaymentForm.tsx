@@ -27,7 +27,7 @@ export interface SquarePaymentFormProps {
   sandbox: boolean;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
-  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken?: string) => void;
+  cardNonceResponseReceived: (errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken?: string, billingContent?: SqContact, shippingContact?: SqContact, shippingOption?: SqShippingOption) => void;
   /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.*/
   createPaymentRequest?: () => SqPaymentRequest;
   /** <b>Required for SCA</b><br/><br/> */
@@ -164,9 +164,9 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     this.paymentForm && this.paymentForm.verifyBuyer(source, verificationDetails, callback)
   }
 
-  cardNonceResponseReceived = (errors: [SqError], nonce: string, cardData: SqCardData) => {
+  cardNonceResponseReceived = (errors: [SqError], nonce: string, cardData: SqCardData, billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => {
     if (errors || !this.props.createVerificationDetails) {
-      this.props.cardNonceResponseReceived(errors, nonce, cardData)
+      this.props.cardNonceResponseReceived(errors, nonce, cardData, '', billingContact, shippingContact, shippingOption)
       return
     }
 
@@ -174,7 +174,7 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       nonce,
       this.props.createVerificationDetails(),
       (err: [SqError], result: SqVerificationResult) => {
-        this.props.cardNonceResponseReceived(err, nonce, cardData, result.token)
+        this.props.cardNonceResponseReceived(err, nonce, cardData, result.token, billingContact, shippingContact, shippingOption)
       }
     )
   }
