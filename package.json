@@ -7,7 +7,8 @@
     "build": "rm -rf ./lib && tsc && npm run copyfiles",
     "copyfiles": "cp src/*.css lib/",
     "prepublish": "npm run lint && npm run test && npm run build",
-    "lint": "eslint --fix src/**/*.tsx",
+    "lint": "eslint src/**/*.tsx",
+    "lint:fix": "eslint --fix src/**/*.tsx",
     "test": "jest",
     "tsc": "tsc",
     "update": "sh updateVersion.sh"
