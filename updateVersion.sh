@@ -45,6 +45,7 @@ echo "Publishing package..."
 if [[ $DRYRUN = true ]]; then
   npm run lint && npm run test && npm run build
 else
+  git push
   npm publish --registry=https://registry.npmjs.org/
 fi
 
