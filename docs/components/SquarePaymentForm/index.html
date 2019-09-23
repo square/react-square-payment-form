@@ -78,14 +78,14 @@ It determines which Square location will receive credit for payments made with t
 <tr><th>Name</th><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs<br/><br/><strong>Default Value:</strong> <code>&quot;reactjs/0.4.0&quot;</code></td></tr>
+<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs<br/><br/><strong>Default Value:</strong> <code>&quot;reactjs/0.4.1&quot;</code></td></tr>
 <tr><td>applicationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard</td></tr>
-<tr><td>cardNonceResponseReceived</td><td>(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string) =&gt; void</td><td><b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.</td></tr>
+<tr><td>cardNonceResponseReceived</td><td>(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string, billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) =&gt; void</td><td><b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.</td></tr>
 <tr><td>createPaymentRequest</td><td>() =&gt; SqPaymentRequest</td><td><b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.</td></tr>
 <tr><td>createVerificationDetails</td><td>() =&gt; SqVerificationDetails</td><td><b>Required for SCA</b><br/><br/></td></tr>
 <tr><td>formId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the DOM form element<br/><br/><strong>Default Value:</strong> <code>&quot;sq-payment-form&quot;</code></td></tr>
 <tr><td>inputEventReceived</td><td>() =&gt; void</td><td>Invoked when visitors interact with the iframe elements</td></tr>
-<tr><td>inputStyles</td><td>array</td><td>Define the internal styles applied to the rendered iframes<br/><br/><strong>Default Value:</strong> <code>[{ fontSize: '16px', fontFamily: 'Helvetica Neue', padding: '16px', color: '#373F4A', backgroundColor: 'transparent', lineHeight: '24px', placeholderColor: '#CCC', _webkitFontSmoothing: 'antialiased', _mozOsxFontSmoothing: 'grayscale' }]</code></td></tr>
+<tr><td>inputStyles</td><td>array</td><td>Define the internal styles applied to the rendered iframes<br/><br/><strong>Default Value:</strong> <code>[ { fontSize: '16px', fontFamily: 'Helvetica Neue', padding: '16px', color: '#373F4A', backgroundColor: 'transparent', lineHeight: '24px', placeholderColor: '#CCC', _webkitFontSmoothing: 'antialiased', _mozOsxFontSmoothing: 'grayscale', }, ]</code></td></tr>
 <tr><td>locationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.</td></tr>
 <tr><td>methodsSupported</td><td>(methods: SqMethods) =&gt; void</td><td></td></tr>
 <tr><td>paymentFormLoaded</td><td>() =&gt; void</td><td>Invoked when payment form is fully loaded</td></tr>
