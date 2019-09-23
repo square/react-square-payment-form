@@ -9,18 +9,17 @@ let mockContext: any = {} // eslint-disable-line @typescript-eslint/no-explicit-
 jest.mock('./Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
-  }
+  },
 }))
 
 describe('CreditCardPostalCodeInput', () => {
-
   beforeEach(() => {
     mockContext = {}
   })
 
   it('should render the class name for styling', () => {
     const wrapper = mount(<CreditCardSubmitButton />)
-    expect(wrapper.find(".sq-creditcard")).to.be.length(1)
+    expect(wrapper.find('.sq-creditcard')).to.be.length(1)
   })
 
   it('should call onCreateNonce when clicked', () => {

@@ -1,13 +1,17 @@
 import * as React from 'react'
-import { SqVerificationDetails, SqError, SqVerificationResult } from './models';
+import { SqVerificationDetails, SqError, SqVerificationResult } from './models'
 
 export interface ContextInterface {
-  formId?: string;
-  applePayState?: string;
-  googlePayState?: string;
-  masterpassState?: string;
-  onCreateNonce?: (event: React.MouseEvent) => {};
-  onVerifyBuyer?: (source: string, verificationDetails: SqVerificationDetails, callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)) => void;
+  formId?: string
+  applePayState?: string
+  googlePayState?: string
+  masterpassState?: string
+  onCreateNonce?: (event: React.MouseEvent) => {}
+  onVerifyBuyer?: (
+    source: string,
+    verificationDetails: SqVerificationDetails,
+    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+  ) => void
 }
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const Context = React.createContext({
@@ -19,8 +23,8 @@ const Context = React.createContext({
   onVerifyBuyer: (
     source: string,
     verificationDetails: SqVerificationDetails,
-    callback: ((err: [SqError], verificationResult: SqVerificationResult) => void)
-  ) => {}
+    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+  ) => {},
 })
 /* eslint-enable @typescript-eslint/no-unused-vars */
 

@@ -9,11 +9,10 @@ let mockContext: ContextInterface = {}
 jest.mock('./Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
-  }
+  },
 }))
 
 describe('ApplePayButton', () => {
-
   beforeEach(() => {
     mockContext = {}
   })
@@ -27,7 +26,7 @@ describe('ApplePayButton', () => {
 
     it('should render the class name for styling', () => {
       const wrapper = mount(<ApplePayButton />)
-      expect(wrapper.find(".sq-apple-pay")).to.be.length(1)
+      expect(wrapper.find('.sq-apple-pay')).to.be.length(1)
     })
   })
 
@@ -58,5 +57,4 @@ describe('ApplePayButton', () => {
       expect(wrapper.find('#loading')).to.be.length(1)
     })
   })
-
 })

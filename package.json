@@ -7,7 +7,8 @@
     "build": "rm -rf ./lib && tsc && npm run copyfiles",
     "copyfiles": "cp src/*.css lib/",
     "prepublish": "npm run lint && npm run test && npm run build",
-    "lint": "eslint --fix src/**/*.tsx",
+    "lint": "eslint src/**/*.tsx",
+    "lint:fix": "eslint --fix src/**/*.tsx",
     "test": "jest",
     "tsc": "tsc",
     "update": "sh updateVersion.sh"
@@ -31,17 +32,20 @@
     "enzyme-adapter-react-16": "^1.13.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.13.0",
     "jest": "^24.7.1",
     "jsdom": "^15.1.0",
+    "prettier": "^1.18.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.1.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.4.5"
   },
   "directories": {
@@ -57,5 +61,6 @@
   "bugs": {
     "url": "https://github.com/square/react-square-payment-form/issues"
   },
-  "homepage": "https://github.com/square/react-square-payment-form#readme"
+  "homepage": "https://github.com/square/react-square-payment-form#readme",
+  "dependencies": {}
 }

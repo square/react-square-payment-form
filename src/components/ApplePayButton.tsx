@@ -3,9 +3,9 @@ import { ContextConsumer } from './Context'
 
 export interface ApplePayButtonProps {
   /** Placeholder view when the Apple Pay is being initialized */
-  loadingView?: React.ReactNode;
+  loadingView?: React.ReactNode
   /** Placeholder view when Apple Pay is not available */
-  unavailableView?: React.ReactNode;
+  unavailableView?: React.ReactNode
 }
 
 /**
@@ -15,7 +15,7 @@ class ApplePayButton extends React.Component<ApplePayButtonProps> {
   render(): React.ReactElement {
     return (
       <ContextConsumer>
-        {context =>
+        {context => (
           <div>
             <button
               id={`${context.formId}-sq-apple-pay`}
@@ -25,7 +25,7 @@ class ApplePayButton extends React.Component<ApplePayButtonProps> {
             {context.applePayState === 'loading' && this.props.loadingView}
             {context.applePayState === 'unavailable' && this.props.unavailableView}
           </div>
-        }
+        )}
       </ContextConsumer>
     )
   }
