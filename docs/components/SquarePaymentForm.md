@@ -21,14 +21,14 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 ## Props
 |Name|Type|Description|
 |---|---|---|
-|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.4.0"`|
+|apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.4.1"`|
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard|
 |cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string, billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.|
 |createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>|
 |formId|string|<b>Required for all features</b><br/><br/>Identifies the DOM form element<br/><br/>**Default Value:** `"sq-payment-form"`|
 |inputEventReceived|() => void|Invoked when visitors interact with the iframe elements|
-|inputStyles|array|Define the internal styles applied to the rendered iframes<br/><br/>**Default Value:** ` [{      fontSize: '16px',      fontFamily: 'Helvetica Neue',      padding: '16px',      color: '#373F4A',      backgroundColor: 'transparent',      lineHeight: '24px',      placeholderColor: '#CCC',      _webkitFontSmoothing: 'antialiased',      _mozOsxFontSmoothing: 'grayscale'    }]`|
+|inputStyles|array|Define the internal styles applied to the rendered iframes<br/><br/>**Default Value:** ` [      {        fontSize: '16px',        fontFamily: 'Helvetica Neue',        padding: '16px',        color: '#373F4A',        backgroundColor: 'transparent',        lineHeight: '24px',        placeholderColor: '#CCC',        _webkitFontSmoothing: 'antialiased',        _mozOsxFontSmoothing: 'grayscale',      },    ]`|
 |locationId|string|<b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.|
 |methodsSupported|(methods: SqMethods) => void||
 |paymentFormLoaded|() => void|Invoked when payment form is fully loaded|

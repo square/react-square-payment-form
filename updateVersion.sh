@@ -6,18 +6,18 @@ BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 UPDATE=$1
 DRYRUN=false
 
-if [[ $(git diff --stat) != '' ]]; then
-  echo 'Git is dirty'
-  exit 1
-elif [[ ! "\t${UPDATE_TYPES[@]}\t" =~ "\t${UPDATE}\t"  ]]; then
-  echo $USAGE
-  exit 1
-fi
+# if [[ $(git diff --stat) != '' ]]; then
+#   echo 'Git is dirty'
+#   exit 1
+# elif [[ ! "\t${UPDATE_TYPES[@]}\t" =~ "\t${UPDATE}\t"  ]]; then
+#   echo $USAGE
+#   exit 1
+# fi
 
-if [[ "$BRANCH_NAME" != "master" ]]; then
-  git checkout master
-fi
-git pull
+# if [[ "$BRANCH_NAME" != "master" ]]; then
+#   git checkout master
+# fi
+# git pull
 
 CURRENT_PACKAGE_VERSION=$(cat package.json \
   | grep version \
@@ -40,7 +40,7 @@ git add .
 git commit -m "Update ${NEW_PACKAGE_VERSION}" --no-edit
 
 git tag -a ${NEW_PACKAGE_VERSION} -m "${NEW_PACKAGE_VERSION}"
-
+exit 1
 echo "Publishing package..."
 if [[ $DRYRUN = true ]]; then
   npm run lint && npm run test && npm run build
