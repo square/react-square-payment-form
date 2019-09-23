@@ -23,7 +23,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |---|---|---|
 |apiWrapper|string|Internal variable: used for logs<br/><br/>**Default Value:** `"reactjs/0.4.0"`|
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard|
-|cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string, billingContent: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
+|cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: string, billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.|
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.|
 |createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>|
 |formId|string|<b>Required for all features</b><br/><br/>Identifies the DOM form element<br/><br/>**Default Value:** `"sq-payment-form"`|
