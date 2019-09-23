@@ -40,7 +40,7 @@ git add .
 git commit -m "Update ${NEW_PACKAGE_VERSION}" --no-edit
 
 git tag -a ${NEW_PACKAGE_VERSION} -m "${NEW_PACKAGE_VERSION}"
-exit 1
+
 echo "Publishing package..."
 if [[ $DRYRUN = true ]]; then
   npm run lint && npm run test && npm run build
