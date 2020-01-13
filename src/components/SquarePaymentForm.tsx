@@ -248,8 +248,6 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       applicationId: props.applicationId,
       locationId: props.locationId,
       autoBuild: false,
-      inputClass: 'sq-input',
-      inputStyles: props.inputStyles,
       apiWrapper: props.apiWrapper,
       callbacks: {
         cardNonceResponseReceived: props.cardNonceResponseReceived ? this.cardNonceResponseReceived : null, // handles missing callback error
@@ -263,32 +261,44 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
       },
     }
 
-    if (document.getElementById(`${props.formId}-sq-apple-pay`)) {
-      config.applePay = { elementId: `${props.formId}-sq-apple-pay` }
-    }
-    if (document.getElementById(`${props.formId}-sq-google-pay`)) {
-      config.googlePay = { elementId: `${props.formId}-sq-google-pay` }
-    }
-    if (document.getElementById(`${props.formId}-sq-masterpass`)) {
-      config.masterpass = { elementId: `${props.formId}-sq-masterpass` }
-    }
-
-    if (document.getElementById(`${props.formId}-sq-card-number`)) {
-      config.cardNumber = {
-        elementId: `${props.formId}-sq-card-number`,
-        placeholder: '• • • •  • • • •  • • • •  • • • •',
+    // "The SqPaymentForm object in single-element payment form mode does not support digital wallets."
+    // https://developer.squareup.com/docs/payment-form/payment-form-walkthrough#single-element-payment-form-and-digital-wallet-support
+    if (document.getElementById(`${props.formId}-sq-card`)) {
+      config.card = {
+        elementId: `${props.formId}-sq-card`,
+        inputStyle: props.inputStyles && props.inputStyles[0],
       }
-    }
-    if (document.getElementById(`${props.formId}-sq-cvv`)) {
-      config.cvv = { elementId: `${props.formId}-sq-cvv`, placeholder: 'CVV ' }
-    }
-    if (document.getElementById(`${props.formId}-sq-postal-code`)) {
-      config.postalCode = { elementId: `${props.formId}-sq-postal-code`, placeholder: '12345' }
     } else {
-      config.postalCode = false
-    }
-    if (document.getElementById(`${props.formId}-sq-expiration-date`)) {
-      config.expirationDate = { elementId: `${props.formId}-sq-expiration-date`, placeholder: 'MM/YY' }
+      config.inputClass = 'sq-input'
+      config.inputStyles = props.inputStyles
+
+      if (document.getElementById(`${props.formId}-sq-apple-pay`)) {
+        config.applePay = { elementId: `${props.formId}-sq-apple-pay` }
+      }
+      if (document.getElementById(`${props.formId}-sq-google-pay`)) {
+        config.googlePay = { elementId: `${props.formId}-sq-google-pay` }
+      }
+      if (document.getElementById(`${props.formId}-sq-masterpass`)) {
+        config.masterpass = { elementId: `${props.formId}-sq-masterpass` }
+      }
+
+      if (document.getElementById(`${props.formId}-sq-card-number`)) {
+        config.cardNumber = {
+          elementId: `${props.formId}-sq-card-number`,
+          placeholder: '• • • •  • • • •  • • • •  • • • •',
+        }
+      }
+      if (document.getElementById(`${props.formId}-sq-cvv`)) {
+        config.cvv = { elementId: `${props.formId}-sq-cvv`, placeholder: 'CVV ' }
+      }
+      if (document.getElementById(`${props.formId}-sq-postal-code`)) {
+        config.postalCode = { elementId: `${props.formId}-sq-postal-code`, placeholder: '12345' }
+      } else {
+        config.postalCode = false
+      }
+      if (document.getElementById(`${props.formId}-sq-expiration-date`)) {
+        config.expirationDate = { elementId: `${props.formId}-sq-expiration-date`, placeholder: 'MM/YY' }
+      }
     }
     return config
   }
