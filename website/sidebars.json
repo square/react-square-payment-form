@@ -1,12 +1,6 @@
 {
   "docs": {
-    "Getting Started": [
-      "introduction",
-      "paymentform",
-      "charging",
-      "production",
-      "digitalwallet"
-    ],
+    "Getting Started": ["introduction", "paymentform", "charging", "production", "digitalwallet", "simplecard"],
     "Components": [
       "components/ApplePayButton",
       "components/CreditCardCVVInput",

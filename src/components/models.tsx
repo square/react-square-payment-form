@@ -1,13 +1,15 @@
 export interface SqPaymentFormConfiguration {
   applicationId: string
   locationId: string
-  inputClass: string
   callbacks: {}
   inputStyles?: {}[]
   env?: string
   autoBuild?: boolean
   apiWrapper: string
 
+  card?: SqPaymentFormInputConfiguration
+
+  inputClass?: string
   cardNumber?: SqPaymentFormInputConfiguration
   cvv?: SqPaymentFormInputConfiguration
   expirationDate?: SqPaymentFormInputConfiguration
@@ -100,4 +102,7 @@ interface SqLineItem {
 interface SqPaymentFormInputConfiguration {
   elementId: string
   placeholder?: string
+  // only for custom styling of the single-element payment form
+  // https://developer.squareup.com/docs/payment-form/cookbook/customize-form-styles#an-example-1
+  inputStyle?: {}
 }
