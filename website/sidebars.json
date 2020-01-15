@@ -9,6 +9,7 @@
       "components/CreditCardPostalCodeInput",
       "components/GooglePayButton",
       "components/MasterpassButton",
+      "components/SimpleCard",
       "components/SquarePaymentForm"
     ]
   }

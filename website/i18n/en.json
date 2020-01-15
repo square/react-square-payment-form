@@ -32,6 +32,9 @@
       "components/MasterpassButton": {
         "title": "MasterpassButton"
       },
+      "components/SimpleCard": {
+        "title": "SimpleCard"
+      },
       "components/SquarePaymentForm": {
         "title": "SquarePaymentForm"
       },
@@ -46,6 +49,9 @@
       },
       "production": {
         "title": "Taking payments in production"
+      },
+      "simplecard": {
+        "title": "Single-Element Payment Form"
       }
     },
     "links": {
