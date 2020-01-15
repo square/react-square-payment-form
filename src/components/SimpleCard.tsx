@@ -9,6 +9,10 @@ import { ContextConsumer } from './Context'
  *
  * Cannot be used with digital wallets
  */
-export default function Card(): React.ReactElement {
-  return <ContextConsumer>{context => <div id={`${context.formId}-sq-card`}></div>}</ContextConsumer>
+class SimpleCard extends React.Component {
+  render(): React.ReactElement {
+    return <ContextConsumer>{context => <div id={`${context.formId}-sq-card`}></div>}</ContextConsumer>
+  }
 }
+
+export default SimpleCard
