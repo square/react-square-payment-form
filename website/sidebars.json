@@ -7,6 +7,7 @@
       "components/CreditCardNumberInput",
       "components/CreditCardExpirationDateInput",
       "components/CreditCardPostalCodeInput",
+      "components/CreditCardSubmitButton",
       "components/GooglePayButton",
       "components/MasterpassButton",
       "components/SimpleCard",
