@@ -2,11 +2,11 @@ import * as React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import CreditCardSubmitButton from './CreditCardSubmitButton'
-import { ContextInterface } from './Context'
+import CreditCardSubmitButton from '../CreditCardSubmitButton'
+import { ContextInterface } from '../Context'
 
 let mockContext: any = {} // eslint-disable-line @typescript-eslint/no-explicit-any
-jest.mock('./Context', () => ({
+jest.mock('../Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
   },

@@ -2,14 +2,14 @@ import * as React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import { ContextConsumer, ContextInterface } from './Context'
+import { ContextConsumer, ContextInterface } from '../Context'
 
 let mockContext = {
   onCreateNonce: jest.fn(),
   onVerifyBuyer: jest.fn(),
 }
 
-jest.mock('./Context', () => ({
+jest.mock('../Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
   },

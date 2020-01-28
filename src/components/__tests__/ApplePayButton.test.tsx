@@ -2,11 +2,11 @@ import * as React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import ApplePayButton from './ApplePayButton'
-import { ContextInterface } from './Context'
+import ApplePayButton from '../ApplePayButton'
+import { ContextInterface } from '../Context'
 
 let mockContext: ContextInterface = {}
-jest.mock('./Context', () => ({
+jest.mock('../Context', () => ({
   ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
     return props.children(mockContext)
   },
