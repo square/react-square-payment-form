@@ -13,7 +13,7 @@ export interface ContextInterface {
     callback: (err: [SqError], verificationResult: SqVerificationResult) => void
   ) => void
 }
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const Context = React.createContext({
   applePayState: 'loading',
   googlePayState: 'loading',
@@ -26,7 +26,5 @@ const Context = React.createContext({
     callback: (err: [SqError], verificationResult: SqVerificationResult) => void
   ) => {},
 })
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
-export const ContextProvider = Context.Provider
-export const ContextConsumer = Context.Consumer
+export default Context

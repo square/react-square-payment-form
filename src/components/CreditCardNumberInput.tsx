@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { ContextConsumer } from './Context'
+import React, { useContext } from 'react'
+import Context from './Context'
 
-export interface CreditCardNumberInputProps {
+interface Props {
   /** Input field label */
   label?: string
 }
@@ -11,23 +11,16 @@ export interface CreditCardNumberInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-class CreditCardNumberInput extends React.Component<CreditCardNumberInputProps> {
-  static defaultProps = {
-    label: 'Credit Card',
-  }
-
-  render(): React.ReactElement {
-    return (
-      <ContextConsumer>
-        {context => (
-          <div>
-            {this.props.label && <span className="sq-label">{this.props.label}</span>}
-            <div id={`${context.formId}-sq-card-number`}></div>
-          </div>
-        )}
-      </ContextConsumer>
-    )
-  }
+export const CreditCardNumberInput: React.FC<Props> = props => {
+  const context = useContext(Context);
+  return (
+    <div>
+      {props.label && <span className="sq-label">{props.label}</span>}
+      <div id={`${context.formId}-sq-card-number`}></div>
+    </div>
+  )
 }
 
-export default CreditCardNumberInput
+CreditCardNumberInput.defaultProps = {
+  label: 'Credit Card'
+}

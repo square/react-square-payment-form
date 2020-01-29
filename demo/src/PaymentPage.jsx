@@ -1,5 +1,6 @@
 import * as React from 'react';
-import SquarePaymentForm, {
+import {
+  SquarePaymentForm,
   ApplePayButton,
   CreditCardCVVInput,
   CreditCardExpirationDateInput,
@@ -89,39 +90,39 @@ class PaymentPage extends React.Component {
         createPaymentRequest={this.createPaymentRequest}
         createVerificationDetails={this.createVerificationDetails}
         >
-          <ApplePayButton loadingView={loadingView} unavailableView={unavailableApple} />
-          <GooglePayButton loadingView={loadingView} unavailableView={unavailableGoogle} />
-          <MasterpassButton loadingView={loadingView} unavailableView={unavailableMasterpass} />
+        <ApplePayButton loadingView={loadingView} unavailableView={unavailableApple} />
+        <GooglePayButton loadingView={loadingView} unavailableView={unavailableGoogle} />
+        <MasterpassButton loadingView={loadingView} unavailableView={unavailableMasterpass} />
 
-          <div className="sq-divider">
-            <span className="sq-divider-label">Or</span>
-            <hr className="sq-divider-hr" />
+        <div className="sq-divider">
+          <span className="sq-divider-label">Or</span>
+          <hr className="sq-divider-hr" />
+        </div>
+
+        <fieldset className="sq-fieldset">
+          <CreditCardNumberInput />
+
+          <div className="sq-form-third">
+            <CreditCardExpirationDateInput />
           </div>
 
-          <fieldset className="sq-fieldset">
-            <CreditCardNumberInput />
-
-            <div className="sq-form-third">
-              <CreditCardExpirationDateInput />
-            </div>
-
-            <div className="sq-form-third">
-              <CreditCardPostalCodeInput />
-            </div>
-
-            <div className="sq-form-third">
-              <CreditCardCVVInput />
-            </div>
-
-          </fieldset>
-
-          <CreditCardSubmitButton>
-              Pay $1.00
-          </CreditCardSubmitButton>
-
-          <div className="sq-error-message">
-            {this.state.errorMessages.map(errorMessage => <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>)}
+          <div className="sq-form-third">
+            <CreditCardPostalCodeInput />
           </div>
+
+          <div className="sq-form-third">
+            <CreditCardCVVInput />
+          </div>
+
+        </fieldset>
+
+        <CreditCardSubmitButton>
+          Pay $1.00
+        </CreditCardSubmitButton>
+
+        <div className="sq-error-message">
+          {this.state.errorMessages.map(errorMessage => <li key={`sq-error-${errorMessage}`}>{errorMessage}</li>)}
+        </div>
 
       </SquarePaymentForm>
     );

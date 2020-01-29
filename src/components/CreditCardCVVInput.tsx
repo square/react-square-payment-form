@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { ContextConsumer } from './Context'
+import React, { useContext } from 'react'
+import Context from './Context'
 
-export interface CreditCardCVVInputProps {
+interface Props {
   /** Input field label */
   label?: string
 }
@@ -12,23 +12,16 @@ export interface CreditCardCVVInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-class CreditCardCVVInput extends React.Component<CreditCardCVVInputProps> {
-  static defaultProps = {
-    label: 'CVV',
-  }
-
-  render(): React.ReactElement {
-    return (
-      <ContextConsumer>
-        {context => (
-          <div>
-            {this.props.label && <span className="sq-label">{this.props.label}</span>}
-            <div id={`${context.formId}-sq-cvv`}></div>
-          </div>
-        )}
-      </ContextConsumer>
-    )
-  }
+export const CreditCardCVVInput: React.FC<Props> = props => {
+  const context = useContext(Context)
+  return (
+    <div>
+      {props.label && <span className="sq-label">{props.label}</span>}
+      <div id={`${context.formId}-sq-cvv`}></div>
+    </div>
+  )
 }
 
-export default CreditCardCVVInput
+CreditCardCVVInput.defaultProps = {
+  label: 'CVV'
+}

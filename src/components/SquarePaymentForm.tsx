@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import {
   SqError,
   SqCardData,
@@ -10,7 +10,8 @@ import {
   SqVerificationResult,
   SqVerificationDetails,
 } from './models'
-import { ContextProvider } from './Context'
+import Context from './Context'
+import useDynamicCallback from '../hooks/useDynamicCallback';
 
 declare class SqPaymentForm {
   constructor(configuration: SqPaymentFormConfiguration)
@@ -26,7 +27,7 @@ declare class SqPaymentForm {
   ) => void
 }
 
-export interface SquarePaymentFormProps {
+interface Props {
   /** <b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
   applicationId: string
   /** <b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
@@ -93,64 +94,42 @@ interface State {
  *
  * Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api/paymentform) for additional information.
  */
-class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
-  paymentForm?: SqPaymentForm
+export const SquarePaymentForm: React.FC<Props> = (props) => {
+  const [applePayState, setApplePayState] = useState('loading')
+  const [googlePayState, setGooglePayState] = useState('loading');
+  const [masterpassState, setMasterpassState] = useState('loading');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [paymentForm, setPaymentForm] = useState<SqPaymentForm | undefined>(undefined);
 
-  static defaultProps = {
-    formId: 'sq-payment-form',
-    apiWrapper: 'reactjs/0.5.0',
-    sandbox: false,
-    inputStyles: [
-      {
-        fontSize: '16px',
-        fontFamily: 'Helvetica Neue',
-        padding: '16px',
-        color: '#373F4A',
-        backgroundColor: 'transparent',
-        lineHeight: '24px',
-        placeholderColor: '#CCC',
-        _webkitFontSmoothing: 'antialiased',
-        _mozOsxFontSmoothing: 'grayscale',
-      },
-    ],
-  }
+  // Fixes stale closure issue with using React Hooks & SqPaymentForm callback functions
+  // https://github.com/facebook/react/issues/16956
+  const cardNonceResponseReceivedCallback = useDynamicCallback(cardNonceResponseReceived);
 
-  constructor(props: SquarePaymentFormProps) {
-    super(props)
-    this.state = {
-      applePayState: 'loading',
-      googlePayState: 'loading',
-      masterpassState: 'loading',
-      errorMessage: undefined,
-      scriptLoaded: false,
-    }
-  }
-
-  componentDidUpdate(): void {
-    this.renderSqPaymentForm()
-  }
-
-  componentDidMount(): void {
-    this.loadSqPaymentFormLibrary(
-      () => this.setState({ scriptLoaded: true }),
-      () => this.setState({ errorMessage: 'Unable to load Square payment library' })
+  useEffect(() => {
+    loadSqPaymentFormLibrary(
+      () => setScriptLoaded(true),
+      () => setErrorMessage('Unable to load Square payment library')
     )
-  }
+  }, [])
 
-  componentWillUnmount(): void {
-    if (this.paymentForm) {
-      this.paymentForm.destroy()
-      this.paymentForm = undefined
+  useEffect(() => {
+    renderSqPaymentForm()
+    return () => {
+      if (paymentForm) {
+        paymentForm.destroy()
+        setPaymentForm(undefined);
+      }
     }
-  }
+  }, [scriptLoaded])
 
-  loadSqPaymentFormLibrary = (onSuccess?: () => void, onError?: () => void) => {
+  function loadSqPaymentFormLibrary(onSuccess?: () => void, onError?: () => void) {
     if (typeof SqPaymentForm === 'function') {
       onSuccess && onSuccess()
       return
     }
     const script = document.createElement('script')
-    if (this.props.sandbox) {
+    if (props.sandbox) {
       script.src = 'https://js.squareupsandbox.com/v2/paymentform'
     } else {
       script.src = 'https://js.squareup.com/v2/paymentform'
@@ -164,97 +143,96 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     document.body.appendChild(script)
   }
 
-  renderSqPaymentForm = () => {
-    if (!this.state.scriptLoaded || this.paymentForm || (this.state.errorMessage && this.state.errorMessage.length)) {
+  function renderSqPaymentForm() {
+    if (!scriptLoaded || paymentForm || errorMessage.length > 0) {
       return
     }
-
     try {
-      this.paymentForm = new SqPaymentForm(
-        this.buildSqPaymentFormConfiguration({ methodsSupported: this.methodsSupported, ...this.props })
+      const newPaymentForm = new SqPaymentForm(
+        buildSqPaymentFormConfiguration({ methodsSupported: methodsSupported, ...props })
       )
-      this.paymentForm.build()
+      newPaymentForm.build();
+      setPaymentForm(newPaymentForm);
     } catch (error) {
       let errorMesasge = error.message || 'Unable to build Square payment form'
-      this.setState({ errorMessage: errorMesasge })
+      setErrorMessage(errorMesasge);
     }
   }
 
-  createNonce = (event: React.MouseEvent) => {
+  function createNonce(event: React.MouseEvent) {
     event.preventDefault()
-    this.paymentForm && this.paymentForm.requestCardNonce()
+    paymentForm && paymentForm.requestCardNonce()
   }
 
-  verifyBuyer = (
+  function verifyBuyer(
     source: string,
     verificationDetails: SqVerificationDetails,
     callback: (err: [SqError], verificationResult: SqVerificationResult) => void
-  ) => {
-    this.paymentForm && this.paymentForm.verifyBuyer(source, verificationDetails, callback)
+  ) {
+    paymentForm && paymentForm.verifyBuyer(source, verificationDetails, callback)
   }
 
-  cardNonceResponseReceived = (
+  function cardNonceResponseReceived(
     errors: [SqError],
     nonce: string,
     cardData: SqCardData,
     billingContact: SqContact,
     shippingContact: SqContact,
     shippingOption: SqShippingOption
-  ) => {
-    if (errors || !this.props.createVerificationDetails) {
-      this.props.cardNonceResponseReceived(errors, nonce, cardData, '', billingContact, shippingContact, shippingOption)
+  ) {
+    if (errors || !props.createVerificationDetails) {
+      props.cardNonceResponseReceived(errors, nonce, cardData, '', billingContact, shippingContact, shippingOption)
       return
     }
 
-    this.paymentForm &&
-      this.paymentForm.verifyBuyer(
-        nonce,
-        this.props.createVerificationDetails(),
-        (err: [SqError], result: SqVerificationResult) => {
-          this.props.cardNonceResponseReceived(
-            err,
-            nonce,
-            cardData,
-            result.token,
-            billingContact,
-            shippingContact,
-            shippingOption
-          )
-        }
-      )
+    paymentForm && paymentForm.verifyBuyer(
+      nonce,
+      props.createVerificationDetails(),
+      (err: [SqError], result: SqVerificationResult) => {
+        props.cardNonceResponseReceived(
+          err,
+          nonce,
+          cardData,
+          result.token,
+          billingContact,
+          shippingContact,
+          shippingOption
+        )
+      }
+    )
   }
 
-  methodsSupported = (methods: SqMethods) => {
+  function methodsSupported(methods: SqMethods) {
     const keys = Object.keys(methods)
 
     if (keys.indexOf('masterpass') > -1) {
-      this.setState({ masterpassState: methods.masterpass === true ? 'ready' : 'unavailable' })
+      setMasterpassState(methods.masterpass === true ? 'ready' : 'unavailable');
     }
     if (keys.indexOf('applePay') > -1) {
-      this.setState({ applePayState: methods.applePay === true ? 'ready' : 'unavailable' })
+      setApplePayState(methods.applePay === true ? 'ready' : 'unavailable')
     }
     if (keys.indexOf('googlePay') > -1) {
-      this.setState({ googlePayState: methods.googlePay === true ? 'ready' : 'unavailable' })
+      setGooglePayState(methods.googlePay === true ? 'ready' : 'unavailable')
     }
   }
 
-  paymentFormLoaded = () => {
-    this.paymentForm && this.paymentForm.recalculateSize()
-    this.props.paymentFormLoaded && this.props.paymentFormLoaded()
+  function paymentFormLoaded() {
+    paymentForm && paymentForm.recalculateSize()
+    props.paymentFormLoaded && props.paymentFormLoaded()
   }
 
-  buildSqPaymentFormConfiguration(props: SquarePaymentFormProps): SqPaymentFormConfiguration {
+  function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
     const config: SqPaymentFormConfiguration = {
       applicationId: props.applicationId,
       locationId: props.locationId,
       autoBuild: false,
       apiWrapper: props.apiWrapper,
       callbacks: {
-        cardNonceResponseReceived: props.cardNonceResponseReceived ? this.cardNonceResponseReceived : null, // handles missing callback error
+        cardNonceResponseReceived: props.cardNonceResponseReceived ? cardNonceResponseReceivedCallback : null, // handles missing callback error
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
         methodsSupported: props.methodsSupported,
-        paymentFormLoaded: this.paymentFormLoaded,
+        paymentFormLoaded: paymentFormLoaded,
         shippingContactChanged: props.shippingContactChanged,
         shippingOptionChanged: props.shippingOptionChanged,
         unsupportedBrowserDetected: props.unsupportedBrowserDetected,
@@ -303,33 +281,47 @@ class SquarePaymentForm extends React.Component<SquarePaymentFormProps, State> {
     return config
   }
 
-  render(): React.ReactElement {
-    const { applePayState, googlePayState, masterpassState, errorMessage } = this.state
-    if (errorMessage) {
-      return (
-        <div className="sq-payment-form">
-          <div className="sq-error-message">{errorMessage}</div>
-        </div>
-      )
-    }
-
-    const context = {
-      applePayState,
-      googlePayState,
-      masterpassState,
-      formId: this.props.formId,
-      onCreateNonce: this.createNonce,
-      onVerifyBuyer: this.verifyBuyer,
-    }
-
+  if (errorMessage) {
     return (
-      <ContextProvider value={context}>
-        <div id={this.props.formId} className="sq-payment-form">
-          {this.props.children}
-        </div>
-      </ContextProvider>
+      <div className="sq-payment-form">
+        <div className="sq-error-message">{errorMessage}</div>
+      </div>
     )
   }
+
+  const context = {
+    applePayState,
+    googlePayState,
+    masterpassState,
+    formId: props.formId,
+    onCreateNonce: createNonce,
+    onVerifyBuyer: verifyBuyer,
+  }
+
+  return (
+    <Context.Provider value={context}>
+      <div id={props.formId} className="sq-payment-form">
+        {props.children}
+      </div>
+    </Context.Provider>
+  )
 }
 
-export default SquarePaymentForm
+SquarePaymentForm.defaultProps = {
+  formId: 'sq-payment-form',
+  apiWrapper: 'reactjs/0.5.0',
+  sandbox: false,
+  inputStyles: [
+    {
+      fontSize: '16px',
+      fontFamily: 'Helvetica Neue',
+      padding: '16px',
+      color: '#373F4A',
+      backgroundColor: 'transparent',
+      lineHeight: '24px',
+      placeholderColor: '#CCC',
+      _webkitFontSmoothing: 'antialiased',
+      _mozOsxFontSmoothing: 'grayscale',
+    },
+  ],
+}
