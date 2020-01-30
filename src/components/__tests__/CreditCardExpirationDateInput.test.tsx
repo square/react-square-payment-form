@@ -2,25 +2,24 @@ import * as React from 'react'
 import { mount } from 'enzyme'
 import { expect } from 'chai'
 
-import CreditCardExpirationDateInput from '../CreditCardExpirationDateInput'
-import { ContextInterface } from '../Context'
+import { CreditCardExpirationDateInput } from '../CreditCardExpirationDateInput'
+import Context from '../Context'
+import MockContext from './__mocks__/MockContext';
 
-let mockContext: ContextInterface = {}
-jest.mock('../Context', () => ({
-  ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
-    return props.children(mockContext)
-  },
-}))
+let mockContext = MockContext;
 
 describe('CreditCardExpirationDateInput', () => {
   beforeEach(() => {
-    mockContext = {}
+    mockContext = MockContext;
   })
 
   describe('DOM attributes', () => {
     it('should render the form id placeholder', () => {
-      mockContext = { formId: 'my-form' }
-      const wrapper = mount(<CreditCardExpirationDateInput />)
+      const wrapper = mount(
+        <Context.Provider value={mockContext}>
+          <CreditCardExpirationDateInput />
+        </Context.Provider>
+      );
       expect(wrapper.find(`#${mockContext.formId}-sq-expiration-date`)).to.be.length(1)
     })
 

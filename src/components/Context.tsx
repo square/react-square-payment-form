@@ -19,12 +19,14 @@ export interface ContextInterface {
     callback: (err: [SqError], verificationResult: SqVerificationResult) => void
   ) => void;
 }
+
 /**
  * Internal helper that the `SquarePaymentForm` uses to manage internal state and expose access to the SqPaymentForm library.
  *
  * This is available for developers who require more customization over their payment form implementation. Please refer to the
  * [customization](customization.md) page for usage details.
  */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const Context = React.createContext({
   applePayState: 'loading',
   googlePayState: 'loading',
@@ -37,5 +39,6 @@ const Context = React.createContext({
     callback: (err: [SqError], verificationResult: SqVerificationResult) => void
   ) => {},
 });
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 export default Context;

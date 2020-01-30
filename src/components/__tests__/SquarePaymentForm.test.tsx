@@ -3,7 +3,7 @@ import * as React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import SquarePaymentForm from '../SquarePaymentForm'
+import { SquarePaymentForm } from '../SquarePaymentForm'
 
 describe('SquarePaymentForm', () => {
   let wrapper: any

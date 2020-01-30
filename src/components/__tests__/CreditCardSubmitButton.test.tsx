@@ -1,44 +1,47 @@
-import * as React from 'react'
-import { mount } from 'enzyme'
-import { expect } from 'chai'
+import * as React from 'react';
+import { mount } from 'enzyme';
+import { expect } from 'chai';
 
-import CreditCardSubmitButton from '../CreditCardSubmitButton'
-import { ContextInterface } from '../Context'
+import { CreditCardSubmitButton } from '../CreditCardSubmitButton';
+import Context from '../Context';
+import MockContext from './__mocks__/MockContext';
 
-let mockContext: any = {} // eslint-disable-line @typescript-eslint/no-explicit-any
-jest.mock('../Context', () => ({
-  ContextConsumer: (props: { children: (context: ContextInterface) => {} }) => {
-    return props.children(mockContext)
-  },
-}))
+let mockContext = MockContext;
 
 describe('CreditCardPostalCodeInput', () => {
   beforeEach(() => {
-    mockContext = {}
-  })
+    mockContext = MockContext;
+  });
 
   it('should render the class name for styling', () => {
-    const wrapper = mount(<CreditCardSubmitButton />)
-    expect(wrapper.find('.sq-creditcard')).to.be.length(1)
-  })
+    const wrapper = mount(
+      <Context.Provider value={mockContext}>
+        <CreditCardSubmitButton />
+      </Context.Provider>
+    );
+    expect(wrapper.find('.sq-creditcard')).to.be.length(1);
+  });
 
   it('should call onCreateNonce when clicked', () => {
-    mockContext = { onCreateNonce: jest.fn() }
-    const wrapper = mount(<CreditCardSubmitButton />)
-    wrapper.find('button').simulate('click')
-    expect(mockContext.onCreateNonce.mock.calls.length).to.eql(1)
-  })
+    const wrapper = mount(
+      <Context.Provider value={mockContext}>
+        <CreditCardSubmitButton />
+      </Context.Provider>
+    );
+    wrapper.find('button').simulate('click');
+    expect(mockContext.onCreateNonce.mock.calls.length).to.eql(1);
+  });
 
   describe('children', () => {
     it('should render the default placeholder', () => {
-      const wrapper = mount(<CreditCardSubmitButton />)
-      expect(wrapper.find('button').text()).to.eql('Pay')
-    })
+      const wrapper = mount(<CreditCardSubmitButton />);
+      expect(wrapper.find('button').text()).to.eql('Pay');
+    });
 
     it('should render a custom placeholder', () => {
-      const test = 'Pay $1.00'
-      const wrapper = mount(<CreditCardSubmitButton>{test}</CreditCardSubmitButton>)
-      expect(wrapper.find('button').text()).to.eql(test)
-    })
-  })
-})
+      const test = 'Pay $1.00';
+      const wrapper = mount(<CreditCardSubmitButton>{test}</CreditCardSubmitButton>);
+      expect(wrapper.find('button').text()).to.eql(test);
+    });
+  });
+});
