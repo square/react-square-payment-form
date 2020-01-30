@@ -5,11 +5,17 @@
     "previous": "Previous",
     "tagline": "Take payments securely and easily in your React App with Square",
     "docs": {
-      "charging": {
+      "payments": {
         "title": "Creating a Payment"
       },
       "components/ApplePayButton": {
         "title": "ApplePayButton"
+      },
+      "components/Context": {
+        "title": "Context"
+      },
+      "components/ContextConsumer": {
+        "title": "components/ContextConsumer"
       },
       "components/CreditCardCVVInput": {
         "title": "CreditCardCVVInput"
@@ -38,6 +44,9 @@
       "components/SquarePaymentForm": {
         "title": "SquarePaymentForm"
       },
+      "customization": {
+        "title": "Customizing the Form"
+      },
       "digitalwallet": {
         "title": "Accepting Digital Wallets"
       },
@@ -55,12 +64,13 @@
       }
     },
     "links": {
-      "Docs": "Docs",
-      "API": "API",
+      "Developer Documentation": "Developer Documentation",
+      "Square API": "Square API",
       "Github": "Github"
     },
     "categories": {
       "Getting Started": "Getting Started",
+      "Guides": "Guides",
       "Components": "Components"
     }
   },

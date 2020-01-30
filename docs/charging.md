@@ -1,5 +1,5 @@
 ---
-id: charging
+id: payments
 title: Creating a Payment
 ---
 

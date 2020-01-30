@@ -92,7 +92,7 @@ function generateMarkdownTypedoc(name, info) {
     if (!signatures) {
       return;
     }
-    var callSignature = signatures.find(function(signature) {
+    var callSignature = signatures.find(function (signature) {
       return signature.kindString === 'Call signature'
     })
     if (!callSignature) {
@@ -100,7 +100,7 @@ function generateMarkdownTypedoc(name, info) {
     }
     var parameters = [];
     if (callSignature.parameters) {
-      parameters = callSignature.parameters.map(function(parameter) {
+      parameters = callSignature.parameters.map(function (parameter) {
         var name = parameter.name;
         var type = '';
         if (parameter.type) {
@@ -110,7 +110,7 @@ function generateMarkdownTypedoc(name, info) {
             type =
               '[' +
               parameter.type.elements
-                .map(function(element) {
+                .map(function (element) {
                   return element.name;
                 })
                 .join(', ') +
@@ -139,28 +139,37 @@ function generateMarkdownTypedoc(name, info) {
       return buildCallSignature(type);
     }
     if (type.type === 'union') {
-      const reflection = type.types.find(function(elm) {
+      const reflection = type.types.find(function (elm) {
         return elm.type === 'reflection';
       });
-      return buildCallSignature(reflection);
+      if (reflection) {
+        return buildCallSignature(reflection);
+      }
+      const instrinsic = type.types.reverse().find(function (elm) {
+        return elm.type === 'intrinsic';
+      });
+      if (instrinsic) {
+        return instrinsic.name;
+      }
     }
     return type.type;
   }
 
   function buildComponentProperties() {
-    var allProps = info.children.find(function(child) {
-      return child.name == 'Props';
+    var defaultValue = '';
+    var allProps = info.children.find(function (child) {
+      return child.name == 'Props' || child.name == 'ContextInterface';
     });
     if (!allProps) {
       return [];
     }
-    return allProps.children.sort(compare).map(function(prop) {
-      const columns = [prop.name, buildTypeText(prop.type), buildDescription(prop.comment), ''];
+    return allProps.children.sort(compare).map(function (prop) {
+      const columns = [prop.name, buildTypeText(prop.type), buildDescription(prop.comment), defaultValue];
       return '|' + columns.join('|') + '|';
     });
   }
 
-  var descriptionContent = info.children.find(function(child) {
+  var descriptionContent = info.children.find(function (child) {
     return child.name == name;
   });
   var props = buildComponentProperties();
@@ -171,11 +180,14 @@ function generateMarkdownTypedoc(name, info) {
   ].join('\n');
 }
 
-glob('src/components/**/!(*.test).tsx', function(err, files) {
+glob('src/components/**/!(*.test).tsx', function (err, files) {
   if (err) throw err;
 
-  files.forEach(function(file) {
+  files.forEach(function (file) {
     var name = componentName(file);
+    if (name === 'models') {
+      return;
+    }
     console.log('Generating documentation:', name);
     var markdown;
     try {
@@ -187,7 +199,7 @@ glob('src/components/**/!(*.test).tsx', function(err, files) {
         var tempFileName = 'typedocOutput.json';
         app.generateJson([file], tempFileName);
         var json = JSON.parse(fs.readFileSync(tempFileName));
-        var parsed = json.children.find(function(child) {
+        var parsed = json.children.find(function (child) {
           return child.originalName == file;
         });
         markdown = generateMarkdownTypedoc(name, parsed);
