@@ -1,46 +1,30 @@
 #!/usr/bin/env node
-
 var fs = require('fs');
 var path = require('path');
 var glob = require("glob")
+var reactDocs = require('react-docgen')
 
 var TypeDoc = require('typedoc');
 var app = new TypeDoc.Application({
-  mode:   'Modules',
+  mode: 'Modules',
   logger: 'none',
   target: 'ES5',
   module: 'CommonJS',
   jsx: true,
-  experimentalDecorators: true
+  experimentalDecorators: true,
+  esModuleInterop: true,
+  tsconfig: './tsconfig.json',
 });
 
-var tempFileName = 'typedocOutput.json'
-
-glob("src/components/**/!(*.test).tsx", function (err, files) {
-  if (err) throw err;
-
-  files.forEach(function(file, index) {
-    var componentData = fs.readFileSync(file)
-    if (componentData.indexOf('React.Component') === -1 && componentData.indexOf('React.FunctionComponent') === -1) {
-      return
-    }
-    var name = componentName(file)
-
-    console.log("Generating documentation:", name)
-    app.generateJson([file], tempFileName)
-
-    var json = JSON.parse(fs.readFileSync(tempFileName))
-    var parsed = json.children.find(function(child) { return child.originalName == file });
-    if (!parsed) {
-      return
-    }
-    var markdown = generateMarkdown(name, parsed)
-    var outPath = __dirname + '/docs/components/' + name + '.md'
-    fs.writeFileSync(outPath, markdown)
-  })
-
-  fs.unlinkSync(tempFileName)
-})
+function compare(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}
 
 function componentName(filepath) {
   var name = path.basename(filepath);
@@ -51,137 +35,170 @@ function componentName(filepath) {
   return name;
 }
 
-function pageMetadata(name) {
-  return [
-    '---',
-    'id:' + name,
-    'title:' + name,
-    '---',
-  ].join('\n')
+function buildPageMetadata(name) {
+  return ['---', 'id:' + name, 'title:' + name, '---'].join('\n');
 }
 
-function buildDescriptionText(comment) {
-  if (!comment) { return ''; }
-  var text = '';
-  if (comment.shortText) {
-    text += comment.shortText;
+function buildProperties(props) {
+  if (props.length === 0) {
+    return '';
   }
-  if (comment.text) {
-    if (comment.shortText) {
-      text += '\n\n';
+  return ['## Props', '|Name|Type|Description|Default Value|', '|---|---|---|---|', props.join('\n')].join('\n');
+}
+
+function generateMarkdownReactDocs(info) {
+  function buildTypeText(flowType) {
+    if (flowType.name === 'signature') {
+      return '`' + flowType.raw.replace(/[\n\t\r]/g, '') + '`';
     }
-    text += comment.text
+    return flowType.name;
   }
-  return text
+
+  const props = [];
+  if (info.props) {
+    for (var [name, details] of Object.entries(info.props)) {
+      const columns = [
+        name,
+        details.flowType ? buildTypeText(details.flowType) : '',
+        details.description,
+        details.defaultValue ? '`' + details.defaultValue.value.replace(/[\n\t\r]/g, '') + '`' : '',
+      ];
+      props.push('|' + columns.join('|') + '|');
+    }
+  }
+  return [buildPageMetadata(info.displayName), info.description, buildProperties(props)].join('\n');
 }
 
-function componentDescription(name, data) {
-  var content = data.children.find(function(child) {
-    return child.name == name
-  })
-  if (!content) { return '' }
-  return buildDescriptionText(content.comment)
-}
-
-function buildCallSignature(type) {
-
-  var signatures = type.declaration ? type.declaration.signatures : null
-  if (!signatures) { return }
-
-  var callSignature = signatures.find(function(signature) { return signature.kindString === "Call signature" })
-  if (!callSignature) { return }
-
-
-  var parameters = []
-
-  if (callSignature.parameters) {
-    parameters = callSignature.parameters.map(function(parameter) {
-      var name = parameter.name
-      var type = ''
-
-      if (parameter.type) {
-        if (parameter.type.name) {
-          type = parameter.type.name
-        } else if (parameter.type.elements) {
-          type = '[' + parameter.type.elements.map(function(element) { return element.name }).join(', ') + ']'
-        } else if (parameter.type.type == 'reflection') {
-          type = "({}: {}) => {}"
-        }
+function generateMarkdownTypedoc(name, info) {
+  function buildDescription(comment) {
+    if (!comment) {
+      return '';
+    }
+    var text = '';
+    if (comment.shortText) {
+      text += comment.shortText;
+    }
+    if (comment.text) {
+      if (comment.shortText) {
+        text += '\n\n';
       }
-      return name + ': ' + type
+      text += comment.text;
+    }
+    return text;
+  }
+
+  function buildCallSignature(type) {
+    var signatures = type.declaration ? type.declaration.signatures : null;
+    if (!signatures) {
+      return;
+    }
+    var callSignature = signatures.find(function(signature) {
+      return signature.kindString === 'Call signature'
     })
+    if (!callSignature) {
+      return;
+    }
+    var parameters = [];
+    if (callSignature.parameters) {
+      parameters = callSignature.parameters.map(function(parameter) {
+        var name = parameter.name;
+        var type = '';
+        if (parameter.type) {
+          if (parameter.type.name) {
+            type = parameter.type.name;
+          } else if (parameter.type.elements) {
+            type =
+              '[' +
+              parameter.type.elements
+                .map(function(element) {
+                  return element.name;
+                })
+                .join(', ') +
+              ']';
+          } else if (parameter.type.type == 'reflection') {
+            type = '({}: {}) => {}';
+          }
+        }
+        return name + ': ' + type;
+      });
+    }
+
+    var response = 'UNKNOWN';
+    if (callSignature.type && callSignature.type.name) {
+      response = callSignature.type.name;
+    }
+
+    return '(' + parameters.join(', ') + ') => ' + response;
   }
 
-  var response = "UNKNOWN"
-  if (callSignature.type && callSignature.type.name) {
-    response = callSignature.type.name
+  function buildTypeText(type) {
+    if (type.name) {
+      return type.name;
+    }
+    if (type.type === 'reflection') {
+      return buildCallSignature(type);
+    }
+    if (type.type === 'union') {
+      const reflection = type.types.find(function(elm) {
+        return elm.type === 'reflection';
+      });
+      return buildCallSignature(reflection);
+    }
+    return type.type;
   }
 
-  return '(' + parameters.join(', ') + ') => ' + response
-}
-
-function buildTypeText(type) {
-  if (type.name) {
-    return type.name
+  function buildComponentProperties() {
+    var allProps = info.children.find(function(child) {
+      return child.name == 'Props';
+    });
+    if (!allProps) {
+      return [];
+    }
+    return allProps.children.sort(compare).map(function(prop) {
+      const columns = [prop.name, buildTypeText(prop.type), buildDescription(prop.comment), ''];
+      return '|' + columns.join('|') + '|';
+    });
   }
-  if (type.type === 'reflection') {
-    return buildCallSignature(type)
-  }
-  return type.type
 
-}
-
-function compare( a, b ) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}
-
-
-
-function generateProp(prop, defaultProp) {
-  var defaultValue = defaultProp ? defaultProp.defaultValue : ''
-  if (defaultValue) {
-    defaultValue = defaultValue.replace(/[\n\t\r]/g, '')
-    defaultValue = '<br/><br/>**Default Value:** `' + defaultValue + '`'
-  }
-  const columns = [
-    prop.name,
-    buildTypeText(prop.type),
-    buildDescriptionText(prop.comment) + defaultValue,
-  ]
-  return '|' + columns.join('|') + '|'
-}
-
-function componentProperties(name, data) {
-  var props = data.children.find(function(child) {
-    return child.kindString == "Interface"
-  })
-  var defaultProps = data.children.find(function(child) { return child.name == name }) || []
-  defaultProps = defaultProps.children ? defaultProps.children.find(function(child) { return child.name == "defaultProps" }) || []  : []
-  defaultProps = defaultProps.children || []
-
-  if (!props) { return '' };
-
+  var descriptionContent = info.children.find(function(child) {
+    return child.name == name;
+  });
+  var props = buildComponentProperties();
   return [
-    '## Props',
-    '|Name|Type|Description|',
-    '|---|---|---|',
-    props.children.sort(compare).map(function(prop) {
-      var defaultProp = defaultProps.find(function(x) { return x.name == prop.name })
-      return generateProp(prop, defaultProp)
-    }).join('\n'),
-  ].join('\n')
+    buildPageMetadata(name),
+    descriptionContent ? buildDescription(descriptionContent.comment) : '',
+    buildProperties(props),
+  ].join('\n');
 }
 
-function generateMarkdown(name, data) {
-  return [
-    pageMetadata(name),
-    componentDescription(name, data),
-    componentProperties(name, data)
-  ].join('\n')
-}
+glob('src/components/**/!(*.test).tsx', function(err, files) {
+  if (err) throw err;
+
+  files.forEach(function(file) {
+    var name = componentName(file);
+    console.log('Generating documentation:', name);
+    var markdown;
+    try {
+      var componentData = fs.readFileSync(file);
+      var componentInfo = reactDocs.parse(componentData);
+      markdown = generateMarkdownReactDocs(componentInfo);
+    } catch (err1) {
+      try {
+        var tempFileName = 'typedocOutput.json';
+        app.generateJson([file], tempFileName);
+        var json = JSON.parse(fs.readFileSync(tempFileName));
+        var parsed = json.children.find(function(child) {
+          return child.originalName == file;
+        });
+        markdown = generateMarkdownTypedoc(name, parsed);
+        fs.unlinkSync(tempFileName);
+      } catch (err2) {}
+    }
+    if (!markdown) {
+      console.log('Failed to generate markdown');
+      return;
+    }
+    var outPath = __dirname + '/docs/components/' + name + '.md';
+    fs.writeFileSync(outPath, markdown);
+  });
+});

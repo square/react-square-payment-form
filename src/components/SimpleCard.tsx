@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import Context from './Context'
+import React, { useContext } from 'react';
+import Context from './Context';
 
 /**
  * Renders a placeholder element for the single-element payment form. The SqPaymentForm JS library will replace this element with
@@ -11,9 +11,5 @@ import Context from './Context'
  */
 export const SimpleCard: React.FC = () => {
   const context = useContext(Context);
-  return (
-    <div id={`${context.formId}-sq-card`}></div>
-  )
-}
-
-export default SimpleCard
+  return <div id={`${context.formId}-sq-card`}></div>;
+};

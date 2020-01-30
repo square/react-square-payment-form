@@ -8,6 +8,7 @@
     "removeComments": true,
     "declaration": true,
     "sourceMap": true,
+    "esModuleInterop": true,
     "jsx": "react",
     "lib": ["es6", "dom"]
   },
