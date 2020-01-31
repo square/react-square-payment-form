@@ -62,6 +62,6 @@
   "bugs": {
     "url": "https://github.com/square/react-square-payment-form/issues"
   },
-  "homepage": "https://github.com/square/react-square-payment-form#readme",
+  "homepage": "https://square.github.io/react-square-payment-form/",
   "dependencies": {}
 }
