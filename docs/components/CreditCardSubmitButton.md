@@ -9,4 +9,4 @@ When accepting credit card payments, you **must** have this component inside you
 ## Props
 |Name|Type|Description|Default Value|
 |---|---|---|---|
-|children|ReactReactNode|Input field label||
+|children|React.ReactNode|Input field label||

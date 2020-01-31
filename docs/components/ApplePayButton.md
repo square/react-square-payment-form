@@ -6,5 +6,5 @@ Renders an Apple Pay button to use in the Square Payment Form, pre-styled to mee
 ## Props
 |Name|Type|Description|Default Value|
 |---|---|---|---|
-|loadingView|ReactReactNode|Placeholder view when the Apple Pay is being initialized||
-|unavailableView|ReactReactNode|Placeholder view when Apple Pay is not available||
+|loadingView|React.ReactNode|Placeholder view when the Apple Pay is being initialized||
+|unavailableView|React.ReactNode|Placeholder view when Apple Pay is not available||

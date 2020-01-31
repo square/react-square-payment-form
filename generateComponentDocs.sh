@@ -51,9 +51,8 @@ function generateMarkdownReactDocs(info) {
     if (flowType.name === 'signature') {
       return '`' + flowType.raw.replace(/[\n\t\r]/g, '') + '`';
     }
-    return flowType.name;
+    return flowType.raw || flowType.name;
   }
-
   const props = [];
   if (info.props) {
     for (var [name, details] of Object.entries(info.props)) {
@@ -151,6 +150,10 @@ function generateMarkdownTypedoc(name, info) {
       if (instrinsic) {
         return instrinsic.name;
       }
+      const values = type.types.map(function (elm) {
+        return elm.value;
+      });
+      return values.join(',');
     }
     return type.type;
   }
@@ -185,7 +188,7 @@ glob('src/components/**/!(*.test).tsx', function (err, files) {
 
   files.forEach(function (file) {
     var name = componentName(file);
-    if (name === 'models') {
+    if (name === 'models' || name === 'MockContext') {
       return;
     }
     console.log('Generating documentation:', name);

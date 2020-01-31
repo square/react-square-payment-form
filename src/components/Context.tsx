@@ -4,12 +4,12 @@ import { SqVerificationDetails, SqError, SqVerificationResult } from './models';
 export interface ContextInterface {
   /** Unique form ID */
   formId?: string;
-  /** Apple pay state (loading, unavailable, ready) */
-  applePayState?: string;
-  /** Google pay state (loading, unavailable, ready) */
-  googlePayState?: string;
-  /** Masterpass state (loading, unavailable, ready) */
-  masterpassState?: string;
+  /** Apple pay state*/
+  applePayState?: 'loading' | 'unavailable' | 'ready';
+  /** Google pay state*/
+  googlePayState?: 'loading' | 'unavailable' | 'ready';
+  /** Masterpass state */
+  masterpassState?: 'loading' | 'unavailable' | 'ready';
   /** Function that is called to create a nonce */
   onCreateNonce?: (event: React.MouseEvent) => void;
   /** Function that is called to verify the buyer */

@@ -21,7 +21,7 @@ You can use the following class names to change other default component styles:
 
 ## Control when the nonce is requested
 
-Instead of using the `CreditCardSbumitButton`, you can hook directly into the `Context` component to have more control over when form is submitted.
+Instead of using the `CreditCardSubmitButton`, you can hook directly into the `Context` component to have more control over when the form is submitted.
 
 ```
 import React, { useContext } from 'react';

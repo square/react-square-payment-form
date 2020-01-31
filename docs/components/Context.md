@@ -10,9 +10,9 @@ This is available for developers who require more customization over their payme
 ## Props
 |Name|Type|Description|Default Value|
 |---|---|---|---|
-|applePayState|string|Apple pay state (loading, unavailable, ready)||
+|applePayState|ready,unavailable,loading|Apple pay state||
 |formId|string|Unique form ID||
-|googlePayState|string|Google pay state (loading, unavailable, ready)||
-|masterpassState|string|Masterpass state (loading, unavailable, ready)||
+|googlePayState|ready,unavailable,loading|Google pay state||
+|masterpassState|ready,unavailable,loading|Masterpass state||
 |onCreateNonce|(event: MouseEvent) => void|Function that is called to create a nonce||
 |onVerifyBuyer|(source: string, verificationDetails: SqVerificationDetails, callback: ({}: {}) => {}) => void|Function that is called to verify the buyer||
