@@ -12,15 +12,6 @@
     "jsx": "react",
     "lib": ["es6", "dom"]
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "src/**/*.test.tsx",
-    "node_modules",
-    "demo",
-    "website",
-    "docs",
-    "*.sh"
-  ]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.tsx", "src/**/__mocks__", "node_modules", "demo", "website", "docs", "*.sh"]
 }
