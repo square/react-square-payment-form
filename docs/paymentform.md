@@ -34,7 +34,7 @@ npm install --save react-square-payment-form
 We provide default styles to make it easier to get set up.
 
 ```
-import SquarePaymentForm from 'react-square-payment-form'
+import { SquarePaymentForm } from 'react-square-payment-form'
 import 'react-square-payment-form/lib/default.css'
 ```
 
@@ -128,7 +128,8 @@ These fields can be placed anywhere within the form and do not need to be in any
 We have chosen to render the expiration date, postal code, and cvv on one line.
 
 ```
-import SquarePaymentForm, {
+import {
+  SquarePaymentForm,
   CreditCardNumberInput,
   CreditCardExpirationDateInput,
   CreditCardPostalCodeInput,
