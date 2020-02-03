@@ -1,30 +1,15 @@
-import SquarePaymentForm from './components/SquarePaymentForm'
+import { SquarePaymentForm } from './components/SquarePaymentForm'
 
-import CreditCardCVVInput from './components/CreditCardCVVInput'
-import CreditCardExpirationDateInput from './components/CreditCardExpirationDateInput'
-import CreditCardNumberInput from './components/CreditCardNumberInput'
-import CreditCardPostalCodeInput from './components/CreditCardPostalCodeInput'
-import CreditCardSubmitButton from './components/CreditCardSubmitButton'
-
-import ApplePayButton from './components/ApplePayButton'
-import GooglePayButton from './components/GooglePayButton'
-import MasterpassButton from './components/MasterpassButton'
-
-import SimpleCard from './components/SimpleCard'
-
-import { ContextConsumer } from './components/Context'
-
-export {
-  CreditCardCVVInput,
-  CreditCardExpirationDateInput,
-  CreditCardNumberInput,
-  CreditCardPostalCodeInput,
-  CreditCardSubmitButton,
-  ApplePayButton,
-  GooglePayButton,
-  MasterpassButton,
-  SimpleCard,
-  ContextConsumer,
-}
+export * from './components/ApplePayButton'
+export * from './components/Context'
+export * from './components/CreditCardNumberInput'
+export * from './components/GooglePayButton'
+export * from './components/MasterpassButton'
+export * from './components/SimpleCard'
+export * from './components/CreditCardCVVInput'
+export * from './components/CreditCardPostalCodeInput'
+export * from './components/CreditCardSubmitButton'
+export * from './components/SquarePaymentForm'
+export * from './components/CreditCardExpirationDateInput'
 
 export default SquarePaymentForm

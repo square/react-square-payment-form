@@ -9,7 +9,7 @@ Take a payment in production
 
 In order to take a payment in production, the following must be true:
 * You have followed the steps of the [Payment Form Setup Guide](paymentform.md) and can successfully create a nonce.
-* You have followed the steps to [Create a Payment](charging.md) and can successfully create a payment.
+* You have followed the steps to [Create a Payment](payments.md) and can successfully create a payment.
 
 
 ## 1. Use your production credentials

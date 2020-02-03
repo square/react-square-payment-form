@@ -6,9 +6,9 @@ const siteConfig = {
   organizationName: 'square',
   url: 'https://square.github.io/react-square-payment-form',
   headerLinks: [
-    {doc: 'introduction', label: 'Docs'},
-    {href: 'https://docs.connect.squareup.com/api/connect/v2', label: 'API'},
-    {href: 'https://github.com/square/react-square-payment-form', label: 'Github'},
+    { href: 'https://developer.squareup.com/docs', label: 'Developer Documentation' },
+    { href: 'https://developer.squareup.com/reference/square', label: 'Square API' },
+    { href: 'https://github.com/square/react-square-payment-form', label: 'Github' },
   ],
   colors: {
     primaryColor: '#229bac',
@@ -23,6 +23,6 @@ const siteConfig = {
   ogImage: 'img/undraw_online.svg',
   twitterImage: 'img/undraw_tweetstorm.svg',
   noIndex: true,
-};
+}
 
-module.exports = siteConfig;
+module.exports = siteConfig

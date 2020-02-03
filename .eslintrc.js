@@ -21,6 +21,7 @@ module.exports = {
     "tsconfigRootDir": ".",
   },
   rules: {
+    "semi": 2,
     "react/prop-types": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-member-accessibility": "off",

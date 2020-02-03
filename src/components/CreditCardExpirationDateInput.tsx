@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { ContextConsumer } from './Context'
+import React, { useContext } from 'react';
+import Context from './Context';
 
-export interface CreditCardExpirationDateInputProps {
+interface Props {
   /** Input field label */
-  label?: string
+  label?: string;
 }
 
 /**
@@ -12,23 +12,16 @@ export interface CreditCardExpirationDateInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-class CreditCardExpirationDateInput extends React.Component<CreditCardExpirationDateInputProps> {
-  static defaultProps = {
-    label: 'Expiration',
-  }
+export const CreditCardExpirationDateInput: React.FC<Props> = (props: Props) => {
+  const context = useContext(Context);
+  return (
+    <div>
+      {props.label && <span className="sq-label">{props.label}</span>}
+      <div id={`${context.formId}-sq-expiration-date`}></div>
+    </div>
+  );
+};
 
-  render(): React.ReactElement {
-    return (
-      <ContextConsumer>
-        {context => (
-          <div>
-            {this.props.label && <span className="sq-label">{this.props.label}</span>}
-            <div id={`${context.formId}-sq-expiration-date`}></div>
-          </div>
-        )}
-      </ContextConsumer>
-    )
-  }
-}
-
-export default CreditCardExpirationDateInput
+CreditCardExpirationDateInput.defaultProps = {
+  label: 'Expiration',
+};

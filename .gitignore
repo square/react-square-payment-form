@@ -12,3 +12,6 @@ website/i18n/*
 # dependencies
 /node_modules/
 .DS_STORE
+
+# demo
+demo/node_modules/

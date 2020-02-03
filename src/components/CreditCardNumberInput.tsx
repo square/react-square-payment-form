@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { ContextConsumer } from './Context'
+import React, { useContext } from 'react';
+import Context from './Context';
 
-export interface CreditCardNumberInputProps {
+interface Props {
   /** Input field label */
-  label?: string
+  label?: string;
 }
 /**
  * Renders a placeholder element for the card number. The SqPaymentForm JS library will replace this
@@ -11,23 +11,16 @@ export interface CreditCardNumberInputProps {
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  */
-class CreditCardNumberInput extends React.Component<CreditCardNumberInputProps> {
-  static defaultProps = {
-    label: 'Credit Card',
-  }
+export const CreditCardNumberInput: React.FC<Props> = (props: Props) => {
+  const context = useContext(Context);
+  return (
+    <div>
+      {props.label && <span className="sq-label">{props.label}</span>}
+      <div id={`${context.formId}-sq-card-number`}></div>
+    </div>
+  );
+};
 
-  render(): React.ReactElement {
-    return (
-      <ContextConsumer>
-        {context => (
-          <div>
-            {this.props.label && <span className="sq-label">{this.props.label}</span>}
-            <div id={`${context.formId}-sq-card-number`}></div>
-          </div>
-        )}
-      </ContextConsumer>
-    )
-  }
-}
-
-export default CreditCardNumberInput
+CreditCardNumberInput.defaultProps = {
+  label: 'Credit Card',
+};
