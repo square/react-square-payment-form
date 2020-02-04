@@ -10,7 +10,7 @@ In this guide, we will build a simple payment form in Sandbox mode and generate 
 To get started with the Square Payment Form, you will need to do the following:
 
 1. [Create a Square Developer account](https://connect.squareup.com/apps).
-1. [Create an application](https://developer.squareup.com/apps/new) and aggree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
+1. [Create an application](https://developer.squareup.com/apps/new) and agree to our [developer terms of service](https://squareup.com/us/en/legal/general/developers).
 
 ## 2. Get your Sandbox credentials
 
@@ -174,4 +174,4 @@ Fill in the form with the following test credit card information and click the "
 * **Card Number**: 4111 1111 1111 1111
 * **CVV**: any three non-consecutive numbers (ex. 123)
 * **Expiration Date**: any month and year in the future (ex. 01/25)
-* **Postal Code**: any potal code (ex. 12345)
+* **Postal Code**: any postal code (ex. 12345)

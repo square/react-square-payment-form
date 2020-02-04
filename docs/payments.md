@@ -75,7 +75,7 @@ The [idempotency key](https://developer.squareup.com/docs/working-with-apis/idem
 
 ## 5. See the payment in the Sandbox Seller Dashboard
 
-You should now be able create and charge a nonce successfuly.
+You should now be able create and charge a nonce successfully.
 
 The payment is credited to the sandbox test account whose OAuth token is used in the app that you just built. To see the payment in the sandbox seller dashboard:
 
