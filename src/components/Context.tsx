@@ -27,7 +27,7 @@ export interface ContextInterface {
  * [customization](customization.md) page for usage details.
  */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const Context = React.createContext({
+export const Context = React.createContext({
   applePayState: 'loading',
   googlePayState: 'loading',
   masterpassState: 'loading',
