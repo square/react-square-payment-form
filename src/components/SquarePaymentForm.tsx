@@ -23,7 +23,7 @@ declare class SqPaymentForm {
   verifyBuyer: (
     source: string,
     verificationDetails: SqVerificationDetails,
-    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+    callback: (err: SqError, verificationResult: SqVerificationResult) => void
   ) => void;
 }
 
@@ -121,12 +121,12 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       paymentForm.verifyBuyer(
         nonce,
         props.createVerificationDetails(),
-        (err: [SqError], result: SqVerificationResult) => {
+        (err: SqError, result: SqVerificationResult) => {
           props.cardNonceResponseReceived(
-            err,
+            [err],
             nonce,
             cardData,
-            result.token,
+            result ? result.token : undefined,
             billingContact,
             shippingContact,
             shippingOption
@@ -147,7 +147,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   function verifyBuyer(
     source: string,
     verificationDetails: SqVerificationDetails,
-    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+    callback: (err: SqError, verificationResult: SqVerificationResult) => void
   ): void {
     paymentForm && paymentForm.verifyBuyer(source, verificationDetails, callback);
   }

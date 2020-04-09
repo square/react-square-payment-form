@@ -16,7 +16,7 @@ export interface ContextInterface {
   onVerifyBuyer?: (
     source: string,
     verificationDetails: SqVerificationDetails,
-    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+    callback: (err: SqError, verificationResult: SqVerificationResult) => void
   ) => void;
 }
 
@@ -36,7 +36,7 @@ export const Context = React.createContext({
   onVerifyBuyer: (
     source: string,
     verificationDetails: SqVerificationDetails,
-    callback: (err: [SqError], verificationResult: SqVerificationResult) => void
+    callback: (err: SqError, verificationResult: SqVerificationResult) => void
   ) => {},
 });
 /* eslint-enable @typescript-eslint/no-unused-vars */
