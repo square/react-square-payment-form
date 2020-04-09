@@ -51,6 +51,15 @@ const PaymentPage = () => {
 
 ```
 
+## Render multiple payment forms
+
+Each payment form requires a unique form ID. By default, the form ID is `sq-payment-form`.
+
+```
+<SquarePaymentForm formId={"form-id-1}" />
+<SquarePaymentForm formId={"form-id-2}" />
+```
+
 ## Can't find what you need?
 
 If the React payment form does not fit your use case, please leave us feedback on our [GitHub](https://github.com/square/react-square-payment-form/issues) or our [community Slack](https://squ.re/2Hks3YE). Feel free to contribute to our repository as well!
