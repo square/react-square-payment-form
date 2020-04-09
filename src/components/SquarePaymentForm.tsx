@@ -139,8 +139,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   // https://github.com/facebook/react/issues/16956
   const cardNonceResponseReceivedCallback = useDynamicCallback(cardNonceResponseReceived);
 
-  function createNonce(event: React.MouseEvent): void {
-    event.preventDefault();
+  function createNonce(): void {
     paymentForm && paymentForm.requestCardNonce();
   }
 
