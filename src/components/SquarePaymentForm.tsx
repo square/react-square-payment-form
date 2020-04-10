@@ -311,7 +311,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
 SquarePaymentForm.defaultProps = {
   formId: 'sq-payment-form',
-  apiWrapper: 'reactjs/0.6.1',
+  apiWrapper: 'reactjs/0.6.2',
   sandbox: false,
   inputStyles: [
     {
