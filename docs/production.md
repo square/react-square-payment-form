@@ -19,7 +19,7 @@ If you are ready to use the payment form in production, you will need to do the 
 1. Replace all your Sandbox credentials with production credentials
     1. Open your [Application Dashboard](https://developer.squareup.com/apps).
     1. Click on the application you want to use for the payment form.
-    1. On the bottom left corner, toggle "Sandbox Settings" to "Production Settings" .
+    1. On the top, toggle to "Production".
     1. Replace the following credentials with your **production** credentials:
         1. Application ID
         1. Location ID

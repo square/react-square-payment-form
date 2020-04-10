@@ -14,5 +14,5 @@ This is available for developers who require more customization over their payme
 |formId|string|Unique form ID||
 |googlePayState|ready,unavailable,loading|Google pay state||
 |masterpassState|ready,unavailable,loading|Masterpass state||
-|onCreateNonce|(event: MouseEvent) => void|Function that is called to create a nonce||
+|onCreateNonce|() => void|Function that is called to create a nonce||
 |onVerifyBuyer|(source: string, verificationDetails: SqVerificationDetails, callback: ({}: {}) => {}) => void|Function that is called to verify the buyer||

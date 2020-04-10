@@ -21,14 +21,14 @@ You can use the following class names to change other default component styles:
 
 ## Control when the nonce is requested
 
-Instead of using the `CreditCardSubmitButton`, you can hook directly into the `Context` component to have more control over when the form is submitted.
+Instead of using the `CreditCardSubmitButton`, you can hook directly into the `Context` component to have more control over when the form is submitted. The `useContext` call **must** be used within the `<SquarePaymentForm />` component.
 
 ```
 import React, { useContext } from 'react';
 import { Context } from 'react-square-payment-form';
 
-const PaymentPage = () => {
-  const context = useContext(Context);
+const MyCustomButton = () => {
+ const context = useContext(Context);
 
   handleSubmit = evt => {
     evt.preventDefault();
@@ -37,12 +37,27 @@ const PaymentPage = () => {
   }
 
   return (
-    <SquarePaymentForm>
-      <button onClick={handleSubmit}>Pay</button>
+    <button onClick={handleSubmit}>Pay</button>
+  );
+}
+
+const PaymentPage = () => {
+  return (
+    <SquarePaymentForm {...props}>
+      <MyCustomButton />
     </SquarePaymentForm>
   );
 }
 
+```
+
+## Render multiple payment forms
+
+Each payment form requires a unique form ID. By default, the form ID is `sq-payment-form`.
+
+```
+<SquarePaymentForm formId={"form-id-1}" />
+<SquarePaymentForm formId={"form-id-2}" />
 ```
 
 ## Can't find what you need?
