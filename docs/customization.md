@@ -19,6 +19,19 @@ You can use the following class names to change other default component styles:
 | `sq-label`      | Label for the input fields |
 | `sq-masterpass` | Masterpass button          |
 
+## Change the default placeholders
+
+To change the default placeholders, you can pass the following props to the `SquarePaymentForm`:
+```
+<SquarePaymentForm
+  placeholderCVV={'test1'}
+  placeholderPostal={'test2'}
+  placeholderCreditCard={'test3'}
+  placeholderExpiration={'test4'}
+>
+```
+
+
 ## Control when the nonce is requested
 
 Instead of using the `CreditCardSubmitButton`, you can hook directly into the `Context` component to have more control over when the form is submitted. The `useContext` call **must** be used within the `<SquarePaymentForm />` component.

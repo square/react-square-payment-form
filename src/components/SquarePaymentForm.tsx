@@ -42,6 +42,14 @@ interface Props {
   sandbox: boolean;
   /** Square payment form components */
   children?: React.ReactNode;
+  /** Change the placeholder for the CVV input */
+  placeholderCVV?: string;
+  /** Change the placeholder for the postal code input */
+  placeholderPostal?: string;
+  /** Change the placeholder for the credit card input */
+  placeholderCreditCard?: string;
+  /** Change the placeholder for the expiration date input */
+  placeholderExpiration?: string;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (
@@ -197,6 +205,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       autoBuild: false,
       apiWrapper: props.apiWrapper,
       callbacks: {
+        // @ts-ignore: Always true error
         cardNonceResponseReceived: props.cardNonceResponseReceived ? cardNonceResponseReceivedCallback : null, // handles missing callback error
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
@@ -232,19 +241,25 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       if (document.getElementById(`${props.formId}-sq-card-number`)) {
         config.cardNumber = {
           elementId: `${props.formId}-sq-card-number`,
-          placeholder: '• • • •  • • • •  • • • •  • • • •',
+          placeholder: props.placeholderCreditCard || '• • • •  • • • •  • • • •  • • • •',
         };
       }
       if (document.getElementById(`${props.formId}-sq-cvv`)) {
-        config.cvv = { elementId: `${props.formId}-sq-cvv`, placeholder: 'CVV ' };
+        config.cvv = { elementId: `${props.formId}-sq-cvv`, placeholder: props.placeholderCVV || 'CVV ' };
       }
       if (document.getElementById(`${props.formId}-sq-postal-code`)) {
-        config.postalCode = { elementId: `${props.formId}-sq-postal-code`, placeholder: '12345' };
+        config.postalCode = {
+          elementId: `${props.formId}-sq-postal-code`,
+          placeholder: props.placeholderPostal || '12345',
+        };
       } else {
         config.postalCode = false;
       }
       if (document.getElementById(`${props.formId}-sq-expiration-date`)) {
-        config.expirationDate = { elementId: `${props.formId}-sq-expiration-date`, placeholder: 'MM/YY' };
+        config.expirationDate = {
+          elementId: `${props.formId}-sq-expiration-date`,
+          placeholder: props.placeholderExpiration || 'MM/YY',
+        };
       }
     }
     return config;
