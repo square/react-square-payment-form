@@ -28,6 +28,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.||
 |createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>||
 |formId|string|<b>Required for all features</b><br/><br/>Identifies the DOM form element||
+|inputClass|string|Define the CSS class of input iframe elements||
 |inputEventReceived|() => void|Invoked when visitors interact with the iframe elements||
 |inputStyles|array|Define the internal styles applied to the rendered iframes||
 |locationId|string|<b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.||
