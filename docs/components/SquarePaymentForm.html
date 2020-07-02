@@ -83,11 +83,16 @@ It determines which Square location will receive credit for payments made with t
 <tr><td>createPaymentRequest</td><td>() =&gt; SqPaymentRequest</td><td><b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.</td><td></td></tr>
 <tr><td>createVerificationDetails</td><td>() =&gt; SqVerificationDetails</td><td><b>Required for SCA</b><br/><br/></td><td></td></tr>
 <tr><td>formId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the DOM form element</td><td></td></tr>
+<tr><td>inputClass</td><td>string</td><td>Define the CSS class of input iframe elements</td><td></td></tr>
 <tr><td>inputEventReceived</td><td>() =&gt; void</td><td>Invoked when visitors interact with the iframe elements</td><td></td></tr>
 <tr><td>inputStyles</td><td>array</td><td>Define the internal styles applied to the rendered iframes</td><td></td></tr>
 <tr><td>locationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.</td><td></td></tr>
 <tr><td>methodsSupported</td><td>(methods: SqMethods) =&gt; void</td><td></td><td></td></tr>
 <tr><td>paymentFormLoaded</td><td>() =&gt; void</td><td>Invoked when payment form is fully loaded</td><td></td></tr>
+<tr><td>placeholderCVV</td><td>string</td><td>Change the placeholder for the CVV input</td><td></td></tr>
+<tr><td>placeholderCreditCard</td><td>string</td><td>Change the placeholder for the credit card input</td><td></td></tr>
+<tr><td>placeholderExpiration</td><td>string</td><td>Change the placeholder for the expiration date input</td><td></td></tr>
+<tr><td>placeholderPostal</td><td>string</td><td>Change the placeholder for the postal code input</td><td></td></tr>
 <tr><td>sandbox</td><td>boolean</td><td>Enables Sandbox mode</td><td></td></tr>
 <tr><td>shippingContactChanged</td><td>(shippingContact: SqContact, done: ({}: {}) =&gt; {}) =&gt; void</td><td>Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.</td><td></td></tr>
 <tr><td>shippingOptionChanged</td><td>(shippingOption: SqShippingOption, done: ({}: {}) =&gt; {}) =&gt; void</td><td>Invoked when the buyer selects a shipping option in the Apple Pay sheet.</td><td></td></tr>
