@@ -34,6 +34,10 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |locationId|string|<b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.||
 |methodsSupported|(methods: SqMethods) => void|||
 |paymentFormLoaded|() => void|Invoked when payment form is fully loaded||
+|placeholderCVV|string|Change the placeholder for the CVV input||
+|placeholderCreditCard|string|Change the placeholder for the credit card input||
+|placeholderExpiration|string|Change the placeholder for the expiration date input||
+|placeholderPostal|string|Change the placeholder for the postal code input||
 |sandbox|boolean|Enables Sandbox mode||
 |shippingContactChanged|(shippingContact: SqContact, done: ({}: {}) => {}) => void|Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.||
 |shippingOptionChanged|(shippingOption: SqShippingOption, done: ({}: {}) => {}) => void|Invoked when the buyer selects a shipping option in the Apple Pay sheet.||
