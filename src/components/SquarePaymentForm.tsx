@@ -36,6 +36,8 @@ interface Props {
   formId: string;
   /** Define the internal styles applied to the rendered iframes */
   inputStyles?: {}[];
+  /** Define the CSS class of input iframe elements */
+  inputClass?: string;
   /** Internal variable: used for logs */
   apiWrapper: string;
   /** Enables Sandbox mode */
@@ -216,7 +218,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
         inputStyle: props.inputStyles && props.inputStyles[0],
       };
     } else {
-      config.inputClass = 'sq-input';
+      config.inputClass = props.inputClass || 'sq-input';
       config.inputStyles = props.inputStyles;
 
       if (document.getElementById(`${props.formId}-sq-apple-pay`)) {
