@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
+import useDynamicCallback from '../hooks/useDynamicCallback';
+
+import Context from './Context';
+
 import {
   SqError,
   SqCardData,
@@ -10,8 +15,6 @@ import {
   SqVerificationResult,
   SqVerificationDetails,
 } from './models';
-import Context from './Context';
-import useDynamicCallback from '../hooks/useDynamicCallback';
 
 declare class SqPaymentForm {
   constructor(configuration: SqPaymentFormConfiguration);
@@ -164,13 +167,13 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   function methodsSupported(methods: SqMethods): void {
     const keys = Object.keys(methods);
 
-    if (keys.indexOf('masterpass') > -1) {
+    if (keys.includes('masterpass')) {
       setMasterpassState(methods.masterpass === true ? 'ready' : 'unavailable');
     }
-    if (keys.indexOf('applePay') > -1) {
+    if (keys.includes('applePay')) {
       setApplePayState(methods.applePay === true ? 'ready' : 'unavailable');
     }
-    if (keys.indexOf('googlePay') > -1) {
+    if (keys.includes('googlePay')) {
       setGooglePayState(methods.googlePay === true ? 'ready' : 'unavailable');
     }
   }
@@ -202,21 +205,21 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
   function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
     const config: SqPaymentFormConfiguration = {
-      applicationId: props.applicationId,
-      locationId: props.locationId,
-      autoBuild: false,
       apiWrapper: props.apiWrapper,
+      applicationId: props.applicationId,
+      autoBuild: false,
       callbacks: {
         // @ts-ignore: Always true error
         cardNonceResponseReceived: props.cardNonceResponseReceived ? cardNonceResponseReceivedCallback : null, // handles missing callback error
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
         methodsSupported: props.methodsSupported,
-        paymentFormLoaded: paymentFormLoaded,
+        paymentFormLoaded,
         shippingContactChanged: props.shippingContactChanged,
         shippingOptionChanged: props.shippingOptionChanged,
         unsupportedBrowserDetected: props.unsupportedBrowserDetected,
       },
+      locationId: props.locationId,
     };
 
     // "The SqPaymentForm object in single-element payment form mode does not support digital wallets."
@@ -272,13 +275,11 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       return;
     }
     try {
-      const newPaymentForm = new SqPaymentForm(
-        buildSqPaymentFormConfiguration({ methodsSupported: methodsSupported, ...props })
-      );
+      const newPaymentForm = new SqPaymentForm(buildSqPaymentFormConfiguration({ methodsSupported, ...props }));
       newPaymentForm.build();
       setPaymentForm(newPaymentForm);
     } catch (error) {
-      let errorMesasge = error.message || 'Unable to build Square payment form';
+      const errorMesasge = error.message || 'Unable to build Square payment form';
       setErrorMessage(errorMesasge);
     }
   }
@@ -310,9 +311,9 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
   const context = {
     applePayState,
+    formId: props.formId,
     googlePayState,
     masterpassState,
-    formId: props.formId,
     onCreateNonce: createNonce,
     onVerifyBuyer: verifyBuyer,
   };
@@ -327,20 +328,20 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 };
 
 SquarePaymentForm.defaultProps = {
-  formId: 'sq-payment-form',
   apiWrapper: 'reactjs/0.6.2',
-  sandbox: false,
+  formId: 'sq-payment-form',
   inputStyles: [
     {
-      fontSize: '16px',
-      fontFamily: 'Helvetica Neue',
-      padding: '16px',
-      color: '#373F4A',
-      backgroundColor: 'transparent',
-      lineHeight: '24px',
-      placeholderColor: '#CCC',
-      _webkitFontSmoothing: 'antialiased',
       _mozOsxFontSmoothing: 'grayscale',
+      _webkitFontSmoothing: 'antialiased',
+      backgroundColor: 'transparent',
+      color: '#373F4A',
+      fontFamily: 'Helvetica Neue',
+      fontSize: '16px',
+      lineHeight: '24px',
+      padding: '16px',
+      placeholderColor: '#CCC',
     },
   ],
+  sandbox: false,
 };

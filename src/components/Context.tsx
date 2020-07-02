@@ -1,11 +1,13 @@
+/* eslint-disable import/group-exports, filenames/match-exported, no-unused-vars */
 import * as React from 'react';
+
 import { SqVerificationDetails, SqError, SqVerificationResult } from './models';
 
 export interface ContextInterface {
-  /** Unique form ID */
-  formId?: string;
   /** Apple pay state*/
   applePayState?: 'loading' | 'unavailable' | 'ready';
+  /** Unique form ID */
+  formId?: string;
   /** Google pay state*/
   googlePayState?: 'loading' | 'unavailable' | 'ready';
   /** Masterpass state */
@@ -26,12 +28,11 @@ export interface ContextInterface {
  * This is available for developers who require more customization over their payment form implementation. Please refer to the
  * [customization](customization.md) page for usage details.
  */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export const Context = React.createContext({
   applePayState: 'loading',
+  formId: '',
   googlePayState: 'loading',
   masterpassState: 'loading',
-  formId: '',
   onCreateNonce: () => {},
   onVerifyBuyer: (
     source: string,
@@ -39,6 +40,6 @@ export const Context = React.createContext({
     callback: (err: SqError, verificationResult: SqVerificationResult) => void
   ) => {},
 });
-/* eslint-enable @typescript-eslint/no-unused-vars */
 
 export default Context;
+/* eslint-enable import/group-exports, filenames/match-exported, no-unused-vars */

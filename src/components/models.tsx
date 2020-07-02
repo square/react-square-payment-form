@@ -1,3 +1,4 @@
+/* eslint-disable import/group-exports */
 export interface SqPaymentFormConfiguration {
   applicationId: string;
   locationId: string;
@@ -106,3 +107,4 @@ interface SqPaymentFormInputConfiguration {
   // https://developer.squareup.com/docs/payment-form/cookbook/customize-form-styles#an-example-1
   inputStyle?: {};
 }
+/* eslint-enable import/group-exports */
