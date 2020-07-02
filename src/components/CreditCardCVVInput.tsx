@@ -1,4 +1,6 @@
+/* eslint-disable unicorn/filename-case */
 import React, { useContext } from 'react';
+
 import Context from './Context';
 
 interface Props {
@@ -25,3 +27,4 @@ export const CreditCardCVVInput: React.FC<Props> = (props: Props) => {
 CreditCardCVVInput.defaultProps = {
   label: 'CVV',
 };
+/* eslint-enable unicorn/filename-case */
