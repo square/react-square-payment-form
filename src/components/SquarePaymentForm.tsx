@@ -200,7 +200,17 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     script.onerror = function() {
       onError && onError();
     };
-    document.body.appendChild(script);
+
+    let scriptExists = false;
+    const scripts = document.getElementsByTagName('script');
+    for (let i = scripts.length; i > 0; i--) {
+      if (scripts[i].src === script.src) {
+        scriptExists = true;
+      }
+    }
+    if (scriptExists) {
+      document.body.appendChild(script);
+    }
   }
 
   function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
