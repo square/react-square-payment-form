@@ -134,7 +134,9 @@ import { GooglePayButton } from 'react-square-payment-form'
 ```
 
 
-### Masterpass
+### Secure Remote Commerce (formerly Masterpass)
+
+> Masterpass has migrated their digital wallet to Secure Remote Commerce (also known as Click to Pay). In order to minimize breaking changes, the Square Payment Form will continue to refer to original "Masterpass" objects, which remains unchanged with this migration.
 
 The Masterpass button is available in both Sandbox and Production. There are no additional requirements.
 

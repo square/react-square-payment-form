@@ -25,6 +25,7 @@ declare class SqPaymentForm {
   requestCardNonce: () => void;
   setPostalCode: (postal: string) => void;
   focus: (id: string) => void;
+  masterpassImageUrl: () => string;
   verifyBuyer: (
     source: string,
     verificationDetails: SqVerificationDetails,
@@ -327,6 +328,19 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       }
     };
   }, [scriptLoaded]);
+
+  useEffect(() => {
+    if (!paymentForm || masterpassState != 'ready') {
+      return;
+    }
+    const srcBtn = document.getElementById(`${props.formId}-sq-masterpass`);
+    if (!srcBtn) {
+      return;
+    }
+    const imageUrl = paymentForm.masterpassImageUrl();
+    srcBtn.style.display = 'inline-block';
+    srcBtn.style.backgroundImage = `url(${imageUrl})`;
+  }, [paymentForm, masterpassState]);
 
   if (errorMessage) {
     return (
