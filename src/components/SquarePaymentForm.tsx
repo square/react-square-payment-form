@@ -55,6 +55,8 @@ interface Props {
   placeholderCreditCard?: string;
   /** Change the placeholder for the expiration date input */
   placeholderExpiration?: string;
+  /** Change the placeholder for the gift card input */
+  placeholderGiftCard?: string;
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (
@@ -229,6 +231,13 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
         elementId: `${props.formId}-sq-card`,
         inputStyle: props.inputStyles && props.inputStyles[0],
       };
+    } else if (document.getElementById(`${props.formId}-sq-gift-card`)) {
+      config.giftCard = {
+        elementId: `${props.formId}-sq-gift-card`,
+        placeholder: props.placeholderGiftCard || '• • • •  • • • •  • • • •  • • • •',
+      };
+      config.inputClass = props.inputClass || 'sq-input';
+      config.inputStyles = props.inputStyles;
     } else {
       config.inputClass = props.inputClass || 'sq-input';
       config.inputStyles = props.inputStyles;

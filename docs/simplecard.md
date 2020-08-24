@@ -11,7 +11,7 @@ title: Single-Element Payment Form
 
 Follow steps 1-5 of the [Payment Form Setup Guide](paymentform.md) before continuing.
 
-## Add the Simple Card component
+## 6. Add the Simple Card component
 
 Using the `SimpleCard` component is an alternative to building a payment form if you don't need the flexibility of individually placed payment card fields. [Read more about customizing the appearance](https://developer.squareup.com/docs/payment-form/cookbook/customize-form-styles#customize-the-appearance-of-the-single-element-payment-form).
 

@@ -37,6 +37,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |placeholderCVV|string|Change the placeholder for the CVV input||
 |placeholderCreditCard|string|Change the placeholder for the credit card input||
 |placeholderExpiration|string|Change the placeholder for the expiration date input||
+|placeholderGiftCard|string|Change the placeholder for the gift card input||
 |placeholderPostal|string|Change the placeholder for the postal code input||
 |sandbox|boolean|Enables Sandbox mode||
 |shippingContactChanged|(shippingContact: SqContact, done: ({}: {}) => {}) => void|Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.||

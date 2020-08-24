@@ -2,7 +2,7 @@
 id: digitalwallet
 title: Accepting Digital Wallets
 ---
-Add a digital wallet to the Square Payment for to accept payments with Apple Pay for Web, Google Pay, and Masterpass.
+Add a digital wallet to the Square Payment form to accept payments with Apple Pay for Web, Google Pay, and Masterpass.
 
 ![Digital Wallets](assets/digital-wallets-diagram.png)
 
