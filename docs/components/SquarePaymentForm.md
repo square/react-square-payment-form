@@ -23,7 +23,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |---|---|---|---|
 |apiWrapper|string|Internal variable: used for logs||
 |applicationId|string|<b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard||
-|cardNonceResponseReceived|(errors: [SqError], nonce: string, cardData: SqCardData, buyerVerificationToken: , billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.||
+|cardNonceResponseReceived|(errors: , nonce: string, cardData: SqCardData, buyerVerificationToken: , billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) => void|<b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.||
 |children|React.ReactNode|Square payment form components||
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.||
 |createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>||

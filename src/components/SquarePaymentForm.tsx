@@ -63,7 +63,7 @@ interface Props {
 
   /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
   cardNonceResponseReceived: (
-    errors: [SqError],
+    errors: [SqError] | null,
     nonce: string,
     cardData: SqCardData,
     buyerVerificationToken?: string,
@@ -145,9 +145,9 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       paymentForm.verifyBuyer(
         nonce,
         props.createVerificationDetails(),
-        (err: SqError, result: SqVerificationResult) => {
+        (err: SqError | null, result: SqVerificationResult) => {
           props.cardNonceResponseReceived(
-            [err],
+            err ? [err] : null,
             nonce,
             cardData,
             result ? result.token : undefined,
