@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   SquarePaymentForm,
   ApplePayButton,
@@ -69,6 +70,15 @@ const PaymentPage = () => {
     };
   }
 
+  function postalCode() {
+    const postalCode = '12345'; // your logic here
+    return postalCode;
+  }
+
+  function focusField() {
+    return 'cardNumber';
+  }
+
   const loadingView = <div className="sq-wallet-loading"></div>;
   const unavailableApple = (
     <div className="sq-wallet-unavailable">Apple pay unavailable. Open safari on desktop or mobile to use.</div>
@@ -84,6 +94,8 @@ const PaymentPage = () => {
       cardNonceResponseReceived={cardNonceResponseReceived}
       createPaymentRequest={createPaymentRequest}
       createVerificationDetails={createVerificationDetails}
+      postalCode={postalCode}
+      focusField={focusField}
     >
       <ApplePayButton loadingView={loadingView} unavailableView={unavailableApple} />
       <GooglePayButton loadingView={loadingView} unavailableView={unavailableGoogle} />

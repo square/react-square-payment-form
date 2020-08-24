@@ -23,6 +23,8 @@ declare class SqPaymentForm {
   destroy: () => void;
   recalculateSize: () => void;
   requestCardNonce: () => void;
+  setPostalCode: (postal: string) => void;
+  focus: (id: string) => void;
   verifyBuyer: (
     source: string,
     verificationDetails: SqVerificationDetails,
@@ -47,6 +49,7 @@ interface Props {
   sandbox: boolean;
   /** Square payment form components */
   children?: React.ReactNode;
+
   /** Change the placeholder for the CVV input */
   placeholderCVV?: string;
   /** Change the placeholder for the postal code input */
@@ -84,6 +87,11 @@ interface Props {
   shippingOptionChanged?: (shippingOption: SqShippingOption, done: ({}) => {}) => void;
   /** Invoked when the payment form is hosted in an unsupported browser */
   unsupportedBrowserDetected?: () => void;
+
+  /** Postal code to be set on paymentFormLoaded */
+  postalCode?: () => string;
+  /** Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv) */
+  focusField?: () => string;
 }
 
 interface State {
@@ -118,6 +126,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [paymentForm, setPaymentForm] = useState<SqPaymentForm | undefined>(undefined);
+  const [formLoaded, setFormLoaded] = useState(false);
 
   function cardNonceResponseReceived(
     errors: [SqError],
@@ -180,10 +189,10 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     }
   }
 
-  function paymentFormLoaded(): void {
-    paymentForm && paymentForm.recalculateSize();
+  const paymentFormLoaded = () => {
+    setFormLoaded(true);
     props.paymentFormLoaded && props.paymentFormLoaded();
-  }
+  };
 
   function loadSqPaymentFormLibrary(onSuccess?: () => void, onError?: () => void): void {
     if (document.getElementById('sq-payment-form-script') && typeof SqPaymentForm === 'function') {
@@ -292,6 +301,15 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       setErrorMessage(errorMesasge);
     }
   }
+
+  useEffect(() => {
+    if (!formLoaded || !paymentForm) {
+      return;
+    }
+    paymentForm.recalculateSize();
+    props.postalCode && paymentForm.setPostalCode(props.postalCode());
+    props.focusField && paymentForm.focus(props.focusField());
+  }, [formLoaded, paymentForm]);
 
   useEffect(() => {
     loadSqPaymentFormLibrary(

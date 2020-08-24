@@ -27,6 +27,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |children|React.ReactNode|Square payment form components||
 |createPaymentRequest|() => SqPaymentRequest|<b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.||
 |createVerificationDetails|() => SqVerificationDetails|<b>Required for SCA</b><br/><br/>||
+|focusField|() => string|Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv)||
 |formId|string|<b>Required for all features</b><br/><br/>Identifies the DOM form element||
 |inputClass|string|Define the CSS class of input iframe elements||
 |inputEventReceived|() => void|Invoked when visitors interact with the iframe elements||
@@ -39,6 +40,7 @@ Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api
 |placeholderExpiration|string|Change the placeholder for the expiration date input||
 |placeholderGiftCard|string|Change the placeholder for the gift card input||
 |placeholderPostal|string|Change the placeholder for the postal code input||
+|postalCode|() => string|Postal code to be set on paymentFormLoaded||
 |sandbox|boolean|Enables Sandbox mode||
 |shippingContactChanged|(shippingContact: SqContact, done: ({}: {}) => {}) => void|Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.||
 |shippingOptionChanged|(shippingOption: SqShippingOption, done: ({}: {}) => {}) => void|Invoked when the buyer selects a shipping option in the Apple Pay sheet.||
