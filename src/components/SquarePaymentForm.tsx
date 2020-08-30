@@ -184,11 +184,12 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   }
 
   function loadSqPaymentFormLibrary(onSuccess?: () => void, onError?: () => void): void {
-    if (typeof SqPaymentForm === 'function') {
+    if (document.getElementById('sq-payment-form-script') && typeof SqPaymentForm === 'function') {
       onSuccess && onSuccess();
       return;
     }
     const script = document.createElement('script');
+    script.id = 'sq-payment-form-script';
     if (props.sandbox) {
       script.src = 'https://js.squareupsandbox.com/v2/paymentform';
     } else {
@@ -200,17 +201,6 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     script.onerror = function() {
       onError && onError();
     };
-
-    let scriptExists = false;
-    const scripts = document.getElementsByTagName('script');
-    for (let i = scripts.length; i > 0; i--) {
-      if (scripts[i].src === script.src) {
-        scriptExists = true;
-      }
-    }
-    if (scriptExists) {
-      document.body.appendChild(script);
-    }
   }
 
   function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
