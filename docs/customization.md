@@ -28,9 +28,9 @@ To change the default placeholders, you can pass the following props to the `Squ
   placeholderPostal={'test2'}
   placeholderCreditCard={'test3'}
   placeholderExpiration={'test4'}
+  placeholderGiftCard{'test5'}
 >
 ```
-
 
 ## Control when the nonce is requested
 

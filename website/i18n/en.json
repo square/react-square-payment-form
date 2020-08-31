@@ -29,6 +29,9 @@
       "components/CreditCardSubmitButton": {
         "title": "CreditCardSubmitButton"
       },
+      "components/GiftCardInput": {
+        "title": "GiftCardInput"
+      },
       "components/GooglePayButton": {
         "title": "GooglePayButton"
       },
@@ -46,6 +49,9 @@
       },
       "digitalwallet": {
         "title": "Accepting Digital Wallets"
+      },
+      "giftcards": {
+        "title": "Accepting Gift Cards"
       },
       "introduction": {
         "title": "Introduction"
