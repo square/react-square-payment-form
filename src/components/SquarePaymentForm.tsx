@@ -330,7 +330,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
   }, [scriptLoaded]);
 
   useEffect(() => {
-    if (!paymentForm || masterpassState != 'ready') {
+    if (!paymentForm || masterpassState !== 'ready') {
       return;
     }
     const srcBtn = document.getElementById(`${props.formId}-sq-masterpass`);
