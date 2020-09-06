@@ -213,6 +213,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     script.onerror = function() {
       onError && onError();
     };
+    document.body.appendChild(script);
   }
 
   function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
