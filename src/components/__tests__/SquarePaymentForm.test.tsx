@@ -7,8 +7,9 @@ import { SquarePaymentForm } from '../SquarePaymentForm'
 
 describe('SquarePaymentForm', () => {
   let wrapper: any
-  var cardNonceResponseReceived = jest.fn()
-  var paymentFormLoaded = jest.fn()
+  const cardNonceResponseReceived = jest.fn()
+  const paymentFormLoaded = jest.fn()
+  const methodsSupportedCustom = jest.fn()
 
   beforeEach(() => {
     wrapper = shallow(
@@ -17,6 +18,7 @@ describe('SquarePaymentForm', () => {
         locationId={'test'}
         cardNonceResponseReceived={cardNonceResponseReceived}
         paymentFormLoaded={paymentFormLoaded}
+        methodsSupported={methodsSupportedCustom}
       />
     )
     wrapper.instance().renderSqPaymentForm = jest.fn()
@@ -88,20 +90,41 @@ describe('SquarePaymentForm', () => {
   })
 
   describe('methodsSupported', () => {
-    ;['applePay', 'googlePay', 'masterpass'].forEach(method => {
-      ;['ready', 'unavailable'].forEach(state => {
-        const key = `${method}State`
-        it(`should set ${key} = ${state}`, () => {
-          const instance = wrapper.instance()
-          const spy = jest.spyOn(instance, 'setState')
-          spy.mockClear()
-          instance.methodsSupported({ [method]: state === 'ready' ? true : false })
-          expect(spy.mock.calls.length).to.eql(1)
-          expect(instance.state[key]).to.eql(state)
-          spy.mockClear()
+
+    it('should coorectly set the component state for each method and state', () => {
+      ;['applePay', 'googlePay', 'masterpass'].forEach(method => {
+        ;['ready', 'unavailable'].forEach(state => {
+          const key = `${method}State`
+          it(`should set ${key} = ${state}`, () => {
+            const instance = wrapper.instance()
+            const spy = jest.spyOn(instance, 'setState')
+            spy.mockClear()
+            instance.methodsSupported({ [method]: state === 'ready' ? true : false })
+            expect(spy.mock.calls.length).to.eql(1)
+            expect(instance.state[key]).to.eql(state)
+            spy.mockClear()
+          })
         })
       })
     })
+
+    it('should also call the custom methodsSupported prop if supplied', () => {
+      ;['applePay', 'googlePay', 'masterpass'].forEach(method => {
+        ;['ready', 'unavailable'].forEach(state => {
+          const key = `${method}State`
+          it(`should set ${key} = ${state}`, () => {
+            const instance = wrapper.instance()
+            methodsSupportedCustom.mockClear()
+            const supported = state === 'ready' ? true : false;
+            instance.methodsSupported({ [method]: supported })
+            expect(methodsSupportedCustom.mock.calls.length).to.eql(1)
+            expect(methodsSupportedCustom.mock.calls[0][0]).to.eql({[method]: supported})
+            methodsSupportedCustom.mockClear()
+          })
+        })
+      })
+    })
+
   })
 
   describe('render', () => {

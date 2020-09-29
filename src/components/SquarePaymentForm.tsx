@@ -188,6 +188,8 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     if (keys.includes('googlePay')) {
       setGooglePayState(methods.googlePay === true ? 'ready' : 'unavailable');
     }
+
+    props.methodsSupported && props.methodsSupported(methods);
   }
 
   const paymentFormLoaded = () => {
@@ -226,7 +228,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
         cardNonceResponseReceived: props.cardNonceResponseReceived ? cardNonceResponseReceivedCallback : null, // handles missing callback error
         createPaymentRequest: props.createPaymentRequest,
         inputEventReceived: props.inputEventReceived,
-        methodsSupported: props.methodsSupported,
+        methodsSupported,
         paymentFormLoaded,
         shippingContactChanged: props.shippingContactChanged,
         shippingOptionChanged: props.shippingOptionChanged,
@@ -295,7 +297,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       return;
     }
     try {
-      const newPaymentForm = new SqPaymentForm(buildSqPaymentFormConfiguration({ methodsSupported, ...props }));
+      const newPaymentForm = new SqPaymentForm(buildSqPaymentFormConfiguration(props));
       newPaymentForm.build();
       setPaymentForm(newPaymentForm);
     } catch (error) {
