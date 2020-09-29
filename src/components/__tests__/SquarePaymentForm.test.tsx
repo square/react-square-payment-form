@@ -124,7 +124,6 @@ describe('SquarePaymentForm', () => {
         })
       })
     })
-
   })
 
   describe('render', () => {
