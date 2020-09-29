@@ -118,7 +118,7 @@ describe('SquarePaymentForm', () => {
             const supported = state === 'ready' ? true : false;
             instance.methodsSupported({ [method]: supported })
             expect(methodsSupportedCustom.mock.calls.length).to.eql(1)
-            expect(methodsSupportedCustom.mock.calls[0][0]).to.eql({[method]: supported})
+            expect(methodsSupportedCustom.mock.calls[0][0]).to.eql({ [method]: supported })
             methodsSupportedCustom.mockClear()
           })
         })
