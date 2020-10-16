@@ -39,13 +39,13 @@ interface Props {
   /** <b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
   locationId: string;
   /** <b>Required for all features</b><br/><br/>Identifies the DOM form element*/
-  formId: string;
+  formId?: string;
   /** Define the internal styles applied to the rendered iframes */
   inputStyles?: {}[];
   /** Define the CSS class of input iframe elements */
   inputClass?: string;
   /** Internal variable: used for logs */
-  apiWrapper: string;
+  apiWrapper?: string;
   /** Enables Sandbox mode */
   sandbox: boolean;
   /** Square payment form components */
@@ -301,8 +301,8 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       newPaymentForm.build();
       setPaymentForm(newPaymentForm);
     } catch (error) {
-      const errorMesasge = error.message || 'Unable to build Square payment form';
-      setErrorMessage(errorMesasge);
+      const errorMessage = error.message || 'Unable to build Square payment form';
+      setErrorMessage(errorMessage);
     }
   }
 
@@ -369,23 +369,4 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
       </div>
     </Context.Provider>
   );
-};
-
-SquarePaymentForm.defaultProps = {
-  apiWrapper: 'reactjs/0.7.2',
-  formId: 'sq-payment-form',
-  inputStyles: [
-    {
-      _mozOsxFontSmoothing: 'grayscale',
-      _webkitFontSmoothing: 'antialiased',
-      backgroundColor: 'transparent',
-      color: '#373F4A',
-      fontFamily: 'Helvetica Neue',
-      fontSize: '16px',
-      lineHeight: '24px',
-      padding: '16px',
-      placeholderColor: '#CCC',
-    },
-  ],
-  sandbox: false,
 };
