@@ -47,7 +47,7 @@ interface Props {
   /** Internal variable: used for logs. */
   apiWrapper?: string;
   /** Enables Sandbox mode. */
-  sandbox: boolean;
+  sandbox?: boolean;
   /** Square payment form components. */
   children?: React.ReactNode;
 
@@ -120,7 +120,25 @@ interface State {
  *
  * Please view the [Payment Form Data Models](https://docs.connect.squareup.com/api/paymentform) for additional information.
  */
-export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
+export const SquarePaymentForm: React.FC<Props> = ({
+  apiWrapper = 'reactjs/0.7.3',
+  formId = 'sq-payment-form',
+  inputStyles = [
+    {
+      _mozOsxFontSmoothing: 'grayscale',
+      _webkitFontSmoothing: 'antialiased',
+      backgroundColor: 'transparent',
+      color: '#373F4A',
+      fontFamily: 'Helvetica Neue',
+      fontSize: '16px',
+      lineHeight: '24px',
+      padding: '16px',
+      placeholderColor: '#CCC',
+    },
+  ],
+  sandbox = false,
+  ...props
+}: Props) => {
   const [applePayState, setApplePayState] = useState('loading');
   const [googlePayState, setGooglePayState] = useState('loading');
   const [masterpassState, setMasterpassState] = useState('loading');
@@ -204,7 +222,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     }
     const script = document.createElement('script');
     script.id = 'sq-payment-form-script';
-    if (props.sandbox) {
+    if (sandbox) {
       script.src = 'https://js.squareupsandbox.com/v2/paymentform';
     } else {
       script.src = 'https://js.squareup.com/v2/paymentform';
@@ -220,7 +238,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
   function buildSqPaymentFormConfiguration(props: Props): SqPaymentFormConfiguration {
     const config: SqPaymentFormConfiguration = {
-      apiWrapper: props.apiWrapper,
+      apiWrapper,
       applicationId: props.applicationId,
       autoBuild: false,
       callbacks: {
@@ -241,50 +259,50 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     // https://developer.squareup.com/docs/payment-form/payment-form-walkthrough#single-element-payment-form-and-digital-wallet-support
     if (document.getElementById(`${props.formId}-sq-card`)) {
       config.card = {
-        elementId: `${props.formId}-sq-card`,
-        inputStyle: props.inputStyles && props.inputStyles[0],
+        elementId: `${formId}-sq-card`,
+        inputStyle: inputStyles && inputStyles[0],
       };
-    } else if (document.getElementById(`${props.formId}-sq-gift-card`)) {
+    } else if (document.getElementById(`${formId}-sq-gift-card`)) {
       config.giftCard = {
-        elementId: `${props.formId}-sq-gift-card`,
+        elementId: `${formId}-sq-gift-card`,
         placeholder: props.placeholderGiftCard || '• • • •  • • • •  • • • •  • • • •',
       };
       config.inputClass = props.inputClass || 'sq-input';
-      config.inputStyles = props.inputStyles;
+      config.inputStyles = inputStyles;
     } else {
       config.inputClass = props.inputClass || 'sq-input';
-      config.inputStyles = props.inputStyles;
+      config.inputStyles = inputStyles;
 
-      if (document.getElementById(`${props.formId}-sq-apple-pay`)) {
-        config.applePay = { elementId: `${props.formId}-sq-apple-pay` };
+      if (document.getElementById(`${formId}-sq-apple-pay`)) {
+        config.applePay = { elementId: `${formId}-sq-apple-pay` };
       }
-      if (document.getElementById(`${props.formId}-sq-google-pay`)) {
-        config.googlePay = { elementId: `${props.formId}-sq-google-pay` };
+      if (document.getElementById(`${formId}-sq-google-pay`)) {
+        config.googlePay = { elementId: `${formId}-sq-google-pay` };
       }
-      if (document.getElementById(`${props.formId}-sq-masterpass`)) {
-        config.masterpass = { elementId: `${props.formId}-sq-masterpass` };
+      if (document.getElementById(`${formId}-sq-masterpass`)) {
+        config.masterpass = { elementId: `${formId}-sq-masterpass` };
       }
 
-      if (document.getElementById(`${props.formId}-sq-card-number`)) {
+      if (document.getElementById(`${formId}-sq-card-number`)) {
         config.cardNumber = {
-          elementId: `${props.formId}-sq-card-number`,
+          elementId: `${formId}-sq-card-number`,
           placeholder: props.placeholderCreditCard || '• • • •  • • • •  • • • •  • • • •',
         };
       }
-      if (document.getElementById(`${props.formId}-sq-cvv`)) {
-        config.cvv = { elementId: `${props.formId}-sq-cvv`, placeholder: props.placeholderCVV || 'CVV ' };
+      if (document.getElementById(`${formId}-sq-cvv`)) {
+        config.cvv = { elementId: `${formId}-sq-cvv`, placeholder: props.placeholderCVV || 'CVV ' };
       }
-      if (document.getElementById(`${props.formId}-sq-postal-code`)) {
+      if (document.getElementById(`${formId}-sq-postal-code`)) {
         config.postalCode = {
-          elementId: `${props.formId}-sq-postal-code`,
+          elementId: `${formId}-sq-postal-code`,
           placeholder: props.placeholderPostal || '12345',
         };
       } else {
         config.postalCode = false;
       }
-      if (document.getElementById(`${props.formId}-sq-expiration-date`)) {
+      if (document.getElementById(`${formId}-sq-expiration-date`)) {
         config.expirationDate = {
-          elementId: `${props.formId}-sq-expiration-date`,
+          elementId: `${formId}-sq-expiration-date`,
           placeholder: props.placeholderExpiration || 'MM/YY',
         };
       }
@@ -336,7 +354,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
     if (!paymentForm || masterpassState !== 'ready') {
       return;
     }
-    const srcBtn = document.getElementById(`${props.formId}-sq-masterpass`);
+    const srcBtn = document.getElementById(`${formId}-sq-masterpass`);
     if (!srcBtn) {
       return;
     }
@@ -355,7 +373,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
   const context = {
     applePayState,
-    formId: props.formId,
+    formId,
     googlePayState,
     masterpassState,
     onCreateNonce: createNonce,
@@ -364,7 +382,7 @@ export const SquarePaymentForm: React.FC<Props> = (props: Props) => {
 
   return (
     <Context.Provider value={context}>
-      <div id={props.formId} className="sq-payment-form">
+      <div id={formId} className="sq-payment-form">
         {props.children}
       </div>
     </Context.Provider>
