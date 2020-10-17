@@ -8,7 +8,7 @@ import Context from './Context';
  *
  * When accepting credit card payments, you **must** have this component inside your `SquarePaymentForm`.
  *
- * Cannot be used with digital wallets
+ * Cannot be used with digital wallets.
  */
 export const SimpleCard: React.FC = () => {
   const context = useContext(Context);

@@ -43,7 +43,7 @@ To get your Sandbox credentials:
 
 1. Open your [Application Dashboard](https://connect.squareup.com/apps).
 1. Click on the application you want to use for the payment form. You should land on the "Credentials" tab.
-1. On the bottom left corner, toggle "Production Settings" to "Sandbox Settings" .
+1. On the bottom left corner, toggle "Production Settings" to "Sandbox Settings".
 1. Click on the "Show" link on the **Sandbox Access Token** and copy it.
 1. Click on the "Locations" tab on the left navigation bar.
 1. Copy the **Sandbox Location ID**.

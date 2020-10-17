@@ -46,7 +46,7 @@ You will need to provide the the following fields:
 * `applicationId` with your **Sandbox Application ID**
 * `locationId` with your **Sandbox Location ID**
 * `sandbox` with **true**. This is required in addition to using your sandbox ID.
-* [`onCardNonceResponseRecieved`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived). This will be invoked with either a successful nonce or errors.
+* [`onCardNonceResponseReceived`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived) This will be invoked with either a successful nonce or errors.
 * [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
 
 ```
@@ -71,7 +71,7 @@ class PaymentPage extends React.Component {
 
   createVerificationDetails() {
     return {
-      amount: '100.00',
+      amount: "100.00",
       currencyCode: "USD",
       intent: "CHARGE",
       billingContact: {
@@ -115,7 +115,7 @@ class PaymentPage extends React.Component {
 
 ## 6. Add the credit card fields
 
-We will use a credit card form to test nonce creation. Digital wallets are not supported in Sandbox mode.
+We will use a credit card form to test the nonce creation. Digital wallets are not supported in Sandbox mode.
 
 You must include all of the following components inside the `SquarePaymentForm`:
 * `CreditCardNumberInput`

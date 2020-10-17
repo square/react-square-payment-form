@@ -18,7 +18,7 @@ The setup guide implements the form with credit card inputs because Sandbox does
 
 To get your Sandbox location ID:
 
-1. Open your [Application Dashboard](https://connect.squareup.com/apps).
+1. Open your [Application Dashboard](https://developers.squareup.com/apps).
 1. Click on the application you want to use for the payment form. You should land on the "Credentials" tab.
 1. On the bottom left corner, toggle "Sandbox Settings" to "Production Settings" .
 1. Click on the "Locations" tab on the left navigation bar.
@@ -97,7 +97,7 @@ The payment form adheres to Apple's development requirements for Web Apple Pay. 
 By registering your domain to use Web Apple Pay and the Apple Pay Platform, you agree to the [Apple Pay Platform Web Merchant Terms and Conditions](https://developer.apple.com/terms/apple-pay-web/).
 
 To register a domain for Web Apple Pay:
-1. Open the [Application Dashboard](https://connect.squareup.com/apps).
+1. Open the [Application Dashboard](https://developers.squareup.com/apps).
 1. Select the application associated with your payment form implementation.
 1. Click on the "Apple Pay" tab for the selected application.
 1. Click on the "Add a new domain" link and follow the onscreen instructions.

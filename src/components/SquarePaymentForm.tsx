@@ -34,35 +34,35 @@ declare class SqPaymentForm {
 }
 
 interface Props {
-  /** <b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard */
+  /** <b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard. */
   applicationId: string;
   /** <b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.*/
   locationId: string;
-  /** <b>Required for all features</b><br/><br/>Identifies the DOM form element*/
+  /** <b>Required for all features</b><br/><br/>Identifies the DOM form element. */
   formId?: string;
-  /** Define the internal styles applied to the rendered iframes */
+  /** Defines the internal styles applied to the rendered iframes. */
   inputStyles?: {}[];
-  /** Define the CSS class of input iframe elements */
+  /** Defines the CSS class of input iframe elements. */
   inputClass?: string;
-  /** Internal variable: used for logs */
+  /** Internal variable: used for logs. */
   apiWrapper?: string;
-  /** Enables Sandbox mode */
+  /** Enables Sandbox mode. */
   sandbox: boolean;
-  /** Square payment form components */
+  /** Square payment form components. */
   children?: React.ReactNode;
 
-  /** Change the placeholder for the CVV input */
+  /** Changes the placeholder for the CVV input. */
   placeholderCVV?: string;
-  /** Change the placeholder for the postal code input */
+  /** Changes the placeholder for the postal code input. */
   placeholderPostal?: string;
-  /** Change the placeholder for the credit card input */
+  /** Changes the placeholder for the credit card input. */
   placeholderCreditCard?: string;
-  /** Change the placeholder for the expiration date input */
+  /** Changes the placeholder for the expiration date input. */
   placeholderExpiration?: string;
-  /** Change the placeholder for the gift card input */
+  /** Changes the placeholder for the gift card input. */
   placeholderGiftCard?: string;
 
-  /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.*/
+  /** <b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error. */
   cardNonceResponseReceived: (
     errors: [SqError] | null,
     nonce: string,
@@ -72,26 +72,26 @@ interface Props {
     shippingContact?: SqContact,
     shippingOption?: SqShippingOption
   ) => void;
-  /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.*/
+  /** <b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked. */
   createPaymentRequest?: () => SqPaymentRequest;
   /** <b>Required for SCA</b><br/><br/> */
   createVerificationDetails?: () => SqVerificationDetails;
-  /* Triggered when the page renders to decide which, if any, digital wallet button should be rendered in the payment form */
+  /* Triggered when the page renders to decide which, if any, digital wallet button should be rendered in the payment form. */
   methodsSupported?: (methods: SqMethods) => void;
-  /** Invoked when visitors interact with the iframe elements */
+  /** Invoked when visitors interact with the iframe elements. */
   inputEventReceived?: () => void;
-  /** Invoked when payment form is fully loaded */
+  /** Invoked when payment form is fully loaded. */
   paymentFormLoaded?: () => void;
-  /** Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.*/
+  /** Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address. */
   shippingContactChanged?: (shippingContact: SqContact, done: ({}) => {}) => void;
   /** Invoked when the buyer selects a shipping option in the Apple Pay sheet. */
   shippingOptionChanged?: (shippingOption: SqShippingOption, done: ({}) => {}) => void;
-  /** Invoked when the payment form is hosted in an unsupported browser */
+  /** Invoked when the payment form is hosted in an unsupported browser. */
   unsupportedBrowserDetected?: () => void;
 
-  /** Postal code to be set on paymentFormLoaded */
+  /** Postal code to be set on paymentFormLoaded. */
   postalCode?: () => string;
-  /** Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv) */
+  /** Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv). */
   focusField?: () => string;
 }
 
@@ -108,12 +108,12 @@ interface State {
  *
  * This component requires 3 arguments for basic use:
  * * **applicationId**: This can be found in your [Square Developer Dashboard](https://developer.squareup.com/apps)
- * for the current Square app you're developing
- * * **locationId**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations);
+ * for the current Square app you're developing.
+ * * **locationId**: You can retrieve this from the [Square Connect v2 Locations API](https://docs.connect.squareup.com/api/connect/v2#navsection-locations),
  * or your [Square Developer Dashboard](https://developer.squareup.com/apps).
  * It determines which Square location will receive credit for payments made with this form.
- * * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your back-end server to make a "charge" request to Square.
- * * **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview)
+ * * **cardNonceResponseReceived**: This callback gives you a nonce to pass to your backend server to make a "charge" request to Square.
+ * * **createVerificationDetails**: This callback returns data used for [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview).
  *
  * ...and one additional argument for digital wallets:
  * * **createPaymentRequest**: This callback returns data to show information about the payment in the Apple Pay, Google Pay, and Masterpass interfaces.
