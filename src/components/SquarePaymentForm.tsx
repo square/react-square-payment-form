@@ -376,6 +376,7 @@ export const SquarePaymentForm: React.FC<Props> = ({
     formId,
     googlePayState,
     masterpassState,
+    ready: Boolean(paymentForm) && formLoaded,
     onCreateNonce: createNonce,
     onVerifyBuyer: verifyBuyer,
   };

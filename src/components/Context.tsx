@@ -12,6 +12,8 @@ export interface ContextInterface {
   googlePayState?: 'loading' | 'unavailable' | 'ready';
   /** Masterpass state */
   masterpassState?: 'loading' | 'unavailable' | 'ready';
+  /* SquarePaymentForm state */
+  ready?: boolean;
   /** Function that is called to create a nonce */
   onCreateNonce?: () => void;
   /** Function that is called to verify the buyer */
@@ -33,6 +35,7 @@ export const Context = React.createContext({
   formId: '',
   googlePayState: 'loading',
   masterpassState: 'loading',
+  ready: false,
   onCreateNonce: () => {},
   onVerifyBuyer: (
     source: string,
