@@ -3,9 +3,10 @@ import React, { useContext } from 'react';
 import Context from './Context';
 
 interface Props {
-  /** Input field label */
   children?: React.ReactNode;
+  disabled?: boolean;
 }
+
 /**
  * Renders a button that will create a card nonce using Square's SqPaymentForm JS library and calls
  * `onCardNonceResponseReceived` afterwards.
@@ -15,8 +16,12 @@ interface Props {
 export const CreditCardSubmitButton: React.FC<Props> = (props: Props) => {
   const context = useContext(Context);
   return (
-    <button className="sq-creditcard" onClick={context.onCreateNonce}>
+    <button disabled={props.disabled} className="sq-creditcard" onClick={context.onCreateNonce}>
       {props.children ? props.children : 'Pay'}
     </button>
   );
+};
+
+CreditCardSubmitButton.defaultProps = {
+  disabled: false,
 };
