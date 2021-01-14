@@ -44,4 +44,16 @@ describe('CreditCardPostalCodeInput', () => {
       expect(wrapper.find('button').text()).to.eql(test);
     });
   });
+
+  describe('disabled', () => {
+    it('should not be disabled by default', () => {
+      const wrapper = mount(<CreditCardSubmitButton />);
+      expect(wrapper.find('button').prop('disabled')).to.eql(false);
+    });
+
+    it('can be disabled', () => {
+      const wrapper = mount(<CreditCardSubmitButton disabled />);
+      expect(wrapper.find('button').prop('disabled')).to.eql(true);
+    });
+  });
 });
