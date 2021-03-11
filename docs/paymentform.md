@@ -43,11 +43,12 @@ import 'react-square-payment-form/lib/default.css'
 The `SquarePaymentForm` is a wrapper that loads the SqPaymentForm JS library. It does not render anything on its own.
 
 You will need to provide the the following fields:
-* `applicationId` with your **Sandbox Application ID**
-* `locationId` with your **Sandbox Location ID**
-* `sandbox` with **true**. This is required in addition to using your sandbox ID.
-* [`onCardNonceResponseReceived`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived) This will be invoked with either a successful nonce or errors.
-* [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
+
+- `applicationId` with your **Sandbox Application ID**
+- `locationId` with your **Sandbox Location ID**
+- `sandbox` with **true**. This is required in addition to using your sandbox ID.
+- [`onCardNonceResponseReceived`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#cardnonceresponsereceived) This will be invoked with either a successful nonce or errors.
+- [`createVerificationDetails`](https://developer.squareup.com/docs/api/paymentform/?q=verificationdetails#datatype-sqverificationdetails) This is used to verify the identity of the buyer using [Strong Customer Authentication](https://developer.squareup.com/docs/sca-overview?q=sca).
 
 ```
 class PaymentPage extends React.Component {
@@ -87,6 +88,8 @@ class PaymentPage extends React.Component {
     }
   }
 
+  // Note: the `billingContact` field above won't be received or stored in a regular payment transaction. It only applies to existing contacts.
+
   render() {
     return (
       <div>
@@ -118,11 +121,12 @@ class PaymentPage extends React.Component {
 We will use a credit card form to test the nonce creation. Digital wallets are not supported in Sandbox mode.
 
 You must include all of the following components inside the `SquarePaymentForm`:
-* `CreditCardNumberInput`
-* `CreditCardExpirationDateInput`
-* `CreditCardPostalCodeInput`
-* `CreditCardCVVInput`
-* `CreditCardSubmitButton`
+
+- `CreditCardNumberInput`
+- `CreditCardExpirationDateInput`
+- `CreditCardPostalCodeInput`
+- `CreditCardCVVInput`
+- `CreditCardSubmitButton`
 
 These fields can be placed anywhere within the form and do not need to be in any specific order.
 We have chosen to render the expiration date, postal code, and cvv on one line.
@@ -171,7 +175,7 @@ We are ready to start creating nonces! Errors should render when you submit with
 
 Fill in the form with the following test credit card information and click the "Pay" button. A nonce should be generated and an alert should appear on your browser.
 
-* **Card Number**: 4111 1111 1111 1111
-* **CVV**: any three non-consecutive numbers (ex. 123)
-* **Expiration Date**: any month and year in the future (ex. 01/25)
-* **Postal Code**: any postal code (ex. 12345)
+- **Card Number**: 4111 1111 1111 1111
+- **CVV**: any three non-consecutive numbers (ex. 123)
+- **Expiration Date**: any month and year in the future (ex. 01/25)
+- **Postal Code**: any postal code (ex. 12345)
