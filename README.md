@@ -1,10 +1,9 @@
-# react-square-payment-form
+# DEPRECATED - react-square-payment-form
+
+**⛔️ The "Square Payment Form" is deprecated, and will no longer be supported aside from critical bug fixes. Please use the [Web Payments SDK](https://developer.squareup.com/docs/web-payments/overview) to take payments on a web client.**
 
 The React Square Payment Form lets you take payments securely and easily
 in your React app using a familiar, component-based syntax.
-
-*Note: this SDK is in beta. We'll be improving it as we work towards GA - please
-leave feedback for our team!*
 
 ## Compatability
 
