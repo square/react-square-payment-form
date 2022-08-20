@@ -5,7 +5,10 @@ website/
 
 .gitignore
 .eslintrc.js
+.prettierrc.js
 buildDocs.sh
 jest.config.js
 setupTests.ts
 tsconfig.json
+generateComponentDocs.sh
+updateVersion.sh
