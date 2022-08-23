@@ -58,12 +58,12 @@
 <p>This component requires 3 arguments for basic use:</p>
 <ul>
 <li><strong>applicationId</strong>: This can be found in your <a href="https://developer.squareup.com/apps">Square Developer Dashboard</a>
-for the current Square app you're developing</li>
-<li><strong>locationId</strong>: You can retrieve this from the <a href="https://docs.connect.squareup.com/api/connect/v2#navsection-locations">Square Connect v2 Locations API</a>;
+for the current Square app you're developing.</li>
+<li><strong>locationId</strong>: You can retrieve this from the <a href="https://docs.connect.squareup.com/api/connect/v2#navsection-locations">Square Connect v2 Locations API</a>,
 or your <a href="https://developer.squareup.com/apps">Square Developer Dashboard</a>.
 It determines which Square location will receive credit for payments made with this form.</li>
-<li><strong>cardNonceResponseReceived</strong>: This callback gives you a nonce to pass to your back-end server to make a &quot;charge&quot; request to Square.</li>
-<li><strong>createVerificationDetails</strong>: This callback returns data used for <a href="https://developer.squareup.com/docs/sca-overview">Strong Customer Authentication</a></li>
+<li><strong>cardNonceResponseReceived</strong>: This callback gives you a nonce to pass to your backend server to make a &quot;charge&quot; request to Square.</li>
+<li><strong>createVerificationDetails</strong>: This callback returns data used for <a href="https://developer.squareup.com/docs/sca-overview">Strong Customer Authentication</a>.</li>
 </ul>
 <p>...and one additional argument for digital wallets:</p>
 <ul>
@@ -76,30 +76,30 @@ It determines which Square location will receive credit for payments made with t
 <tr><th>Name</th><th>Type</th><th>Description</th><th>Default Value</th></tr>
 </thead>
 <tbody>
-<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs</td><td></td></tr>
-<tr><td>applicationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard</td><td></td></tr>
+<tr><td>apiWrapper</td><td>string</td><td>Internal variable: used for logs.</td><td></td></tr>
+<tr><td>applicationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the calling form with a verified application ID generated from the Square Application Dashboard.</td><td></td></tr>
 <tr><td>cardNonceResponseReceived</td><td>(errors: , nonce: string, cardData: SqCardData, buyerVerificationToken: , billingContact: SqContact, shippingContact: SqContact, shippingOption: SqShippingOption) =&gt; void</td><td><b>Required for all features</b><br/><br/>Invoked when payment form receives the result of a nonce generation request. The result will be a valid credit card or wallet nonce, or an error.</td><td></td></tr>
-<tr><td>children</td><td>React.ReactNode</td><td>Square payment form components</td><td></td></tr>
+<tr><td>children</td><td>React.ReactNode</td><td>Square payment form components.</td><td></td></tr>
 <tr><td>createPaymentRequest</td><td>() =&gt; SqPaymentRequest</td><td><b>Required for digital wallets</b><br/><br/>Invoked when a digital wallet payment button is clicked.</td><td></td></tr>
 <tr><td>createVerificationDetails</td><td>() =&gt; SqVerificationDetails</td><td><b>Required for SCA</b><br/><br/></td><td></td></tr>
-<tr><td>focusField</td><td>() =&gt; string</td><td>Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv)</td><td></td></tr>
-<tr><td>formId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the DOM form element</td><td></td></tr>
-<tr><td>inputClass</td><td>string</td><td>Define the CSS class of input iframe elements</td><td></td></tr>
-<tr><td>inputEventReceived</td><td>() =&gt; void</td><td>Invoked when visitors interact with the iframe elements</td><td></td></tr>
-<tr><td>inputStyles</td><td>array</td><td>Define the internal styles applied to the rendered iframes</td><td></td></tr>
+<tr><td>focusField</td><td>() =&gt; string</td><td>Field to be focused on paymentFormLoaded (valid values are cardNumber, postalCode, expirationDate, cvv).</td><td></td></tr>
+<tr><td>formId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the DOM form element.</td><td></td></tr>
+<tr><td>inputClass</td><td>string</td><td>Defines the CSS class of input iframe elements.</td><td></td></tr>
+<tr><td>inputEventReceived</td><td>() =&gt; void</td><td>Invoked when visitors interact with the iframe elements.</td><td></td></tr>
+<tr><td>inputStyles</td><td>array</td><td>Defines the internal styles applied to the rendered iframes.</td><td></td></tr>
 <tr><td>locationId</td><td>string</td><td><b>Required for all features</b><br/><br/>Identifies the location of the merchant that is taking the payment. Obtained from the Square Application Dashboard - Locations tab.</td><td></td></tr>
 <tr><td>methodsSupported</td><td>(methods: SqMethods) =&gt; void</td><td></td><td></td></tr>
-<tr><td>paymentFormLoaded</td><td>() =&gt; void</td><td>Invoked when payment form is fully loaded</td><td></td></tr>
-<tr><td>placeholderCVV</td><td>string</td><td>Change the placeholder for the CVV input</td><td></td></tr>
-<tr><td>placeholderCreditCard</td><td>string</td><td>Change the placeholder for the credit card input</td><td></td></tr>
-<tr><td>placeholderExpiration</td><td>string</td><td>Change the placeholder for the expiration date input</td><td></td></tr>
-<tr><td>placeholderGiftCard</td><td>string</td><td>Change the placeholder for the gift card input</td><td></td></tr>
-<tr><td>placeholderPostal</td><td>string</td><td>Change the placeholder for the postal code input</td><td></td></tr>
-<tr><td>postalCode</td><td>() =&gt; string</td><td>Postal code to be set on paymentFormLoaded</td><td></td></tr>
-<tr><td>sandbox</td><td>boolean</td><td>Enables Sandbox mode</td><td></td></tr>
+<tr><td>paymentFormLoaded</td><td>() =&gt; void</td><td>Invoked when payment form is fully loaded.</td><td></td></tr>
+<tr><td>placeholderCVV</td><td>string</td><td>Changes the placeholder for the CVV input.</td><td></td></tr>
+<tr><td>placeholderCreditCard</td><td>string</td><td>Changes the placeholder for the credit card input.</td><td></td></tr>
+<tr><td>placeholderExpiration</td><td>string</td><td>Changes the placeholder for the expiration date input.</td><td></td></tr>
+<tr><td>placeholderGiftCard</td><td>string</td><td>Changes the placeholder for the gift card input.</td><td></td></tr>
+<tr><td>placeholderPostal</td><td>string</td><td>Changes the placeholder for the postal code input.</td><td></td></tr>
+<tr><td>postalCode</td><td>() =&gt; string</td><td>Postal code to be set on paymentFormLoaded.</td><td></td></tr>
+<tr><td>sandbox</td><td>boolean</td><td>Enables Sandbox mode.</td><td></td></tr>
 <tr><td>shippingContactChanged</td><td>(shippingContact: SqContact, done: ({}: {}) =&gt; {}) =&gt; void</td><td>Invoked when requestShippingAddress is true in PaymentRequest and the buyer selects a shipping address in the Apple Pay sheet or enters a new shipping address.</td><td></td></tr>
 <tr><td>shippingOptionChanged</td><td>(shippingOption: SqShippingOption, done: ({}: {}) =&gt; {}) =&gt; void</td><td>Invoked when the buyer selects a shipping option in the Apple Pay sheet.</td><td></td></tr>
-<tr><td>unsupportedBrowserDetected</td><td>() =&gt; void</td><td>Invoked when the payment form is hosted in an unsupported browser</td><td></td></tr>
+<tr><td>unsupportedBrowserDetected</td><td>() =&gt; void</td><td>Invoked when the payment form is hosted in an unsupported browser.</td><td></td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-square-payment-form/docs/components/SimpleCard"><span class="arrow-prev">← </span><span class="function-name-prevnext">SimpleCard</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#props">Props</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div><h5>Docs</h5><a href="/react-square-payment-form/docs/en/introduction">Getting Started</a><a href="https://docs.connect.squareup.com/api/connect/v2">API Reference</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/square-connect" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://squ.re/2Hks3YE">Slack Channel</a></div><div><h5>More</h5><a href="https://developer.squareup.com/blog/">Blog</a><a href="https://github.com/square/react-square-payment-form">GitHub</a></div></section><section class="copyright">Copyright © 2020 Square Inc.</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/react-square-payment-form/docs/components/SimpleCard"><span class="arrow-prev">← </span><span class="function-name-prevnext">SimpleCard</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#props">Props</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div><h5>Docs</h5><a href="/react-square-payment-form/docs/en/introduction">Getting Started</a><a href="https://docs.connect.squareup.com/api/connect/v2">API Reference</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/square-connect" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://squ.re/2Hks3YE">Slack Channel</a></div><div><h5>More</h5><a href="https://developer.squareup.com/blog/">Blog</a><a href="https://github.com/square/react-square-payment-form">GitHub</a></div></section><section class="copyright">Copyright © 2022 Square Inc.</section></footer></div></body></html>
